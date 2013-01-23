@@ -70,7 +70,7 @@ public class EmployeeAction extends ActionSupport {
 		errorInfo="";
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		session.put("employee", null);
+		session.remove("employee");
 		return "logoutSuccess";
 	}
 	public String changePassword(){
