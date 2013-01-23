@@ -4,11 +4,14 @@
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     %>
+   
 <!DOCTYPE html>
+ <base href="<%=basePath%>">
 <html>
 <head>
     <title>Mutual Fund Trade</title>
-    <link rel="stylesheet" href="<%=basePath%>style.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
     <div class="BackgroundGradient"> </div>
@@ -18,7 +21,7 @@
 
         <div class="Header">
           <div class="HeaderTitle">
-            <h1><a href="<%=basePath%>#">&nbsp;&nbsp;Mutual Fund Trade</a></h1>
+            <h1><a href="#">&nbsp;&nbsp;Mutual Fund Trade</a></h1>
             <h2>&nbsp;&nbsp;&nbsp;Team6</h2>
           </div>
         
@@ -40,7 +43,7 @@
         <div class="ArticleBorder"><div class="ArticleBL"><div></div></div><div class="ArticleBR"><div></div></div><div class="ArticleTL"></div><div class="ArticleTR"><div></div></div><div class="ArticleT"></div><div class="ArticleR"><div></div></div><div class="ArticleB"><div></div></div><div class="ArticleL"></div><div class="ArticleC"></div>
         <div class="Article">
         <h2 style="margin-left:250px;">Login</h2>
-        <form method="post" action="<%=basePath%>act/customer_login.action">
+        <form method="post" action="act/customer_login.action" id="form">
 		<table border="0" style="line-width: 60px; line-height: 30px; padding-left: 10px;" align="center">
 			<col width="100">
 			<col width="250">
@@ -59,6 +62,8 @@
 				<tr>
 			</div>
 		</table>
+		
+		<input type="radio" name="type" onclick="">Customer  <input type="radio" name="type">Employee  
        <div align = "right" style="margin-right:250px;">
             <span class="ButtonInput"><span align="center"><input type="submit" value="Login"/></span></span>
 		</div>
@@ -68,11 +73,11 @@
                 
         </div></div></div>
         <div class="Footer">
-            Footer Text - <a href="<%=basePath%>#">Contact Us</a>
+            Footer Text - <a href="#">Contact Us</a>
         </div>
         
     </div>
     </div>
-    <span class="BackLink"><a href="<%=basePath%>http://cooltemplate.com">Web Template</a> created using Cool Template</span>
+    <span class="BackLink"><a href="http://cooltemplate.com">Web Template</a> created using Cool Template</span>
 </body>
 </html>
