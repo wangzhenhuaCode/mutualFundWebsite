@@ -11,6 +11,10 @@
 <head>
     <title>&nbsp;&nbsp;Mutual Fund Trade</title>
     <link rel="stylesheet" href="style.css" />
+    <style type="text/css">
+                table.bottomBorder { border-collapse:collapse; }
+                table.bottomBorder td, table.bottomBorder th { border-bottom:1px dotted black;padding:5px; }
+    </style>
 </head>
 <body>
     <div class="BackgroundGradient"> </div>

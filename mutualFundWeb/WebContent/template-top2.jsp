@@ -33,10 +33,3 @@
         
         <div align="right"><h3>Current Trading Date is: Jan 17, 2013</h3></div>
         
-        <style type="text/css">
-                table.bottomBorder { border-collapse:collapse; }
-                table.bottomBorder td, table.bottomBorder th { border-bottom:1px dotted black;padding:5px; }
-                </style>
-            <!-- Be sure to place the above styles (i.e. everything between the <style></style> tags) into the document 'head' (i.e. between the <head></head> tags. Everything below goes inside the <body></body> tags) -->
-        
-      
