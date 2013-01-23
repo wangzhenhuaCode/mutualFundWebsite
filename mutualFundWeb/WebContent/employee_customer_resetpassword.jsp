@@ -12,7 +12,7 @@
         </div>
 
 
-<jsp:include page="template-top2.jsp" />
+<jsp:include page="employee_template-top2.jsp" />
 
         <h2 >Reset Password for Yue Ma</h2>
             <br />
