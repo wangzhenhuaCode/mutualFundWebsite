@@ -43,7 +43,7 @@
         <div class="ArticleBorder"><div class="ArticleBL"><div></div></div><div class="ArticleBR"><div></div></div><div class="ArticleTL"></div><div class="ArticleTR"><div></div></div><div class="ArticleT"></div><div class="ArticleR"><div></div></div><div class="ArticleB"><div></div></div><div class="ArticleL"></div><div class="ArticleC"></div>
         <div class="Article">
         <h2 style="margin-left:250px;">Login</h2>
-        <form method="post" action="act/customer_login.action" id="form">
+        <form method="post" action="act/employee_login.action" id="form">
 		<table border="0" style="line-width: 60px; line-height: 30px; padding-left: 10px;" align="center">
 			<col width="100">
 			<col width="250">
@@ -65,7 +65,7 @@
 
 		
 		
-		<input type="radio" name="type" onclick="javascript:$('form').action='act/customer_login.action'">Customer  <input type="radio" name="type" onclick="javascript:$('form').action='act/employee_login.action'">Employee  
+		<input type="radio" name="type" onclick="javascript:$('#form').attr('action','<%=basePath%>act/customer_login.action');">Customer  <input type="radio" name="type" onclick="javascript:$('#form').attr('action','<%=basePath%>act/employee_login.action');" checked>Employee  
        <div align = "right" style="margin-right:250px;">
             <span class="ButtonInput"><span align="center"><input type="submit" value="Login"/></span></span>
 		</div>
