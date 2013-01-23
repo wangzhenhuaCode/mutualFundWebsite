@@ -14,7 +14,7 @@
 
 <jsp:include page="template-top2.jsp" />
 
-        <h2 >Reset Password for Yue Ma</h2>
+        <h2 >Reset Password for <s:property value="customer.firstname" /><s:property value="customer.lastname" /> </h2>
             <br />
 		<table >
 			<col width="150">
@@ -22,7 +22,7 @@
 			<div class="name">
 				<tr>
 					<td><strong>New Password:</strong></td>
-					<td><input type="text" , name="first name"
+					<td><input type="text" , name="newPassword"
 						style="width: 200px" /></td>
 				</tr>
 			</div>
