@@ -43,7 +43,7 @@
         <div class="ArticleBorder"><div class="ArticleBL"><div></div></div><div class="ArticleBR"><div></div></div><div class="ArticleTL"></div><div class="ArticleTR"><div></div></div><div class="ArticleT"></div><div class="ArticleR"><div></div></div><div class="ArticleB"><div></div></div><div class="ArticleL"></div><div class="ArticleC"></div>
         <div class="Article">
         <h2 style="margin-left:250px;">Login</h2>
-        <form method="post" action="act/customer_login.action" id="form">
+        <form method="post" action="<%=basePath%>act/customer_login.action" id="form">
 		<table border="0" style="line-width: 60px; line-height: 30px; padding-left: 10px;" align="center">
 			<col width="100">
 			<col width="250">

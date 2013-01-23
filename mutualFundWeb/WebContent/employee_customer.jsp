@@ -31,10 +31,10 @@
                 <tbody align="left">
                 <tr>
                     <td><strong>Yue Ma</strong></td>
-                    <td><a href="employee_customer_viewChangeProfile.html">View Account</a></td>
-                    <td><a href="employee_customer_deposit_check.html">Deposit Check</a></td>
-                    <td><a href="employee_customer_resetpassword.html">Reset Password</a></td>
-                    <td><a href="employee_customer_history.html">Transaction History</a></td>
+                    <td><a href="<%=basePath%>act/employee_viewCustomer.action?customer.customerId=">View Account</a></td>
+                    <td><a href="<%=basePath%>act/employee_depositCheck.action">Deposit Check</a></td>
+                    <td><a href="<%=basePath%>act/employee_resetPassword.action">Reset Password</a></td>
+                    <td><a href="<%=basePath%>act/employee_transactionHistory.action">Transaction History</a></td>
                 </tr>
                 <tr>
                     <td><strong>Edward Zhang</strong></td>
