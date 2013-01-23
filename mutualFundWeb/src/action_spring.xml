@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="CustomerAction"
+		class="Struts.Action.CustomerAction">
+		<property name="customerDAO" ref="CustomerDAO" />
+	</bean>
+	<bean id="EmployeeAction"
+		class="Struts.Action.EmployeeAction">
+	</bean>
+	<bean id="FinanceAction"
+		class="Struts.Action.FinanceAction">
+	</bean>
+	
+	<bean id="TransactionDayAction"
+		class="Struts.Action.TransactionDayAction">
+	</bean>
+	<bean id="TradeAction"
+		class="Struts.Action.TradeAction">
+		<property name="fundDAO" ref="FundDAO" />
+	</bean>
+	<bean id="TradeAJAXAction"
+		class="Struts.Action.TradeAJAXAction">
+	</bean>
+</beans>
