@@ -14,7 +14,7 @@
 <jsp:include page="template-top2.jsp" />
 
 
- <h2>Welcome, Administrator</h2>
+ <h2>Welcome, <s:property value="#session.employee.firstname" /></h2>
             
             <br />
             <h3>Fund Summary:</h3>

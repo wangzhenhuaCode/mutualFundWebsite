@@ -13,14 +13,16 @@ public class CustomerAction extends ActionSupport {
 	private Customer customer;
 	private String newPassword;
 	private String errorInfo;
+	private String username;
+	private String password;
 	public String login(){
 		errorInfo="";
-		List<Customer> list=customerDAO.findByProperty("username", customer.getUsername());
+		List<Customer> list=customerDAO.findByProperty("username", username);
 		if(list.size()==0){
 			errorInfo="Username error!";
 			return "failure";
 		}
-		if(list.get(0).getPassword().equals(customer.getPassword())){
+		if(list.get(0).getPassword().equals(password)){
 			ActionContext ctx=ActionContext.getContext();
 			Map<String,Object> session=ctx.getSession();
 			session.put("customer", list.get(0));
@@ -63,6 +65,12 @@ public class CustomerAction extends ActionSupport {
 	}
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }
