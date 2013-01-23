@@ -45,7 +45,7 @@ public class EmployeeAction extends ActionSupport {
 		List<Employee> list=employeeDAO.findByProperty("username", employee.getUsername());
 		if(list.size()==0){
 			errorInfo="Username error!";
-			return "failure";
+			return "employeeFailureLogin";
 		}
 		if(list.get(0).getPassword().equals(employee.getPassword())){
 			ActionContext ctx=ActionContext.getContext();
