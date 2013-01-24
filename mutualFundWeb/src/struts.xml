@@ -9,7 +9,7 @@
         	<result name="index">/login.jsp</result>
         </action>
        <action name="employee_*" class="EmployeeAction"  method="{1}">
-        	<result name="changeCustomerPassword">/employee_customer.jsp</result>
+        	<result name="changeCustomerPassword">/employee_customer_resetpassword.jsp</result>
         	<result name="manageBookmark">/manageBookmark.jsp</result>
         	<result name="addBookmark">/addBookmark.jsp</result>
         	<result name="logoutSuccess">/Login.jsp</result>
