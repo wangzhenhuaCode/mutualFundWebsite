@@ -13,46 +13,31 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
-
+		<form method="post" action="<%=basePath%>act/customer_viewCustomers.action" id="form">
             <h2>Account Management</h2>
             
-            <a href="employee_customer_New_Account.html" class="Button"><span>Create New Account</span></a>
+            <a href="<%=basePath%>act/employee_addNewCustomerAccount" class="Button"><span>Create New Account</span></a>
             
             <p></p>
             <p></p>
             
-            <h4>Customer List:<h4>
-            <p>
+            <h4>Customer List:</h4>
             
-            </p>
-            <p>
-            
-            </p>
+            <p></p>
+            <p></p>
             <table class="bottomBorder" cellspacing="20px">
                 <tbody align="left">
-                <s:iterator value="fundlist" id="fund">
+                <s:iterator value="customerList" id="customer">
                 <tr>
-                    <td><s:property value="#fund.symbol" /></td>
-                    <td><s:property value="#fund.name" /></td>
-                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
-                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" /></s:if><s:else>N/A</s:else></font></td>
+                	<td><strong><s:property value="#customer.firstName" /><s:property value="#customer.lastName" /></strong></td>
+                    <td><a href="<%=basePath%>act/employee_viewCustomerAccount.action?customer.customerId=<s:property value="#customer.id"/>">View Account</a></td>
+                    <td><a href="<%=basePath%>act/employee_checkCustomerdeposit.action">Deposit Check</a></td>
+                    <td><a href="<%=basePath%>act/employee_resetCustomerPassword.action">Reset Password</a></td>
+                    <td><a href="<%=basePath%>act/employee_viewTransactionHistory.action">Transaction History</a></td>
                 </tr>
                 </s:iterator>
-                <tr>
-                    <td><strong>Yue Ma</strong></td>
-                    <td><a href="<%=basePath%>act/employee_viewCustomer.action?customer.customerId=">View Account</a></td>
-                    <td><a href="<%=basePath%>act/employee_depositCheck.action">Deposit Check</a></td>
-                    <td><a href="<%=basePath%>act/employee_resetPassword.action">Reset Password</a></td>
-                    <td><a href="<%=basePath%>act/employee_transactionHistory.action">Transaction History</a></td>
-                </tr>
-                <tr>
-                    <td><strong>Edward Zhang</strong></td>
-                    <td><a href="">View Account</a></td>
-                    <td><a href="">Deposit Check</a></td>
-                    <td><a href="">Reset Password</a></td>
-                    <td><a href="">Transaction History</a></td>
-                </tr>
-            </tbody></table>
-
+            	</tbody>
+            </table>
+		</form>
             
 <jsp:include page="template-bottom.jsp" />

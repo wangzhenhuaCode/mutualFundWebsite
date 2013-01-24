@@ -12,7 +12,7 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
-
+		<form method="post" action="<%=basePath%>act/customer_addNewCustomerAccount.action" id="form">
 			<h2>Create a New Account</h2>
 		
 			<table>
@@ -21,8 +21,8 @@
 				<td>Last Name</td>
 				</tr>
 				<tr>
-				<td><input type="text" name="firstName"></td>
-				<td><input type="text" name="lastName"></td>
+				<td><input type="text" name="customer.firstName"></td>
+				<td><input type="text" name="customer.lastName"></td>
 				</tr>
 				<tr>
 				<td>Date of Birth</td>
@@ -54,9 +54,9 @@
 				<td>Zipcode</td>
 				</tr>
 				<tr>
-				<td><input type="text" size="20" name="city"></td>
-				<td><input type="text" size="20" name="state"></td>
-				<td><input type="text" size="5" name="zipcode"></td>
+				<td><input type="text" size="20" name="customer.city"></td>
+				<td><input type="text" size="20" name="customer.state"></td>
+				<td><input type="text" size="5" name="customer.zip"></td>
 				</tr>
 				<tr>
 				<td>Account Type</td>
@@ -66,5 +66,5 @@
 				</tr>
 			</table> 
 			<span class="ButtonInput"><span align="center"><input type="button" value="Create" style="width:100px"></span></span>
-
+		</form>
 <jsp:include page="template-bottom.jsp" />
