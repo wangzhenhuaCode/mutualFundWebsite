@@ -44,7 +44,7 @@
         <div class="Article">
         <h2 style="margin-left:250px;">Login</h2>
 
-        <form method="post" action="<%=basePath%>act/customer_login.action" id="form">
+        <form method="post" action="<%=basePath%>act/employee_login.action" id="form">
 
 		<table border="0" style="line-width: 60px; line-height: 30px; padding-left: 10px;" align="center">
 			<col width="100">
