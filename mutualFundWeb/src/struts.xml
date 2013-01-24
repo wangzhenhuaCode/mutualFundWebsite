@@ -18,7 +18,7 @@
         <action name="finance_*" class="FinanceAction"  method="{1}">
         	<result name="depositSuccess">/employee_customer_deposit_check.jsp</result>
         	<result name="requestSuccess">/Finance.jsp</result>
-        	<result name="backmanage" type="redirectAction">bookmark_manageBookmark.action</result>
+        	<result name="gotoFinance" >/Finance.jsp</result>
         </action>
         <action name="trade_*" class="TradeAction"  method="{1}">
         	<result name="employeeGotoTrade">/employee_fund.jsp</result>

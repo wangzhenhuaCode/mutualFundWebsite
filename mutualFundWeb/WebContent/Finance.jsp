@@ -19,7 +19,7 @@
         <p>
             <br />
             <h3>Request History</h3>
-            <form method="post" action="act/finance_requestCheck.action">
+            <form method="post" action="<%=basePath%>act/finance_requestCheck.action">
                <table class="bottomBorder">
 			   	<col width="250">
 				<col width="250">
@@ -53,7 +53,7 @@
             
             <br />
 		<div align = "left">
-            <span class="ButtonInput"><span align="center"><input type="button" value="Request Check"/></span></span>
+            <span class="ButtonInput"><span align="center"><input type="submit" value="Request Check"/></span></span>
 		</div>
 		</form>
         </p>
