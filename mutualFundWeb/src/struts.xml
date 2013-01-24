@@ -16,7 +16,7 @@
         	<result name="backmanage" type="redirectAction">bookmark_manageBookmark.action</result>
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">
-        	<result name="addBookmark">/addBookmark.jsp</result>
+        	<result name="depositSuccess">/employee_customer_deposit_check.jsp</result>
         	<result name="updateBookmark">/updateBookmark.jsp</result>
         	<result name="backmanage" type="redirectAction">bookmark_manageBookmark.action</result>
         </action>

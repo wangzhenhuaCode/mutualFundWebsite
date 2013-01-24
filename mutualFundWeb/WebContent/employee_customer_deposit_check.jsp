@@ -20,15 +20,16 @@
             
             <h3>Yue Ma</h3>
             <h4>Balance: $5,000.00</h4>
+            <form method="post" action="act/finance_deposit.action">
 			<table>
             	<tr>
                 <td>Amount:</td>
                 <td><input type="text" style="width:120px"><td>
-                <td><span class="ButtonInput"><span><input type="button" value="Deposit"></span></span></td>
+                <td><span class="ButtonInput"><span><input type="button" value="Deposit" name="amount"></span></span></td>
                 <td><span class="ButtonInput"><span><input type="button" value="Cancel"></span></span></td>
                 </tr>
 			</table>
-            
+            </form>
 
 
 <jsp:include page="template-bottom.jsp" />
