@@ -17,7 +17,7 @@
 		
 			<table>
 				<tr>
-				<td>First Name</td>
+				<td>First Name</td> 
 				<td>Last Name</td>
 				</tr>
 				
