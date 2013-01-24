@@ -11,7 +11,7 @@
             <ul><li><a href="employee_home.html" class="MenuButton"><span>Home</span></a></li> <li><a href="employee_transaction.html" class="MenuButton"><span>Transaction History</span></a></li> <li><a href="employee_customer.html" class="MenuButton"><span>Account Management</span></a></li> <li><a href="employee_fund.html" class="ActiveMenuButton"><span>Fund Management</span></a></li></ul>
         </div>
 
-<jsp:include page="employee_template-top2.jsp" />
+<jsp:include page="template-top2.jsp" />
 
             <h2>Fund Listed:</h2>
             
@@ -24,52 +24,26 @@
                     <th>Fund Name</th>
                     <th>Last Price</th>
                     <th>Change</th>
-                    <th>Share Sold</th>
-                    <th>Current Value</th>
-                    <th>Cost</th>
+                   
+                   
                 </tr>
+               
+                <s:iterator value="fundlist" id="fund">
                 <tr>
-                    <td>MCSM01</td>
-                    <td>Michael Shamos 01</td>
-                    <td>100.00</td>
-                    <td><font color="red">-5%</td>
-                    <td>1000.000</td>
-                    <td><font color="green">100,000.00</td>
-                    <td>89,000.00</td>
+                    <td><s:property value="#fund.symbol" /></td>
+                    <td><s:property value="#fund.name" /></td>
+                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
+                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" /></s:if><s:else>N/A</s:else></font></td>
                 </tr>
-                <tr>
-                    <td>JFEPG07</td>
-                    <td>Jeff Eppinger 07</td>
-                    <td>10.00</td>
-                    <td><font color="red">-5%</td>
-                    <td>1000.000</td>
-                    <td><font color="green">10,000.00</td>
-                    <td>9,000.00</td>
-                </tr>
-                <tr>
-                    <td>MCSM01</td>
-                    <td>Michael Shamos 01</td>
-                    <td>100.00</td>
-                    <td><font color="red">-5%</td>
-                    <td>1000.000</td>
-                    <td><font color="green">100,000.00</td>
-                    <td>89,000.00</td>
-                </tr>
-                <tr>
-                    <td>JFEPG07</td>
-                    <td>Jeff Eppinger 07</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                    <td>-</td>
-                </tr>
+                </s:iterator>
+               
+                
             </table>
 
             
             <br />
             
-            <form method="post" action="">
+            <form method="post" action="<%=basePath%>/act/trade_create.action">
                 
                 <table>
                     <tr>
@@ -81,17 +55,19 @@
                         </td>
                         
                     </tr>
-                    <tr>
+                    <tr> 
                         <td>
-                            <input type="text" maxlength="255" value=""/>
+                            <input type="text" maxlength="255" name="fund.symbol" />
                         </td>
                         <td>
-                            <input type="text" maxlength="255" value=""/>
+                            <input type="text" maxlength="255" name="fund.name"/>
                         </td>
                         
                     </tr>
                 </table>
-                <span class="ButtonInput"><span><input type="button" value="Add New Fund" /></span></span>
+                Fund Description<br/>
+                <textArea width="500" height="300" name="fund.description"></textArea><br/>
+                <span class="ButtonInput"><span><input type="submit" value="Add New Fund" /></span></span>
                 
             </form>
             

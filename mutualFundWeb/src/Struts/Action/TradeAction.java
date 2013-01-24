@@ -67,9 +67,14 @@ public class TradeAction extends ActionSupport {
 		return "";
 	}
 	public String gotoTrade(){
-		List<Fund> fundlist=fundDAO.getListByPage(0, _PAGE_SIZE,null,null);
+		fundlist=fundDAO.getListByPage(0, _PAGE_SIZE,null,null);
 		maxPage=fundDAO.count(null,null)/20+1;
 		return "gotoTrade";
+	}
+	public String employeeGotoTrade(){
+		fundlist=fundDAO.getListByPage(0, _PAGE_SIZE,null,null);
+		maxPage=fundDAO.count(null,null)/20+1;
+		return "employeeGotoTrade";
 	}
 	public String changePage(){
 		if(maxPage==null)
@@ -78,11 +83,15 @@ public class TradeAction extends ActionSupport {
 			pageNum=1;
 		if(pageNum>maxPage)
 			pageNum=maxPage;
-		List<Fund> fundlist=fundDAO.getListByPage((pageNum-1)*_PAGE_SIZE, _PAGE_SIZE,null,null);
+		fundlist=fundDAO.getListByPage((pageNum-1)*_PAGE_SIZE, _PAGE_SIZE,null,null);
 		return "gotoTrade";
 	}
 	public String research(){
 		return "";
+	}
+	public String create(){
+		fundDAO.save(fund);
+		return "create";
 	}
 	
 	
@@ -97,6 +106,7 @@ public class TradeAction extends ActionSupport {
 	public void setTransactionDAO(ITransactionDAO transactionDAO) {
 		this.transactionDAO = transactionDAO;
 	}
+
 
 	public List<Fund> getFundlist() {
 		return fundlist;

@@ -25,9 +25,16 @@ public class EmployeeAction extends ActionSupport {
 	private String errorInfo;
 	private Fund fund;
 	private IFundDAO fundDAO;
+	private List<Customer> customerList;
+	private int pageNum;
+	private int maxPage;
 
 	private ITransactionDAO transactionDAO;
 	private Transaction transaction;
+	
+	public List<Customer> getCustomerList() {
+		return this.customerList;
+	}
 	public void setNewCustomerPassword(String s) {
 		this.newCustomerPassword = s;
 	}
@@ -59,6 +66,21 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public void setFundDAO(IFundDAO fundDAO) {
 		this.fundDAO = fundDAO;
+	}
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getMaxPage() {
+		return maxPage;
+	}
+
+	public void setMaxPage(Integer maxPage) {
+		this.maxPage = maxPage;
 	}
 	public String login(){
 		errorInfo="";
@@ -104,7 +126,11 @@ public class EmployeeAction extends ActionSupport {
 		fundDAO.save(fund);
 		return "addNewFundSuccess";
 	}
-
+	public String viewCustomers() {
+		customerList = customerDAO.getListByPage(0, pageNum, null, null);
+		maxPage=customerDAO.count(null,null)/20+1;
+		return "viewCustomers";
+	}
 	public String addNewCustomerAccount(){
 		errorInfo="";
 		customerDAO.save(customer);

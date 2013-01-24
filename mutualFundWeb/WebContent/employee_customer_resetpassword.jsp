@@ -14,7 +14,7 @@
 
 
 <jsp:include page="template-top2.jsp" />
-		<form method="post" action="<%=basePath%>act/employee_changeCustomerPassword.action" id="form">
+		<form method="post" action="<%=basePath%>act/employee_resetCustomerPassword.action" id="form">
         <h2 >Reset Password for <s:property value="customer.firstname" /><s:property value="customer.lastname" /> </h2>
 
             <br />
