@@ -15,6 +15,7 @@
 	</bean>
 	<bean id="FinanceAction"
 		class="Struts.Action.FinanceAction">
+		<property name="transactionDAO" ref="TransactionDAO" />
 	</bean>
 	
 	<bean id="TransactionDayAction"

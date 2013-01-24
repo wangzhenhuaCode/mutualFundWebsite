@@ -20,7 +20,7 @@
             
             <h3>Yue Ma</h3>
             <h4>Balance: $5,000.00</h4>
-            <form method="post" action="act/finance_deposit.action">
+            <form method="post" action="<%=basePath%>act/finance_deposit.action">
 			<table>
             	<tr>
                 <td>Amount:</td>

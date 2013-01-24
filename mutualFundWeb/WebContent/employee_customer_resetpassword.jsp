@@ -12,9 +12,11 @@
         </div>
 
 
-<jsp:include page="employee_template-top2.jsp" />
 
-        <h2 >Reset Password for Yue Ma</h2>
+<jsp:include page="template-top2.jsp" />
+		<form method="post" action="<%=basePath%>act/employee_resetCustomerPassword.action" id="form">
+        <h2 >Reset Password for <s:property value="customer.firstname" /><s:property value="customer.lastname" /> </h2>
+
             <br />
 		<table >
 			<col width="150">
@@ -22,14 +24,14 @@
 			<div class="name">
 				<tr>
 					<td><strong>New Password:</strong></td>
-					<td><input type="text" , name="first name"
+					<td><input type="text" , name="newPassword"
 						style="width: 200px" /></td>
 				</tr>
 			</div>
 			<div class="inputName">
 				<tr>
 				<td><strong>Confirm Password:</strong></td>
-				<td><input type="text" , name="last name" style="width: 200px" />
+				<td><input type="text" , name="newPassword" style="width: 200px" />
 					</td>
 				<tr>
 			</div>
@@ -38,5 +40,6 @@
             <span class="ButtonInput"><span align="center"><input type="button" value="Reset"/></span></span>
            <span class="ButtonInput"><span align="center"><input type="button" value="Cancel"/></span></span>
 		</div>
+		</form>
        
 <jsp:include page="template-bottom.jsp" />
