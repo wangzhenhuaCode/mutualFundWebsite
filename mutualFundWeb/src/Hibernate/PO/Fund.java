@@ -1,6 +1,7 @@
 package Hibernate.PO;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -19,6 +20,9 @@ public class Fund implements java.io.Serializable {
 	private Set fundPriceHistories = new HashSet(0);
 	private Set transactions = new HashSet(0);
 
+	
+	private Long todayPrice;
+	private Double percentage;
 	// Constructors
 
 	/** default constructor */
@@ -98,6 +102,37 @@ public class Fund implements java.io.Serializable {
 
 	public void setTransactions(Set transactions) {
 		this.transactions = transactions;
+	}
+	public String getPercentage(){
+		if(percentage==null){
+			
+			if(fundPriceHistories.size()>1){
+				Iterator i=fundPriceHistories.iterator();
+				todayPrice=((FundPriceHistory)i.next()).getPrice();
+				
+					Long p=((FundPriceHistory)i.next()).getPrice();
+					percentage=((double)todayPrice-(double)p)/(double)p*100;
+					return String.format("%1$,.2f", percentage);
+				
+			}else return "N/A";
+		}else return String.format("%1$,.2f", percentage);
+	}
+
+	public String getTodayPrice() {
+		if(todayPrice==null){
+			
+			if(fundPriceHistories.size()>0){
+				Iterator i=fundPriceHistories.iterator();
+				todayPrice=((FundPriceHistory)i.next()).getPrice();
+				Double coverted=(double)todayPrice/100;
+				return String.format("%1$,.2f", coverted);
+			}else
+				return "N/A";
+		}
+		else{
+			Double coverted=(double)todayPrice/100;
+			return String.format("%1$,.2f", coverted);
+		}
 	}
 
 }

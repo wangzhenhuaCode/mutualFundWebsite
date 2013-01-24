@@ -8,7 +8,7 @@ import Hibernate.PO.Fund;
 
 public class FundDAO extends BaseHibernateDAO<Fund> implements IFundDAO {
 	public void initDAO(){
-		super.init(FundDAO.class.getName());
+		super.init(Fund.class.getName());
 	}
 	@SuppressWarnings("unchecked")
 	public List<Fund> search(final String keywords){
