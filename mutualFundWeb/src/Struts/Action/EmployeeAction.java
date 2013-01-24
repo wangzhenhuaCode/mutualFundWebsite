@@ -25,6 +25,7 @@ public class EmployeeAction extends ActionSupport {
 	private String errorInfo;
 	private Fund fund;
 	private IFundDAO fundDAO;
+
 	private ITransactionDAO transactionDAO;
 	private Transaction transaction;
 	public void setNewCustomerPassword(String s) {
@@ -32,6 +33,14 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public void setTransaction(Transaction t) {
 		this.transaction = t;
+	}
+	private String username;
+	private String password;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
@@ -53,12 +62,12 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public String login(){
 		errorInfo="";
-		List<Employee> list=employeeDAO.findByProperty("username", employee.getUsername());
+		List<Employee> list=employeeDAO.findByProperty("username", username);
 		if(list.size()==0){
 			errorInfo="Username error!";
 			return "employeeFailureLogin";
 		}
-		if(list.get(0).getPassword().equals(employee.getPassword())){
+		if(list.get(0).getPassword().equals(password)){
 			ActionContext ctx=ActionContext.getContext();
 			Map<String,Object> session=ctx.getSession();
 			session.put("employee", list.get(0));
@@ -73,7 +82,7 @@ public class EmployeeAction extends ActionSupport {
 		errorInfo="";
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		session.put("employee", null);
+		session.remove("employee");
 		return "logoutSuccess";
 	}
 	public String changePassword(){

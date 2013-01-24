@@ -11,7 +11,7 @@
            <ul><li><a href="employee_home.html" class="MenuButton"><span>Home</span></a></li> <li><a href="employee_transaction.html" class="MenuButton"><span>Transaction History</span></a></li> <li><a href="employee_customer.html" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="employee_fund.html" class="MenuButton"><span>Fund Management</span></a></li></ul>
         </div>
 
-<jsp:include page="template-top2.jsp" />
+<jsp:include page="employee_template-top2.jsp" />
 
             
             
