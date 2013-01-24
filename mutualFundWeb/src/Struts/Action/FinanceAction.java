@@ -28,6 +28,7 @@ public class FinanceAction extends ActionSupport {
 			return "requestFailure";
 		}
 		Transaction transaction=new Transaction();
+	
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_WITHDRAW);
 		transaction.setAmount(amount);
@@ -36,7 +37,7 @@ public class FinanceAction extends ActionSupport {
 		return "requestSuccess";
 	}
 	
-	public String financPage(){
+	public String financePage(){
 		return "gotoFinance";
 	}
 	
