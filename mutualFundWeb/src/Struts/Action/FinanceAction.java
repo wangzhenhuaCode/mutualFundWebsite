@@ -17,21 +17,20 @@ public class FinanceAction extends ActionSupport {
 	private Customer customer;
 	private ICustomerDAO customerDAO;
 
-	private long amountRequest;
-	private long amountDeposit;
+	private long amount;
 
 	public String requestCheck(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		if(amountRequest<0) {
+		if(amount<0) {
 			errorInfo="Amount cannot be negative!";
 			return "requestFailure";
 		}
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_WITHDRAW);
-		transaction.setAmount(amountRequest);
+		transaction.setAmount(amount);
 		transaction.setExecuteDate(new Date());
 		transactionDAO.save(transaction);
 		return "requestSuccess";
@@ -46,23 +45,23 @@ public class FinanceAction extends ActionSupport {
 	}
 	
 	public String deposit(){
-		if(amountDeposit<0) {
+		if(amount<0) {
 			errorInfo="Amount cannot be negative!";
 			return "depositFailure";
 		}
 		customer=customerDAO.find(customer).get(0);
-		customer.setCash(customer.getCash()+amountDeposit);
+		customer.setCash(customer.getCash()+amount);
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
-		transaction.setAmount(amountDeposit);
+		transaction.setAmount(amount);
 		transaction.setExecuteDate(new Date());
 		transactionDAO.save(transaction);
 		return "depositSuccess";
 	}
 	
 	public void setAmount(long amount) {
-		this.amountRequest = amount;
+		this.amount = amount;
 	}
 
 	public String getErrorInfo() {
@@ -71,10 +70,6 @@ public class FinanceAction extends ActionSupport {
 	
 	public void setTransactionDAO(ITransactionDAO transactionDAO) {
 		this.transactionDAO = transactionDAO;
-	}
-
-	public void setAmountDeposit(long amountDeposit) {
-		this.amountDeposit = amountDeposit;
 	}
 	
 	public void setCustermor(Customer customer) {
