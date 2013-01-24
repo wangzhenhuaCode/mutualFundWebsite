@@ -23,6 +23,7 @@
 				<tr>
 				<td><input type="text" name="customer.firstName"></td>
 				<td><input type="text" name="customer.lastName"></td>
+				
 				</tr>
 				<tr>
 				<td>Date ofBirth</td>
