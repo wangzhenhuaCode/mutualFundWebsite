@@ -25,29 +25,14 @@
 				<td><input type="text" name="customer.firstName"></td>
 				<td><input type="text" name="customer.lastName"></td>
 				</tr>
+				
 				<tr>
-				<td>Date ofBirth</td>
-				<td>Social Security Number</td>
+				<td>Address Line 1</td>
+				<td>Address Line 2</td>
 				</tr>
 				<tr>
-				<td><input type="text" size="2" name="birthDay"> <input type="text" size="2" name="birthMonth"> <input type="text" size="4" name="birthYear"></td>
-				<td><input type="text" size="3" name="socialSecurityNumber3"> - <input type="text" size="2" name="socialSecurityNumber2"> - <input type="text" size="4" name="socialSecurityNumber4"></td>
-				</tr>
-				<tr>
-				<td>Email Address</td>
-                <td>Phone Number</td>
-				</tr>
-				<tr>
-				<td><input type="text" name="emailAddress"></td>
-                <td><input type="text" name="phoneNumber"></td>
-				</tr>
-				<tr>
-				<td>Address</td>
-				<td>Apartment Number</td>
-				</tr>
-				<tr>
-				<td><input type="text" name="address"></td>
-				<td><input type="text" name="apartmentNumber"></td>
+				<td><input type="text" name="customer.addLine1"></td>
+				<td><input type="text" name="customer.addLine2"></td>
 				</tr>
 				<tr>
 				<td>City</td>
