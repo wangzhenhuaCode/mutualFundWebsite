@@ -25,7 +25,7 @@
 				<td><input type="text" name="customer.lastName"></td>
 				</tr>
 				<tr>
-				<td>Date of Birth</td>
+				<td>Date ofBirth</td>
 				<td>Social Security Number</td>
 				</tr>
 				<tr>
