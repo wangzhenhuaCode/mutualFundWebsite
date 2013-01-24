@@ -136,6 +136,7 @@ public class EmployeeAction extends ActionSupport {
 		errorInfo="";
 		customerDAO.save(customer);
 		return "addNewCustomerAccountSuccess";
+		
 	}
 	public String viewCustomerAccount(){
 		errorInfo="";
