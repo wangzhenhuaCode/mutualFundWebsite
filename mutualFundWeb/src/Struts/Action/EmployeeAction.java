@@ -125,6 +125,7 @@ public class EmployeeAction extends ActionSupport {
 		errorInfo="";
 		fundDAO.save(fund);
 		return "addNewFundSuccess";
+		
 	}
 	public String viewCustomers() {
 		customerList = customerDAO.getListByPage(0, pageNum, null, null);
