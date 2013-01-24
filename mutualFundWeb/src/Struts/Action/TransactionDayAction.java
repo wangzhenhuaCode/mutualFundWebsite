@@ -60,6 +60,25 @@ public class TransactionDayAction extends ActionSupport{
 			}
 			
 		}
+		if(!transactionDAO.transactionDay(buylist, selllist, depositlist, withdrawlist, pricelist))return "failureTrans";
 		return "successTrans";
+	}
+	public List<Fund> getFundlist() {
+		return fundlist;
+	}
+	public String[] getNewPrices() {
+		return newPrices;
+	}
+	public void setFundDAO(IFundDAO fundDAO) {
+		this.fundDAO = fundDAO;
+	}
+	public void setPositionDAO(IPositionDAO positionDAO) {
+		this.positionDAO = positionDAO;
+	}
+	public void setTransactionDAO(ITransactionDAO transactionDAO) {
+		this.transactionDAO = transactionDAO;
+	}
+	public void setDatestring(String datestring) {
+		this.datestring = datestring;
 	}
 }

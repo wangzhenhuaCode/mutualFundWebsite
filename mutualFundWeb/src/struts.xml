@@ -7,13 +7,14 @@
         	<result name="customerFailureLogin">/Login.jsp</result>
         	<result name="login"  type="redirectAction">user_index.action</result>
         	<result name="index">/login.jsp</result>
+        	
         </action>
        <action name="employee_*" class="EmployeeAction"  method="{1}">
-        	<result name="employeeSucessLogin">/employee_home.jsp</result>
         	<result name="employeeFailureLogin">/Login.jsp</result>
-        	<result name="addBookmark">/addBookmark.jsp</result>
-        	<result name="updateBookmark">/updateBookmark.jsp</result>
-        	<result name="backmanage" type="redirectAction">bookmark_manageBookmark.action</result>
+        	<result name="employeeSucessLogin" type="redirectAction">transaction_gotoTrans.action</result>
+        	<result name="changeCustomerPassword">/employee_customer_resetpassword.jsp</result>
+        	<result name="viewCustomers">/employee_customer.jsp</result>
+
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">
         	<result name="depositSuccess">/employee_customer_deposit_check.jsp</result>
@@ -25,10 +26,10 @@
         	<result name="create" type="redirectAction">trade_employeeGotoTrade.action</result>
         	<result name="backmanage" type="redirectAction">bookmark_manageBookmark.action</result>
         </action>
-        <action name="transaction_*" class="TransactionAction"  method="{1}">
+        <action name="transaction_*" class="TransactionDayAction"  method="{1}">
         
-        	<result name="addBookmark">/addBookmark.jsp</result>
-        	<result name="backmanage" type="redirectAction">bookmark_manageBookmark.action</result>
+        	<result name="successTrans" type="redirectAction">trade_employeeGotoTrade.action</result>
+        	<result name="gototrans" >/employee_home.jsp</result>
         </action>
 	</package>
 	
