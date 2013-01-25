@@ -42,64 +42,7 @@
               </s:iterator>
             </table>
             
-            <p>
-            Please enter fund ticker to purchase or sale, your transaction will be proceed on next working day.
-            </p>
             
-            
-            <br /><br />
-            
-            <form method="post" action="<%=basePath%>act/trade_buy.action">
-                
-                <table>
-                    <tr>
-                        <td>
-                            Fund Ticker
-                        </td>
-                        <td>
-                            Value
-                        </td>
-                       
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                        
-                    </tr>
-                </table>
-                <span class="ButtonInput"><span><input type="button" value="BUY" /></span></span>
-                
-            </form>
-            
-            <br /><br />
-            
-            <form method="post" action="">
-                
-                <table>
-                    <tr>
-                        <td>
-                            Fund Ticker
-                        </td>
-                        <td>
-                            Shares
-                        </td>
-                        
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                    </tr>
-                </table>
-                <span class="ButtonInput"><span><input type="button" value="SELL" /></span></span>
-            </form>
             
             <br /><br />
 
