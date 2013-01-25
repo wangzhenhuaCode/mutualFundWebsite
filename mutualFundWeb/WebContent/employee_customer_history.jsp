@@ -8,19 +8,24 @@
 <jsp:include page="employee_template-top.jsp" />
 
 <div class="Menu">
-            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li><li><a href="<%=basePath%>act/employee_viewCustomers.action" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+<<<<<<< HEAD
+           <ul><li><a href='<%=basePath%>act/employee_homePage.action' class="MenuButton"><span>Home</span></a></li> <li><a href='<%=basePath%>act/employee_transactionPage.action' class="MenuButton"><span>Transaction History</span></a></li> <li><a href='<%=basePath%>act/employee_customerPage.action' class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href='<%=basePath%>act/employee_fundPage.action' class="MenuButton"><span>Fund Management</span></a></li></ul>
+=======
+            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+>>>>>>> ca770e0604d7ac6704744bb232a5cbf16d58897b
         </div>
 
 
 <jsp:include page="employee_template-top2.jsp" />
 
-            
-            <h2>Yue Ma's Transaction History</h2>
+            <form method="post" action="<%=basePath%>act/employee_viewTransactionHistory.action">
+            <h2><s:property value="customer.firstName"/> <s:property value="customer.lastName"/>'s Transaction History</h2>
             
             <p>
             <br />
             <table class="bottomBorder" cellspacing="15px">
-  				<tbody align="center" ><tr>
+  				<tbody align="center" >
+  				<tr>
     				<th width="120">Transaction Date</th>
     				<th width="100">Operation</th>
                     <th width="80">Fund Name</th>
@@ -28,32 +33,23 @@
                     <th width="80">Share Price</th>
     				<th width="60">Amount</th>
   				</tr>
-                    <tr class="pending">
-                        <td>Pending...</td>
-                        <td>Request Check</td>
-                        <td>-</td><td>-</td>
-                        <td>-</td>
-                        <td>6,000.00</td>
-                    </tr>
-                    <tr class="pending">
-                        <td>Pending...</td>
-                        <td>Deposit</td>
-                        <td>-</td><td>-</td>
-                        <td>-</td>
-                        <td>3,000.00</td>
-                    </tr>
-                    <tr>
-                        <td>01/17/2013</td>
-                        <td>Buy</td>
-                        <td>Name</td>
-                        <td>100.000</td>
-                        <td>50.00</td>
-                        <td>5,000.00</td>
-                    </tr>
-                </tbody></table>
+  				
+  				<s:iterator value="transactionList" id="transaction">
+                <tr>
+                    <td><s:property value="#transaction.executeDate"/></td>
+                    <td><s:property value="#transaction.transactionType"/></td>
+                    <td><s:property value="#transaction.fund.name"/></td>
+                    <td><s:property value="#transaction.shares"/></td>
+                    <td></td>
+                    <td><s:property value="#transaction.amount"/></td>
+                </tr>
+                </s:iterator>
+                 
+                </tbody>
+                </table>
             </p>
             <div align="right" style="margin-right:80px;">
             <span class="ButtonInput"><span align="center"><input type="button" value="Back"/></span></span>
             </div>
-
+		</form>
 <jsp:include page="template-bottom.jsp" />

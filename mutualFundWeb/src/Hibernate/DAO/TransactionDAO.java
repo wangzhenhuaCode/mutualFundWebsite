@@ -25,7 +25,9 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 	public List<Transaction> findPendingTransaction(final Date date,final Integer type){
 		try {
 			String queryString = "from " + entityName
+
 					+ " where  transactionType="+type+" and executeDate<="+date.getTime();
+
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			throw re;

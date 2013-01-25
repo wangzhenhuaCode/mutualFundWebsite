@@ -67,6 +67,7 @@ public class TransactionDayAction extends ActionSupport{
 		return fundlist;
 	}
 
+
 	public void setNewPrices(String[] newPrices) {
 		this.newPrices = newPrices;
 	}

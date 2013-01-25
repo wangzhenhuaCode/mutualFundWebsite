@@ -9,7 +9,11 @@
 <jsp:include page="employee_template-top.jsp" />
 
 <div class="Menu">
-           <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li><li><a href="<%=basePath%>act/employee_viewCustomers.action" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+<<<<<<< HEAD
+           <ul><li><a href='<%=basePath%>act/employee_homePage.action' class="MenuButton"><span>Home</span></a></li> <li><a href='<%=basePath%>act/employee_transactionPage.action' class="MenuButton"><span>Transaction History</span></a></li> <li><a href='<%=basePath%>act/employee_customerPage.action' class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href='<%=basePath%>act/employee_fundPage.action' class="MenuButton"><span>Fund Management</span></a></li></ul>
+=======
+           <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+>>>>>>> ca770e0604d7ac6704744bb232a5cbf16d58897b
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
@@ -31,9 +35,9 @@
                 <tr>
                 	<td><strong><s:property value="#customer.firstName" /><s:property value="#customer.lastName" /></strong></td>
                     <td><a href="<%=basePath%>act/employee_viewCustomerAccount.action?customer.customerId=<s:property value="#customer.id"/>">View Account</a></td>
-                    <td><a href="<%=basePath%>act/employee_checkCustomerdeposit.action">Deposit Check</a></td>
-                    <td><a href="<%=basePath%>act/employee_resetCustomerPassword.action">Reset Password</a></td>
-                    <td><a href="<%=basePath%>act/employee_viewTransactionHistory.action">Transaction History</a></td>
+                    <td><a href="<%=basePath%>act/employee_checkCustomerdeposit.action?customer.customerId=<s:property value="#customer.id"/>">Deposit Check</a></td>
+                    <td><a href="<%=basePath%>act/employee_resetCustomerPassword.action?customer.customerId=<s:property value="#customer.id"/>">Reset Password</a></td>
+                    <td><a href="<%=basePath%>act/employee_viewTransactionHistory.action?customer.customerId=<s:property value="#customer.id"/>">Transaction History</a></td>
                 </tr>
                 </s:iterator>
             	</tbody>

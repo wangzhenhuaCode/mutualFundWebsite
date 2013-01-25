@@ -8,7 +8,7 @@
 <jsp:include page="template-top.jsp" />
 
 <div class="Menu">
-            <ul><li><a href="Home.html" class="MenuButton"><span>Home</span></a></li> <li><a href="Trade.html" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href="Finance.html" class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/customer_login.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
         </div>
 
 <jsp:include page="template-top2.jsp" />
@@ -33,8 +33,8 @@
                 <tr>
                     <td><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#fund.fundId" />"><s:property value="#fund.symbol" /></a></td>
                     <td><s:property value="#fund.name" /></td>
-                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
-                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else></font></td>
+                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>-</s:else></td>
+                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>-</s:else></font></td>
                     <td>50.000</td>
                     <td>5,000.00</td>
                     <td><font color="red">-123.00</td>
@@ -42,64 +42,7 @@
               </s:iterator>
             </table>
             
-            <p>
-            Please enter fund ticker to purchase or sale, your transaction will be proceed on next working day.
-            </p>
             
-            
-            <br /><br />
-            
-            <form method="post" action="">
-                
-                <table>
-                    <tr>
-                        <td>
-                            Fund Ticker
-                        </td>
-                        <td>
-                            Value
-                        </td>
-                       
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                        
-                    </tr>
-                </table>
-                <span class="ButtonInput"><span><input type="button" value="BUY" /></span></span>
-                
-            </form>
-            
-            <br /><br />
-            
-            <form method="post" action="">
-                
-                <table>
-                    <tr>
-                        <td>
-                            Fund Ticker
-                        </td>
-                        <td>
-                            Shares
-                        </td>
-                        
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                        <td>
-                            <input type="text" maxlength="255" value=""/>
-                        </td>
-                    </tr>
-                </table>
-                <span class="ButtonInput"><span><input type="button" value="SELL" /></span></span>
-            </form>
             
             <br /><br />
 
