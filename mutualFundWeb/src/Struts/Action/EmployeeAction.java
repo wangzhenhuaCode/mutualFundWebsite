@@ -100,7 +100,7 @@ public class EmployeeAction extends ActionSupport {
 	public String viewCustomerAccount(){
 		errorInfo="";
 		customer = customerDAO.findById(customer.getCustomerId());
-		
+		//customerDAO.save(customer);
 		return "viewCustomerSuccess";
 	}
 	public String resetCustomerPassword(){
