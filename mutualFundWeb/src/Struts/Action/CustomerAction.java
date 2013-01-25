@@ -16,7 +16,7 @@ public class CustomerAction extends ActionSupport {
 	private String username;
 	private String password;
 	public String login(){
-		errorInfo="";
+		errorInfo=""; 
 		List<Customer> list=customerDAO.findByProperty("username", username);
 		if(list.size()==0){
 			errorInfo="Username error!";
