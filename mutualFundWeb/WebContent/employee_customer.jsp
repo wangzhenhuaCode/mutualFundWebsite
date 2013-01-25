@@ -18,7 +18,7 @@
 		<form method="post" action="<%=basePath%>act/customer_viewCustomers.action" id="form">
             <h2>Account Management</h2>
             
-            <a href="<%=basePath%>act/employee_addNewCustomerAccount" class="Button"><span> Create New Account</span></a>
+            <a href="<%=basePath%>act/employee_goToAddNewCustomerAccount.action" class="Button"><span> Create New Account</span></a>
             
             <p></p>
             <p></p>

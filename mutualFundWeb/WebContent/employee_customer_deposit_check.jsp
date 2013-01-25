@@ -21,13 +21,13 @@
             
             
             <h3><s:property value="customer.firstname" />&nbsp<s:property value="customer.lastname" /></h3>
-            <h4>Balance: $<s:property value="customer.cash"/></h4>
+            <h4>Balance: $<s:property value="customer.currentCash"/></h4>
             
 			<table>
             	<tr>
                 <td>Amount:</td>
                 <td><input type="text" style="width:120px"><td>
-                <td><span class="ButtonInput"><span><input type="submit" value="Deposit" name="amount"></span></span></td>
+                <td><span class="ButtonInput"><span><input type="submit" value="Deposit" ></span></span></td>
                 <td><span class="ButtonInput"><span><input type="button" value="Cancel"></span></span></td>
                 </tr>
 			</table>

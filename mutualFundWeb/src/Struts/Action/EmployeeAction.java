@@ -86,9 +86,7 @@ public class EmployeeAction extends ActionSupport {
 	public void setMaxPage(Integer maxPage) {
 		this.maxPage = maxPage;
 	}
-	public String homePage(){
-		return "goToHomepage";
-	}
+
 	public String transactionPage() {
 		return "goToTransactionPage";
 	}
@@ -115,6 +113,12 @@ public class EmployeeAction extends ActionSupport {
 			errorInfo="Password error!";
 			return "employeeFailureLogin";
 		}
+	}
+	public String createCustomerAccount(){
+		errorInfo="";
+		customerDAO.save(customer);
+		return "addNewCustomerSuccess";
+		
 	}
 	public String logout(){
 		errorInfo="";
@@ -144,16 +148,15 @@ public class EmployeeAction extends ActionSupport {
 		
 	}
 	public String viewCustomers() {
-		customerList = customerDAO.getListByPage(0, pageNum, null, null);
+		customerList = customerDAO.findAll();
 		maxPage=customerDAO.count(null,null)/20+1;
 		return "viewCustomers";
 	}
-	public String addNewCustomerAccount(){
-		errorInfo="";
-		customerDAO.save(customer);
-		return "addNewCustomerAccountSuccess";
-		
+	
+	public String goToAddNewCustomerAccount() {
+		return "goToAddNewCustomerAccount";
 	}
+	
 	public String viewCustomerAccount(){
 		errorInfo="";
 		List<Customer> list = customerDAO.find(customer);
