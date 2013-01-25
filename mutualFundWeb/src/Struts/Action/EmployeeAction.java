@@ -33,60 +33,10 @@ public class EmployeeAction extends ActionSupport {
 	private ITransactionDAO transactionDAO;
 	private Transaction transaction;
 	
-	public List<Customer> getCustomerList() {
-		return this.customerList;
-	}
-	public List<Transaction> getTransactionList() {
-		return this.transactionList;
-	}
-	public void setNewCustomerPassword(String s) {
-		this.newCustomerPassword = s;
-	}
-	public void setTransaction(Transaction t) {
-		this.transaction = t;
-	}
+
 	private String username;
 	private String password;
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	public void setFund(Fund fund) {
-		this.fund = fund;
-	}
-	public void setEmployeeDAO(IEmployeeDAO employeeDAO) {
-		this.employeeDAO = employeeDAO;
-	}
-	public void setCustomerDAO(ICustomerDAO customerDAO) {
-		this.customerDAO = customerDAO;
-	}
-	public void setFundDAO(IFundDAO fundDAO) {
-		this.fundDAO = fundDAO;
-	}
-	public Integer getPageNum() {
-		return pageNum;
-	}
-
-	public void setPageNum(Integer pageNum) {
-		this.pageNum = pageNum;
-	}
-
-	public Integer getMaxPage() {
-		return maxPage;
-	}
-
-	public void setMaxPage(Integer maxPage) {
-		this.maxPage = maxPage;
-	}
-
+	
 	public String transactionPage() {
 		return "goToTransactionPage";
 	}
@@ -213,4 +163,66 @@ public class EmployeeAction extends ActionSupport {
 	public String homePage(){
 		return "homePage";
 	}
+	
+	
+	
+	
+	
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public void setFund(Fund fund) {
+		this.fund = fund;
+	}
+	public void setEmployeeDAO(IEmployeeDAO employeeDAO) {
+		this.employeeDAO = employeeDAO;
+	}
+	public void setCustomerDAO(ICustomerDAO customerDAO) {
+		this.customerDAO = customerDAO;
+	}
+	public void setFundDAO(IFundDAO fundDAO) {
+		this.fundDAO = fundDAO;
+	}
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getMaxPage() {
+		return maxPage;
+	}
+
+	public void setMaxPage(Integer maxPage) {
+		this.maxPage = maxPage;
+	}
+	public List<Customer> getCustomerList() {
+		return this.customerList;
+	}
+	public List<Transaction> getTransactionList() {
+		return this.transactionList;
+	}
+	public void setNewCustomerPassword(String s) {
+		this.newCustomerPassword = s;
+	}
+	public void setTransaction(Transaction t) {
+		this.transaction = t;
+	}
+
 }

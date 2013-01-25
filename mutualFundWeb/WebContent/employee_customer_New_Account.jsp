@@ -42,8 +42,8 @@
 				</tr>
 				
 				<tr>
-				<td><input type="text" name="customer.firstName"></td>
-				<td><input type="text" name="customer.lastName"></td>
+				<td><input type="text" name="customer.firstname"></td>
+				<td><input type="text" name="customer.lastname"></td>
 				</tr>
 				
 				<tr>
