@@ -1,6 +1,7 @@
 package Struts.Action;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import Hibernate.DAO.ICustomerDAO;
@@ -16,7 +17,7 @@ public class FinanceAction extends ActionSupport {
 	private String errorInfo;
 	private Customer customer;
 	private ICustomerDAO customerDAO;
-
+	private List<Transaction> transactionList;
 	private long amount;
 
 	public String requestCheck(){
@@ -38,6 +39,10 @@ public class FinanceAction extends ActionSupport {
 	}
 	
 	public String financePage(){
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> session=ctx.getSession();
+		Customer customer=(Customer)session.get("customer");
+		transactionList=transactionDAO.findByProperty("customer", customer);
 		return "gotoFinance";
 	}
 	
@@ -80,6 +85,10 @@ public class FinanceAction extends ActionSupport {
 
 	public void setCustomerDAO(ICustomerDAO customerDAO) {
 		this.customerDAO = customerDAO;
+	}
+
+	public List<Transaction> getTransactionList() {
+		return transactionList;
 	}
 
 }

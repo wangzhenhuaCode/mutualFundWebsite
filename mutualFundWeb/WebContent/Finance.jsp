@@ -28,22 +28,25 @@
 			   		<tr style="padding-bot:10px;">
 						<td><Strong align="left">Date</strong>
 						<td><Strong align="right">Ammount</strong>
-						<td><Strong align="right">Balance</strong>
+						<td><Strong align="right">Status</strong>
+						
 					</tr>
+					<s:iterator value="transactionList" id="transaction">
+					<s:if test="#transaction.transactionType>4">
 					<tr>
-						<td>02 Jan 2013</td>
-						<td>17,100.00</td>
-						<td>17,100.00</td>
+						<td><s:property value="#transaction.currentDate" /></td>
+						<td><s:property value="#transaction.currentAmount" /></td>
+						<td><s:if test="#transaction.transactionType==5">Deposited</s:if>
+                    <s:if test="#transaction.transactionType==6">Pending Deposit</s:if>
+                    <s:if test="#transaction.transactionType==7">Withdrew</s:if>
+                    <s:if test="#transaction.transactionType==8">Pending Withdraw</s:if></td>
 					</tr>
-					<tr>
-						<td>22 Jan 2013</td>
-						<td>-5,100.00</td>
-						<td>12,000.00</td>
-					</tr>
+					</s:if>
+					</s:iterator>
 
 
 			   </table>
-            <h3>Current Balance: 12,000.00</h3>
+            <h3>Current Balance: <s:property value="#session.customer.currentCash" /></h3>
                
             <br />
 			

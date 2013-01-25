@@ -25,9 +25,7 @@
                     <th>Fund Name</th>
                     <th>Last Price</th>
                     <th>Change</th>
-                    <th>Position</th>
-                    <th>Value</th>
-                    <th>P&amp;L</th>
+                
                 </tr>
                 <s:iterator value="fundlist" id="fund">
                 <tr>
@@ -35,9 +33,7 @@
                     <td><s:property value="#fund.name" /></td>
                     <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>-</s:else></td>
                     <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>-</s:else></font></td>
-                    <td>50.000</td>
-                    <td>5,000.00</td>
-                    <td><font color="red">-123.00</td>
+                  
                 </tr>
               </s:iterator>
             </table>

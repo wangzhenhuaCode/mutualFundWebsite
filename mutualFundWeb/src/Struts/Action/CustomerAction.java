@@ -54,6 +54,7 @@ public class CustomerAction extends ActionSupport {
 		session.remove("customer");
 		return "logout";
 	}
+
 	public Customer getCustomer() {
 		return customer;
 	}

@@ -86,9 +86,7 @@ public class EmployeeAction extends ActionSupport {
 	public void setMaxPage(Integer maxPage) {
 		this.maxPage = maxPage;
 	}
-	public String homePage(){
-		return "goToHomepage";
-	}
+
 	public String transactionPage() {
 		return "goToTransactionPage";
 	}

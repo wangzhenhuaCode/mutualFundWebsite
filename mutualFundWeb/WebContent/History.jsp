@@ -26,15 +26,24 @@
                     <th width="80">Share Price</th>
     				<th width="60">Amount</th>
   				</tr>
-               <s:iterator value="fundlist" id="fund">
+               <s:iterator value="transactionList" id="transaction">
                 <tr>
-                    <td><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#fund.fundId" />"><s:property value="#fund.symbol" /></a></td>
-                    <td><s:property value="#fund.name" /></td>
-                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
-                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else></font></td>
-                    <td>50.000</td>
-                    <td>5,000.00</td>
-                    <td><font color="red">-123.00</td>
+                    <td><s:property value="#transaction.currentDate" /></td>
+                    <td>
+                    <s:if test="#transaction.transactionType==1">Sold</s:if>
+                    <s:if test="#transaction.transactionType==2">Pending Sell</s:if>
+                    <s:if test="#transaction.transactionType==3">Bought</s:if>
+                    <s:if test="#transaction.transactionType==4">Pending Buy</s:if>
+                    <s:if test="#transaction.transactionType==5">Deposited</s:if>
+                    <s:if test="#transaction.transactionType==6">Pending Deposit</s:if>
+                    <s:if test="#transaction.transactionType==7">Withdrew</s:if>
+                    <s:if test="#transaction.transactionType==8">Pending Withdraw</s:if>
+                    </td>
+                    <td><s:if test="#transaction.fund!=null"><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#transaction.fund.fundId" />"><s:property value="#transaction.fund.symbol" /></a></s:if><s:else>-</s:else></td>
+                    <td><s:property value="#transaction.currentShares" /></td>
+                    <td><s:if test="#transaction.fund!=null"><s:property value="#transaction.boughtPrice" /></s:if></td>
+                    <td><s:property value="#transaction.currentAmount" /></td>
+                   
                 </tr>
               </s:iterator>
 			</tbody></table>

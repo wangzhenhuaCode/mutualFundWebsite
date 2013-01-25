@@ -11,7 +11,7 @@
         
         <div class="Menu">
 
-            <ul><li><a href="<%=basePath%>act/customer_login.action" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="MenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/customer_login.action" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="MenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="<%=basePath%>act/trade_viewHistory.action" class="MenuButton"><span>History</span></a></li></ul>
 
         </div>
 
@@ -31,20 +31,17 @@
                     <th>Last Price</th>
                     <th>Price Change</th>
                     <th>Position</th>
-                    <th>Bought At</th>
-                    <th>Value</th>
-                    <th>P&amp;L</th>
+                   
                 </tr>
+                <s:iterator value="positionList" id="position">
                 <tr>
-                    <td><a href="ResearchFund.html">MCSM01</a></td>
-                    <td>100.00</td>
-                    <td><font color="red">-5%</td>
-                    <td>50.000</td>
-                    <td>90.00</td>
-                    <td>4,500.00</td>
-                    <td><font color="green">+500.00</td>
+                    <td><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#position.id.fund.fundId" />"><s:property value="#position.id.fund.symbol" /></a></td>
+                    <td><s:if test="#position.id.fund.todayPrice!=null"><s:property value="#position.id.fund.todayPrice" /></s:if><s:else>-</s:else></td>
+                    <td><font color="red"><s:if test="#position.id.fund.percentage!=null"><s:property value="#position.id.fund.percentage" />%</s:if><s:else>-</s:else></font></td>
+                    <td><s:property value="#position.currentShares" /></td>
+                    
                 </tr>
-               
+               </s:iterator>
             </table>
             
            <br />

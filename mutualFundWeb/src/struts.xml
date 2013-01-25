@@ -34,7 +34,8 @@
         	<result name="gotoTrade" >/Trade.jsp</result>
         	<result name="success" type="redirectAction">trade_gotoTrade.action</result>
         	<result name="failure" type="redirectAction">trade_gotoTrade.action</result>
-        	<result name="home">trade_gotoTrade.action</result>
+        	<result name="home">/Home.jsp</result>
+        	<result name="viewHistory">/History.jsp</result>
         </action>
         <action name="transaction_*" class="TransactionDayAction"  method="{1}">
         

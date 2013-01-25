@@ -116,7 +116,13 @@ public class TradeAction extends ActionSupport {
 		positionList=positionDAO.findByProperty("id.customer", customer);
 		return "home";
 	}
-	
+	public String viewHistory(){
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> session=ctx.getSession();
+		Customer customer=(Customer)session.get("customer");
+		transactionList=transactionDAO.findByProperty("customer", customer);
+		return "viewHistory";
+	}
 	
 	//setter getter
 	public void setFundDAO(IFundDAO fundDAO) {
@@ -168,6 +174,10 @@ public class TradeAction extends ActionSupport {
 
 	public List<Transaction> getTransactionList() {
 		return transactionList;
+	}
+
+	public List<Position> getPositionList() {
+		return positionList;
 	}
 
 
