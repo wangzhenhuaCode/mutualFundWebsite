@@ -52,36 +52,34 @@
 			<div class="name">
 				<tr>
 					<td><strong>User Name:</strong></td>
-					<td><input type="text" , name="username"
+					<td><input type="text"  name="username"
 						style="width: 200px" /></td>
 				</tr>
 			</div>
 			<div class="inputName">
 				<tr>
 				<td><strong>Password:</strong></td>
-				<td><input type="text" , name="password" style="width: 200px" />
+				<td><input type="text" name="password" style="width: 200px" />
 					</td>
-				<tr>
+				</tr>
 			</div>
+			<tr>
+			<td>
+					<input type="radio" name="type" onclick="javascript:$('#form').attr('action','<%=basePath%>act/customer_login.action');">Customer  
+			</td>
+			<td>	
+					<input type="radio" name="type" onclick="javascript:$('#form').attr('action','<%=basePath%>act/employee_login.action');" checked>Employee  
+			</td>
+			</tr>
 		</table>
 
 		
 		
-		<input type="radio" name="type" onclick="javascript:$('#form').attr('action','<%=basePath%>act/customer_login.action');">Customer  <input type="radio" name="type" onclick="javascript:$('#form').attr('action','<%=basePath%>act/employee_login.action');" checked>Employee  
        <div align = "right" style="margin-right:250px;">
             <span class="ButtonInput"><span align="center"><input type="submit" value="Login"/></span></span>
 		</div>
 		</form>
 
-                
-                
-        </div></div></div>
-        <div class="Footer">
-            Footer Text - <a href="#">Contact Us</a>
-        </div>
-        
-    </div>
-    </div>
-    <span class="BackLink"><a href="http://cooltemplate.com">Web Template</a> created using Cool Template</span>
-</body>
-</html>
+        <div>        
+
+<jsp:include page="template-bottom.jsp" />
