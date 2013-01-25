@@ -66,7 +66,7 @@
 		</script>
 
     <div class="Menu">
-            <ul><li><a href="Home.html" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="Trade.html" class="MenuButton"><span>Trade</span></a></li> <li><a class="MenuButton" href="Finance.html" ><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
+            <ul><li><a href="#" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="MenuButton"><span>Trade</span></a></li> <li><a class="MenuButton" href="Finance.html" ><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
         </div>
 
 <jsp:include page="template-top2.jsp" />
