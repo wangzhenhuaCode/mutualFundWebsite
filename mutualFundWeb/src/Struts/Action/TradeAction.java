@@ -26,8 +26,8 @@ public class TradeAction extends ActionSupport {
 	private Integer maxPage;
 	private Integer _PAGE_SIZE=20;
 	private Fund fund=null;
-	private Long amount;
-	private Long shares;
+	private Double amount;
+	private Double shares;
 	private String keywords;
 	private List<Transaction> transactionList;
 	private List<Position> positionList;
@@ -36,12 +36,12 @@ public class TradeAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		if(amount>customer.getCash()) return "buyfailure";
+		if(amount*100>customer.getCash()) return "buyfailure";
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
 		transaction.setTransactionType(Transaction.PENDING_BUY);
-		transaction.setAmount(amount*100);
+		transaction.setAmount((long)(amount*100));
 		transaction.setExecuteDate(new Date());
 		transactionDAO.save(transaction);
 		return "success";
@@ -64,7 +64,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
 		transaction.setTransactionType(Transaction.PENDING_SELL);
-		transaction.setShares(shares*1000);
+		transaction.setShares((long)(shares*1000));
 		transaction.setExecuteDate(new Date());
 		transaction.setPosition(null);
 		transactionDAO.save(transaction);
@@ -164,11 +164,11 @@ public class TradeAction extends ActionSupport {
 		this.fund = fund;
 	}
 
-	public void setAmount(Long amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
-	public void setShares(Long shares) {
+	public void setShares(Double shares) {
 		this.shares = shares;
 	}
 

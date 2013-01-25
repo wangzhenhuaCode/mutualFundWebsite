@@ -27,7 +27,7 @@
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">
         	<result name="depositSuccess">/employee_customer_deposit_check.jsp</result>
-        	<result name="requestSuccess">/Finance.jsp</result>
+        	<result name="requestSuccess" type="redirectAction">finance_financePage.action</result>
         	<result name="gotoFinance" >/Finance.jsp</result>
         </action>
         <action name="trade_*" class="TradeAction"  method="{1}">
