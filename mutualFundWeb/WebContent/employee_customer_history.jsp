@@ -53,7 +53,7 @@
 			</tbody></table>
             </p>
             <div align="right" style="margin-right:80px;">
-            <span class="ButtonInput"><span align="center"><input type="button" value="Back"/></span></span>
+            <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
             </div>
 		</form>
 <jsp:include page="template-bottom.jsp" />
