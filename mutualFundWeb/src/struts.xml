@@ -27,6 +27,7 @@
         	<result name="employeeGotoTrade">/employee_fund.jsp</result>
         	<result name="create" type="redirectAction">trade_employeeGotoTrade.action</result>
         	<result name="gotoResearch" >/ResearchFund.jsp</result>
+        	<result name="gotoTrade" >/Trade.jsp</result>
         </action>
         <action name="transaction_*" class="TransactionDayAction"  method="{1}">
         

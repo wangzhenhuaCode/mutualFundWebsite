@@ -15,7 +15,7 @@
           $( "#sellSlider" ).slider({
                                           range: "max",
                                           min: 0,
-                                          max: 100,
+                                          max: <s:property value="#session.customer.currentCash" />,
                                           value: 50,
                                           slide: function( event, ui ) {
                                           $( "#sellField" ).val( ui.value );
@@ -71,7 +71,7 @@
 
 <jsp:include page="template-top2.jsp" />
 
-        <h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="#fund.todayPrice" /> &nbsp;&nbsp;&nbsp;<img src="images/up.png" height="20"/>&nbsp;<span style="color:green;"><s:property value="#fund.percentage" />%</span></h2>
+        <h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="fund.todayPrice" /> &nbsp;&nbsp;&nbsp;<img src="images/up.png" height="20"/>&nbsp;<span style="color:green;"><s:property value="fund.percentage" />%</span></h2>
 
         <p>
             
@@ -89,27 +89,26 @@
             <center>
             <table style="text-align:center;">
                 <tr>
-                    <td width="200"><b>Trasaction Time</b></td>
-                    <td width="200"><b>Purchase Price</b></td>
-                    <td width="200"><b>Shares</b></td>
+                    <td width="150"><b>Trasaction Time</b></td>
+                    <td width="150"><b>Purchase Price</b></td>
+                    <td width="150"><b>Shares</b></td>
+                    <td width="150"><b>Shares</b></td>
                 </tr>
+                 <s:iterator value="transactionList" id="transaction">
                 <tr>
-                    <td >Jan. 12th</td>
-                    <td >3.21</td>
-                    <td >3,000.00</td>
+                    <td ><s:property value="#transaction.executeDate" /></td>
+                    <td ><s:property value="#transaction.boughtPrice" /></td>
+                    <td ><s:property value="#transaction.currentShares" /></td>
                 </tr>
-                <tr>
-                    <td >Jan. 5th</td>
-                    <td >5.23</td>
-                    <td >12,000.00</td>
-                </tr>
+                </s:iterator>
                 
-                
+                <s:if test="transactionList.size()>0">
                 <tr >
                     <td ></td>
                     <td style="padding-top:10px;"><b>Total</b></td>
-                    <td style="padding-top:10px;">15,000</td>
+                    <td style="padding-top:10px;"><s:property value="transactionList.get(0).position.currentShares" /></td>
                 </tr>
+                </s:if>
             </table>
                 </center>
         </p>
@@ -119,21 +118,27 @@
             <h2 style="color:red; margin-left:20px;"><img src="images/down.png" height="20"/>&nbsp;-320.00</h2>
             </p>
          <p><h2>Transaction</h2>
+         <form method="post" action="<%=basePath%>act/trade_buy.action">
             <div id="sellDiv">
-                Shares: <input type="textfield" id="sellField"/><span class="ButtonInput"><span><input type="button" value="Sell" /></span></span>
+                Shares: <input type="textfield" id="sellField"/><span class="ButtonInput"><span><input type="submit" value="Sell" /></span></span>
                 
                 
                 <br/>
+                
+                
                 <div id="sellSlider"></div>
                 
                 
             </div>
+           </form>
+           <form method="post" action="<%=basePath%>act/trade_sell.action">
             <div id="buyDiv" style="margin-top:20px;">
-                Spend: <input type="textfield" id="buyField"/> <span class="ButtonInput"><span><input type="button" value="Buy" /></span></span>
+                Spend: <input type="textfield" id="buyField"/> <span class="ButtonInput"><span><input type="submit" value="Buy" /></span></span>
                     
                     <div id="buySlider"></div>
                 
             </div>
+            </form>
             </p>
            
 <jsp:include page="template-bottom.jsp" />

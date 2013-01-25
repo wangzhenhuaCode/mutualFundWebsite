@@ -25,6 +25,7 @@ public class TradeAJAXAction extends ActionSupport{
 	private JSONObject user;
 	private Integer lastPage;
 	private Integer bookmarkID;
+
 /*
 	public String login(){
 		userList=null;

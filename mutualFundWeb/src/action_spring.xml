@@ -28,6 +28,7 @@
 	<bean id="TradeAction"
 		class="Struts.Action.TradeAction">
 		<property name="fundDAO" ref="FundDAO" />
+		<property name="transactionDAO" ref="TransactionDAO" />
 	</bean>
 	<bean id="TradeAJAXAction"
 		class="Struts.Action.TradeAJAXAction">

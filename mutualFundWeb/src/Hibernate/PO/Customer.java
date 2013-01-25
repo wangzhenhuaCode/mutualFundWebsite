@@ -170,5 +170,8 @@ public class Customer implements java.io.Serializable {
 	public void setPositions(Set positions) {
 		this.positions = positions;
 	}
+	public String getCurrentCash(){
+		return String.format("%1$,.2f", (double)cash/100);
+	}
 
 }
