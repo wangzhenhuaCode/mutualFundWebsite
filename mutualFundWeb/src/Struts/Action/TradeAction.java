@@ -86,7 +86,13 @@ public class TradeAction extends ActionSupport {
 		fundlist=fundDAO.getListByPage((pageNum-1)*_PAGE_SIZE, _PAGE_SIZE,null,null);
 		return "gotoTrade";
 	}
+	public String gotoResearch(){
+		fund=fundDAO.find(fund).get(0);
+		
+		return "gotoResearch";
+	}
 	public String research(){
+		
 		return "";
 	}
 	public String create(){

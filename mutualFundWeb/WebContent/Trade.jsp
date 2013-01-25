@@ -29,42 +29,17 @@
                     <th>Value</th>
                     <th>P&amp;L</th>
                 </tr>
+                <s:iterator value="fundlist" id="fund">
                 <tr>
-                    <td><a href="ResearchFund.html">MCSM01</a></td>
-                    <td>Michael Shamos 01</td>
-                    <td>100.00</td>
-                    <td><font color="red">-5%</td>
+                    <td><a href="ResearchFund.html"><s:property value="#fund.symbol" /></a></td>
+                    <td><s:property value="#fund.name" /></td>
+                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
+                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else>/font></td>
                     <td>50.000</td>
                     <td>5,000.00</td>
                     <td><font color="red">-123.00</td>
                 </tr>
-                <tr>
-                    <td><a href="">JFEPG07</a></td>
-                    <td>Jeff Eppinger 07</td>
-                    <td>200.00</td>
-                    <td><font color="green">+5%</td>
-                    <td>50.000</td>
-                    <td>10,000.00</td>
-                    <td><font color="green">+3333.00</td>
-                </tr>
-                <tr>
-                    <td><a href="">MCSM01</a></td>
-                    <td>Michael Shamos 01</td>
-                    <td>100.00</td>
-                    <td><font color="red">-5%</td>
-                    <td>50.000</td>
-                    <td>5,000.00</td>
-                    <td><font color="red">-123.00</td>
-                </tr>
-                <tr>
-                    <td><a href="">JFEPG07</a></td>
-                    <td>Jeff Eppinger 07</td>
-                    <td>200.00</td>
-                    <td><font color="green">+5%</td>
-                    <td>50.000</td>
-                    <td>10,000.00</td>
-                    <td><font color="green">+3333.00</td>
-                </tr>
+              </s:iterator>
             </table>
             
             <p>

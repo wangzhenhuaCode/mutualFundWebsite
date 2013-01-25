@@ -48,11 +48,11 @@
                                                              },
                                                              
                                                              title : {
-                                                             text : 'Apple Inc'
+                                                             text : '<s:property value="fund.name" />'
                                                              },
                                                              
                                                              series : [{
-                                                                       name : 'AAPL',
+                                                                       name : '<s:property value="fund.symbol" />',
                                                                        data : data,
                                                                        tooltip: {
                                                                        valueDecimals: 2
@@ -71,7 +71,7 @@
 
 <jsp:include page="template-top2.jsp" />
 
-        <h2 style="margin-bottom:10px;">Apple Inc (4230)&nbsp;&nbsp;&nbsp;&nbsp;6.54 &nbsp;&nbsp;&nbsp;<img src="images/up.png" height="20"/>&nbsp;<span style="color:green;">0.23&nbsp;&nbsp;12.00%</span></h2>
+        <h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="#fund.todayPrice" /> &nbsp;&nbsp;&nbsp;<img src="images/up.png" height="20"/>&nbsp;<span style="color:green;"><s:property value="#fund.percentage" />%</span></h2>
 
         <p>
             
@@ -82,7 +82,7 @@
         </p>
         <p>
             <h2>Fund Description.</h2>
-            Fund description
+            <s:property value="fund.description" />
         </p>
         <p>
             <h2>Fund Position</h2>
