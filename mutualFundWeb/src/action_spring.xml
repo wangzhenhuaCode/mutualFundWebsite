@@ -17,6 +17,7 @@
 	<bean id="FinanceAction"
 		class="Struts.Action.FinanceAction" scope="prototype">
 		<property name="transactionDAO" ref="TransactionDAO" />
+		<property name="customerDAO" ref="CustomerDAO" />
 	</bean>
 	
 	<bean id="TransactionDayAction"
