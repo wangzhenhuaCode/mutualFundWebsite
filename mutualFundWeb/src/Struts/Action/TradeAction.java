@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import Hibernate.DAO.ICustomerDAO;
 import Hibernate.DAO.IFundDAO;
 import Hibernate.DAO.IPositionDAO;
 import Hibernate.DAO.ITransactionDAO;
@@ -31,6 +32,8 @@ public class TradeAction extends ActionSupport {
 	private String keywords;
 	private List<Transaction> transactionList;
 	private List<Position> positionList;
+	private ICustomerDAO customerDAO;
+	private Customer customer;
 	public String buy(){
 		try{
 		ActionContext ctx=ActionContext.getContext();
@@ -123,6 +126,16 @@ public class TradeAction extends ActionSupport {
 		transactionList=transactionDAO.findByProperty("customer", customer);
 		return "viewHistory";
 	}
+	public String employeeViewHistory(){
+		
+		customer=customerDAO.findById(customer.getCustomerId());
+		transactionList=transactionDAO.findByProperty("customer", customer);
+		return "employeeViewHistory";
+	}
+	public String employeeResearch(){
+		fund=fundDAO.findById(fund.getFundId());
+		return "employeeResearch";
+	}
 	
 	//setter getter
 	public void setFundDAO(IFundDAO fundDAO) {
@@ -178,6 +191,18 @@ public class TradeAction extends ActionSupport {
 
 	public List<Position> getPositionList() {
 		return positionList;
+	}
+
+	public void setCustomerDAO(ICustomerDAO customerDAO) {
+		this.customerDAO = customerDAO;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 

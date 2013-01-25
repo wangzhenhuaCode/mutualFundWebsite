@@ -41,6 +41,8 @@
         	<result name="failure" type="redirectAction">trade_gotoTrade.action</result>
         	<result name="home">/Home.jsp</result>
         	<result name="viewHistory">/History.jsp</result>
+        	<result name="employeeViewHistory">/employee_customer_history.jsp</result>
+        	<result name="employeeResearch">/employee_ResearchFund.jsp</result>
         </action>
         <action name="transaction_*" class="TransactionDayAction"  method="{1}">
         
