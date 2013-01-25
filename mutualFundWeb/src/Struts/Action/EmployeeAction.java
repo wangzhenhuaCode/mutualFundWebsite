@@ -86,6 +86,18 @@ public class EmployeeAction extends ActionSupport {
 	public void setMaxPage(Integer maxPage) {
 		this.maxPage = maxPage;
 	}
+	public String homePage(){
+		return "goToHomepage";
+	}
+	public String transactionPage() {
+		return "goToTransactionPage";
+	}
+	public String fundPage() {
+		return "goToFundPage";
+	}
+	public String customerPage() {
+		return "goToCustomerPage";
+	}
 	public String login(){
 		errorInfo="";
 		List<Employee> list=employeeDAO.findByProperty("username", username);
