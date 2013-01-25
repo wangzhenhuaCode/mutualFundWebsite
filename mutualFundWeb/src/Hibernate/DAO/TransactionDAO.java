@@ -15,6 +15,7 @@ import Hibernate.BaseDAO.BaseHibernateDAO;
 import Hibernate.PO.Fund;
 import Hibernate.PO.FundPriceHistory;
 import Hibernate.PO.Position;
+import Hibernate.PO.PositionId;
 import Hibernate.PO.Transaction;
 
 public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITransactionDAO {
@@ -24,7 +25,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 	public List<Transaction> findPendingTransaction(final Date date,final Integer type){
 		try {
 			String queryString = "from " + entityName
-					+ " where  transactionType="+type+" and executeDate<="+date.toString();
+					+ " where  transactionType="+type+" and executeDate<="+date.;
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			throw re;
@@ -35,7 +36,9 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 		boolean b=(Boolean) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
+				
 				org.hibernate.Transaction tx=session.beginTransaction();
+				try{
 				HashMap<Integer, Long> map =new HashMap<Integer, Long>();
 				DecimalFormat format1 = new DecimalFormat("#.##");
 				DecimalFormat format2 = new DecimalFormat("#.###");
@@ -62,8 +65,9 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 						Long currentShares=t.getShares();
 						p.setShares(currentShares);
 						PositionId pid=new PositionId();
-						pid.s
-						p.setId()
+						pid.setFund(t.getFund());
+						pid.setCustomer(t.getCustomer());
+						p.setId(pid);
 					}
 					t.setPosition(p);
 					session.update(t);
@@ -76,6 +80,13 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					t.setTransactionType(Transaction.SELLED);
 					Long ucash=t.getCustomer().getCash();
 					t.getCustomer().setCash(ucash+t.getAmount());
+					Position p=t.getPosition();
+					
+						Long currentShares=p.getShares();
+						currentShares-=t.getShares();
+						p.setShares(currentShares);
+					
+					t.setPosition(p);
 					session.update(t);
 				}
 				for(Transaction t:depositlist){
@@ -93,6 +104,10 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 				
 				tx.commit();
 				return true;
+				}catch(Exception e){
+					tx.rollback();
+					return false;
+				}
 			}
 		});
 		return b;

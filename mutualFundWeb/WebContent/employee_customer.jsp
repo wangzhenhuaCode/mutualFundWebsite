@@ -31,9 +31,9 @@
                 <tr>
                 	<td><strong><s:property value="#customer.firstName" /><s:property value="#customer.lastName" /></strong></td>
                     <td><a href="<%=basePath%>act/employee_viewCustomerAccount.action?customer.customerId=<s:property value="#customer.id"/>">View Account</a></td>
-                    <td><a href="<%=basePath%>act/employee_checkCustomerdeposit.action">Deposit Check</a></td>
-                    <td><a href="<%=basePath%>act/employee_resetCustomerPassword.action">Reset Password</a></td>
-                    <td><a href="<%=basePath%>act/employee_viewTransactionHistory.action">Transaction History</a></td>
+                    <td><a href="<%=basePath%>act/employee_checkCustomerdeposit.action?customer.customerId=<s:property value="#customer.id"/>">Deposit Check</a></td>
+                    <td><a href="<%=basePath%>act/employee_resetCustomerPassword.action?customer.customerId=<s:property value="#customer.id"/>">Reset Password</a></td>
+                    <td><a href="<%=basePath%>act/employee_viewTransactionHistory.action?customer.customerId=<s:property value="#customer.id"/>">Transaction History</a></td>
                 </tr>
                 </s:iterator>
             	</tbody>

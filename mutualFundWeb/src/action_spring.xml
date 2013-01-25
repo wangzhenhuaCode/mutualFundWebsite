@@ -20,6 +20,9 @@
 	
 	<bean id="TransactionDayAction"
 		class="Struts.Action.TransactionDayAction">
+		<property name="fundDAO" ref="FundDAO" />
+		<property name="positionDAO" ref="PositionDAO" />
+		<property name="transactionDAO" ref="TransactionDAO" />
 	</bean>
 	<bean id="TradeAction"
 		class="Struts.Action.TradeAction">

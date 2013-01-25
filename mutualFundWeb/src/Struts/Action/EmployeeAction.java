@@ -26,6 +26,7 @@ public class EmployeeAction extends ActionSupport {
 	private Fund fund;
 	private IFundDAO fundDAO;
 	private List<Customer> customerList;
+	private List<Transaction> transactionList;
 	private int pageNum;
 	private int maxPage;
 
@@ -34,6 +35,9 @@ public class EmployeeAction extends ActionSupport {
 	
 	public List<Customer> getCustomerList() {
 		return this.customerList;
+	}
+	public List<Transaction> getTransactionList() {
+		return this.transactionList;
 	}
 	public void setNewCustomerPassword(String s) {
 		this.newCustomerPassword = s;
@@ -169,11 +173,12 @@ public class EmployeeAction extends ActionSupport {
 			return "viewTransactionHistoryFailue";
 		}else {
 			this.customer = list.get(0);
-			transaction.setCustomer(customer);
-			List<Transaction> listTran =transactionDAO.find(transaction);
-			if(listTran.size()==0) 
+			this.transactionList = transactionDAO.findByProperty("customer", customer);
+			//transaction.setCustomer(customer);
+			//List<Transaction> listTran =transactionDAO.find(transaction);
+			if(transactionList.size()==0) 
 				return "noTransactionHistory";
-			transaction = listTran.get(0);
+			//transaction = listTran.get(0);
 			return "viewTransactionHistorySuccess";
 		}
 	}
