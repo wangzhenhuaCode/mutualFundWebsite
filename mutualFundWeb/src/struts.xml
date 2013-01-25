@@ -5,11 +5,13 @@
 		<action name="customer_*" class="CustomerAction"  method="{1}">
         	<result name="customerSucessLogin" type="redirectAction">trade_showPosition.action</result>
         	<result name="customerFailureLogin">/Login.jsp</result>
+        	<result name="logout">/Login.jsp</result>
         	<result name="login"  type="redirectAction">user_index.action</result>
         	<result name="index">/login.jsp</result>
         	
         </action>
        <action name="employee_*" class="EmployeeAction"  method="{1}">
+        	<result name="logoutSuccess">/Login.jsp</result>
         	<result name="employeeFailureLogin">/Login.jsp</result>
         	<result name="goToHomePage">/employee_home.jsp</result>
         	<result name="goToCustomerPage">/employee_customer.jsp</result>
@@ -40,6 +42,8 @@
         	<result name="failure" type="redirectAction">trade_gotoTrade.action</result>
         	<result name="home">/Home.jsp</result>
         	<result name="viewHistory">/History.jsp</result>
+        	<result name="employeeViewHistory">/employee_customer_history.jsp</result>
+        	<result name="employeeResearch">/employee_ResearchFund.jsp</result>
         </action>
         <action name="transaction_*" class="TransactionDayAction"  method="{1}">
         

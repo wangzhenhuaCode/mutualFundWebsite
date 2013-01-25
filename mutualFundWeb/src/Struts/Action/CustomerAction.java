@@ -20,7 +20,7 @@ public class CustomerAction extends ActionSupport {
 		List<Customer> list=customerDAO.findByProperty("username", username);
 		if(list.size()==0){
 			errorInfo="Username error!";
-			return "failure";
+			return "customerFailureLogin";
 		}
 		if(list.get(0).getPassword().equals(password)){
 			ActionContext ctx=ActionContext.getContext();

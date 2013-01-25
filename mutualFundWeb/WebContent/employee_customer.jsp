@@ -35,7 +35,7 @@
                     <td><a href="<%=basePath%>act/employee_goToViewCustomerAccount.action?customer.customerId=<s:property value="#customer.customerId"/>">View Account</a></td>
                     <td><a href="<%=basePath%>act/finance_depositPage.action?customer.customerId=<s:property value="#customer.customerId"/>">Deposit Check</a></td>
                     <td><a href="<%=basePath%>act/employee_goToResetCustomerPassword.action?customer.customerId=<s:property value="#customer.customerId"/>">Reset Password</a></td>
-                    <td><a href="<%=basePath%>act/employee_goToViewTransactionHistory.action?customer.customerId=<s:property value="#customer.customerId"/>">Transaction History</a></td>
+                    <td><a href="<%=basePath%>act/trade_employeeViewHistory.action?customer.customerId=<s:property value="#customer.customerId"/>">Transaction History</a></td>
                 </tr>
                 </s:iterator>
             	</tbody>

@@ -21,9 +21,8 @@
             
             <p>
             <br />
-            <table class="bottomBorder" cellspacing="15px">
-  				<tbody align="center" >
-  				<tr>
+             <table class="bottomBorder" cellspacing="15px">
+  				<tbody align="center" ><tr>
     				<th width="120">Transaction Date</th>
     				<th width="100">Operation</th>
                     <th width="80">Fund Name</th>
@@ -31,20 +30,27 @@
                     <th width="80">Share Price</th>
     				<th width="60">Amount</th>
   				</tr>
-  				
-  				<s:iterator value="transactionList" id="transaction">
+               <s:iterator value="transactionList" id="transaction">
                 <tr>
-                    <td><s:property value="#transaction.currentDate"/></td>
-                    <td><s:property value="#transaction.transactionType"/></td>
-                    <td><s:property value="#transaction.fund.name"/></td>
-                    <td><s:property value="#transaction.currentShares"/></td>
-                    <td><s:property value="#transaction.boughtPrice"/></td>
-                    <td><s:property value="#transaction.currentAmount"/></td>
+                    <td><s:property value="#transaction.currentDate" /></td>
+                    <td>
+                    <s:if test="#transaction.transactionType==1">Sold</s:if>
+                    <s:if test="#transaction.transactionType==2">Pending Sell</s:if>
+                    <s:if test="#transaction.transactionType==3">Bought</s:if>
+                    <s:if test="#transaction.transactionType==4">Pending Buy</s:if>
+                    <s:if test="#transaction.transactionType==5">Deposited</s:if>
+                    <s:if test="#transaction.transactionType==6">Pending Deposit</s:if>
+                    <s:if test="#transaction.transactionType==7">Withdrew</s:if>
+                    <s:if test="#transaction.transactionType==8">Pending Withdraw</s:if>
+                    </td>
+                    <td><s:if test="#transaction.fund!=null"><a href="<%=basePath%>act/trade_employeeResearch.action?fund.fundId=<s:property value="#transaction.fund.fundId" />"><s:property value="#transaction.fund.symbol" /></a></s:if><s:else>-</s:else></td>
+                    <td><s:property value="#transaction.currentShares" /></td>
+                    <td><s:if test="#transaction.fund!=null"><s:property value="#transaction.boughtPrice" /></s:if></td>
+                    <td><s:property value="#transaction.currentAmount" /></td>
+                   
                 </tr>
-                </s:iterator>
-                 
-                </tbody>
-                </table>
+              </s:iterator>
+			</tbody></table>
             </p>
             <div align="right" style="margin-right:80px;">
             <span class="ButtonInput"><span align="center"><input type="button" value="Back"/></span></span>
