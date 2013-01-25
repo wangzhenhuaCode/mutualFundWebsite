@@ -36,6 +36,13 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 			throw re;
 		}
 	}
+	public void merge(T object) {
+		try {
+			getHibernateTemplate().merge(object);
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
 
 	public void delete(T object) {
 		try {
