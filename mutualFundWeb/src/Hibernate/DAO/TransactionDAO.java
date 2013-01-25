@@ -104,8 +104,8 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 				}
 				for(Transaction t:depositlist){
 					t.setTransactionType(Transaction.DEPOSITED);
-					Long ucash=t.getCustomer().getCash();
-					t.getCustomer().setCash(ucash+t.getAmount());
+					Long ucash=t.getCustomer().getCash()+t.getAmount();
+					t.getCustomer().setCash(ucash);
 					session.merge(t.getCustomer());
 					session.merge(t);
 				}
