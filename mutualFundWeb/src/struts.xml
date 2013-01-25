@@ -19,18 +19,17 @@
         	<result name="changeCustomerPassword">/employee_customer_resetpassword.jsp</result>
         	<result name="viewCustomers">/employee_customer.jsp</result>
         	<result name="homePage">/Home.jsp</result>
-        	<result name="addNewCustomerSuccess" type="redirectAction">employee_viewCustomers.action</result>
+        	<result name="addNewCustomerSuccess" type="redirectAction">/employee_viewCustomers.action</result>
         	<result name="goToAddNewCustomerAccount">/employee_customer_New_Account.jsp</result>
-        	
-
+        	<result name="goToViewCustomerAccount">/employee_customer_viewChangeProfile.jsp</result>
+        	<result name="viewCustomerSuccess" type="redirectAction">/employee_viewCustomers.action</result>
+		
 
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">
-        	<result name="depositSuccess" type="redirectAction">employee_viewCustomers.action</result>
+        	<result name="depositSuccess">/employee_customer_deposit_check.jsp</result>
         	<result name="requestSuccess" type="redirectAction">finance_financePage.action</result>
         	<result name="gotoFinance" >/Finance.jsp</result>
-        	<result name="gotoDeposit" >/employee_customer_deposit_check.jsp</result>
-        	
         </action>
         <action name="trade_*" class="TradeAction"  method="{1}">
         	<result name="employeeGotoTrade">/employee_fund.jsp</result>
