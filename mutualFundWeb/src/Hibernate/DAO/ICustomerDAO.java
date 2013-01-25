@@ -6,3 +6,4 @@ import Hibernate.PO.Customer;
 public interface ICustomerDAO extends IBaseHibernateDAO<Customer> {
 
 }
+//
