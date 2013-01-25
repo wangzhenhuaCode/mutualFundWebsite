@@ -28,7 +28,7 @@
                 <td>Amount:</td>
                 <td><input type="text" style="width:120px" name="amount"><td>
                 <td><span class="ButtonInput"><span><input type="submit" value="Deposit" ></span></span></td>
-                <td><span class="ButtonInput"><span><input type="button" value="Cancel"></span></span></td>
+                <td><a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a></td>
                 </tr>
 			</table>
             </form>
