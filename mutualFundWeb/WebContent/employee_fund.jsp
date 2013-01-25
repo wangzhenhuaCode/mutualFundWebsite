@@ -33,7 +33,7 @@
                     <td><s:property value="#fund.symbol" /></td>
                     <td><s:property value="#fund.name" /></td>
                     <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
-                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" /></s:if><s:else>N/A</s:else></font></td>
+                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else></font></td>
                 </tr>
                 </s:iterator>
                
