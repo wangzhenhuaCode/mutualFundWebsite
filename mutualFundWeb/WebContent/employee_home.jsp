@@ -8,7 +8,7 @@
 <jsp:include page="employee_template-top.jsp" />
 
 <div class="Menu">
-            <ul><li><a href="<%=basePath%>act/employee_" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="employee_transaction.html" class="MenuButton"><span>Transaction History</span></a></li> <li><a href="<%=basePath%>act/trade_employeeGotoTrade" class="MenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/employee_" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="MenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
