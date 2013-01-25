@@ -44,33 +44,7 @@
                     <td>4,500.00</td>
                     <td><font color="green">+500.00</td>
                 </tr>
-                <tr>
-                    <td><a href="">JFEPG07</a></td>
-                    <td>200.00</td>
-                    <td><font color="green">+5%</td>
-                    <td>100.000</td>
-                    <td>240.00</td>
-                    <td>24,000.00</td>
-                    <td><font color="red">-4,000.00</td>
-                </tr>
-                <tr>
-                    <td><a href="">TT04</a></td>
-                    <td>100.00</td>
-                    <td><font color="red">-5%</td>
-                    <td>50.000</td>
-                    <td>90.00</td>
-                    <td>4,500.00</td>
-                    <td><font color="green">+500.00</td>
-                </tr>
-                <tr>
-                    <td><a href="">JPP04</a></td>
-                    <td>200.00</td>
-                    <td><font color="green">+5%</td>
-                    <td>100.000</td>
-                    <td>240.00</td>
-                    <td>24,000.00</td>
-                    <td><font color="red">-4,000.00</td>
-                </tr>
+               
             </table>
             
            <br />

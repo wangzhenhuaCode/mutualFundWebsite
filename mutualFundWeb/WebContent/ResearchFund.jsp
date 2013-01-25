@@ -11,19 +11,20 @@
     <link rel="stylesheet" href="js/ui/css/redmond/jquery-ui-1.9.2.custom.css" />
     <script src="js/ui/js/jquery-ui-1.9.2.custom.js"></script>
     <script type="text/javascript">
-        $(function() {
+    
+        $(function() {<s:if test="transactionList.get(0).position.shares>0" > 
           $( "#sellSlider" ).slider({
                                           range: "max",
                                           min: 0,
-                                          max: 50,
+                                          max:  <s:property value="transactionList.get(0).position.currentShares" />,
                                           value: 0,
                                           slide: function( event, ui ) {
                                           $( "#sellField" ).val( ui.value );
                                           }
                                           });
           $( "#sellField" ).val( $( "#sellSlider" ).slider( "value" ) );
-          
-          
+     </s:if>     
+     <s:if test="#session.customer.cash>0" >     
           $( "#buySlider" ).slider({
                                     range: "max",
                                     min: 0,
@@ -34,7 +35,7 @@
                                     }
                                     });
           $( "#buyField" ).val( $( "#buySlider" ).slider( "value" ) );
-          
+          </s:if>
           
           $.getJSON('<%=basePath%>ajax/ajax_getHistory.action?fundId=<s:property value="fund.fundId" />', function(data) {
                     // Create the chart
@@ -132,11 +133,12 @@
                 </center>
         </p>
             
-        <p><h2>Profit / Loss</h2>
+      <!--    <p><h2>Profit / Loss</h2>
             
             <h2 style="color:red; margin-left:20px;"><img src="images/down.png" height="20"/>&nbsp;-320.00</h2>
-            </p>
+            </p>-->
          <p><h2>Transaction</h2>
+         <s:if test="transactionList.get(0).position.shares>0" > 
          <form method="post" action="<%=basePath%>act/trade_sell.action?fund.fundId=<s:property value="fund.fundId" />">
             <div id="sellDiv">
                 Shares: <input type="textfield" id="sellField" name="shares"/><span class="ButtonInput"><span><input type="submit" value="Sell" /></span></span>
@@ -150,6 +152,8 @@
                 
             </div>
            </form>
+           </s:if>
+            <s:if test="#session.customer.cash>0" > 
            <form method="post" action="<%=basePath%>act/trade_buy.action?fund.fundId=<s:property value="fund.fundId" />">
             <div id="buyDiv" style="margin-top:20px;">
                 Spend: <input type="textfield" id="buyField" name="amount"/> <span class="ButtonInput"><span><input type="submit" value="Buy" /></span></span>
@@ -158,6 +162,7 @@
                 
             </div>
             </form>
+            </s:if>
             </p>
            
 <jsp:include page="template-bottom.jsp" />

@@ -30,6 +30,7 @@ public class TradeAction extends ActionSupport {
 	private Long shares;
 	private String keywords;
 	private List<Transaction> transactionList;
+	private List<Position> positionList;
 	public String buy(){
 		try{
 		ActionContext ctx=ActionContext.getContext();
@@ -103,15 +104,18 @@ public class TradeAction extends ActionSupport {
 		transactionList=transactionDAO.findByTwoProperty("customer", customer, "fund", fund);
 		return "gotoResearch";
 	}
-	public String research(){
-		
-		return "";
-	}
+
 	public String create(){
 		fundDAO.save(fund);
 		return "create";
 	}
-	
+	public String showPosition(){
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> session=ctx.getSession();
+		Customer customer=(Customer)session.get("customer");
+		positionList=positionDAO.findByProperty("id.customer", customer);
+		return "home";
+	}
 	
 	
 	//setter getter

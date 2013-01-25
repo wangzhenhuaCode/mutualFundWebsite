@@ -48,7 +48,7 @@ public class TransactionDayAction extends ActionSupport{
 		for(int i=0;i<fundlist.size();i++){
 			try{
 				FundPriceHistory instance=new FundPriceHistory();
-				Long p=Long.valueOf(newPrices[i]);
+				Long p=(long)(Double.valueOf(newPrices[i])*100);
 				instance.setPrice(p);
 				FundPriceHistoryId id=new FundPriceHistoryId();
 				id.setFund(fundlist.get(i));
