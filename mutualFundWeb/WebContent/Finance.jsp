@@ -48,7 +48,7 @@
             <br />
 			
 			<div class="amount">
-			<input type="text" name="amount" style="width: 190px;" >
+			Amount:&nbsp;<input type="text" name="amount" style="width: 190px;" >
 			</div>
             
             <br />
