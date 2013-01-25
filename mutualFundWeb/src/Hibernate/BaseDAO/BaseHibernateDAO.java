@@ -19,7 +19,7 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 
 	protected String entityName;
 
-	protected String className;
+	protected Class<?> className;
 
 	public Serializable save(T object) {
 		try {
@@ -51,6 +51,9 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 		} catch (RuntimeException re) {
 			throw re;
 		}
+	}
+	public T findById(Serializable id){
+		return (T) getHibernateTemplate().get(className, id);  
 	}
 
 	@SuppressWarnings("unchecked")
@@ -85,8 +88,13 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 
 
 	public void init(String _className) {
-		this.className = _className;
-		entityName = className.substring(_className.lastIndexOf(".") + 1);
+		try {
+			this.className = Class.forName(_className);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		entityName = _className.substring(_className.lastIndexOf(".") + 1);
 	}
 
 	@SuppressWarnings("unchecked")

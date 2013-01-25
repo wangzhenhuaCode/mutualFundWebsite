@@ -33,7 +33,7 @@ public class TransactionDayAction extends ActionSupport{
 		fundlist=fundDAO.findAll();
 		Date date;
 		try {
-			date = new SimpleDateFormat("yyyy-mm-dd", Locale.US).parse(datestring);
+			date = (new SimpleDateFormat("yyyy-MM-dd")).parse(datestring);
 		} catch (ParseException e1) {
 			// TODO Auto-generated catch block
 			return "failureTrans";

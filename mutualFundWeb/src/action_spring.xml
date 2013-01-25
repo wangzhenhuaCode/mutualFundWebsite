@@ -6,31 +6,34 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	
 	<bean id="CustomerAction"
-		class="Struts.Action.CustomerAction">
+		class="Struts.Action.CustomerAction" scope="prototype">
 		<property name="customerDAO" ref="CustomerDAO" />
 	</bean>
 	<bean id="EmployeeAction"
-		class="Struts.Action.EmployeeAction">
+		class="Struts.Action.EmployeeAction" scope="prototype">
 		<property name="employeeDAO" ref="EmployeeDAO" />
 		<property name="customerDAO" ref="CustomerDAO" />
 	</bean>
 	<bean id="FinanceAction"
-		class="Struts.Action.FinanceAction">
+		class="Struts.Action.FinanceAction" scope="prototype">
 		<property name="transactionDAO" ref="TransactionDAO" />
 	</bean>
 	
 	<bean id="TransactionDayAction"
-		class="Struts.Action.TransactionDayAction">
+		class="Struts.Action.TransactionDayAction" scope="prototype">
 		<property name="fundDAO" ref="FundDAO" />
 		<property name="positionDAO" ref="PositionDAO" />
 		<property name="transactionDAO" ref="TransactionDAO" />
 	</bean>
 	<bean id="TradeAction"
-		class="Struts.Action.TradeAction">
+		class="Struts.Action.TradeAction" scope="prototype">
 		<property name="fundDAO" ref="FundDAO" />
 		<property name="transactionDAO" ref="TransactionDAO" />
+		<property name="positionDAO" ref="PositionDAO" />
 	</bean>
 	<bean id="TradeAJAXAction"
-		class="Struts.Action.TradeAJAXAction">
+		class="Struts.Action.TradeAJAXAction" scope="prototype">
+		<property name="fundDAO" ref="FundDAO" />
+		<property name="fundPriceHistoryDAO" ref="FundPriceHistoryDAO" />
 	</bean>
 </beans>

@@ -29,10 +29,13 @@
         	<result name="create" type="redirectAction">trade_employeeGotoTrade.action</result>
         	<result name="gotoResearch" >/ResearchFund.jsp</result>
         	<result name="gotoTrade" >/Trade.jsp</result>
+        	<result name="success" type="redirectAction">trade_gotoTrade.action</result>
+        	<result name="failure" type="redirectAction">trade_gotoTrade.action</result>
         </action>
         <action name="transaction_*" class="TransactionDayAction"  method="{1}">
         
         	<result name="successTrans" type="redirectAction">trade_employeeGotoTrade.action</result>
+        	<result name="failureTrans" type="redirectAction">transaction_gotoTrans.action</result>
         	<result name="gototrans" >/employee_home.jsp</result>
         </action>
 	</package>

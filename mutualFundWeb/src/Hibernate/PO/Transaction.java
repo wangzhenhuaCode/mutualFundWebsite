@@ -1,5 +1,6 @@
 package Hibernate.PO;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -8,8 +9,8 @@ import java.util.Date;
 
 public class Transaction implements java.io.Serializable {
 	public static Integer SELLED=1;
-	public static Integer BOUGHT=2;
-	public static Integer PENDING_SELL=3;
+	public static Integer BOUGHT=3;
+	public static Integer PENDING_SELL=2;
 	public static Integer PENDING_BUY=4;
 	public static Integer DEPOSITED=5;
 	public static Integer PENDING_DEPOSIT=6;
@@ -125,5 +126,11 @@ public class Transaction implements java.io.Serializable {
 	public String getCurrentShares(){
 		return String.format("%1$,.3f", (double)shares/1000);
 	}
-
+	public String getCurrentAmount(){
+		return String.format("%1$,.2f", (double)amount/100);
+	}
+	public String getCurrentDate(){
+		SimpleDateFormat sdf=new SimpleDateFormat("MMM dd, yyyy");
+		return sdf.format(executeDate);
+	}
 }

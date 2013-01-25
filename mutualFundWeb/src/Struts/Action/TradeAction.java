@@ -15,6 +15,7 @@ import Hibernate.PO.Transaction;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.Preparable;
 
 public class TradeAction extends ActionSupport {
 	private IFundDAO fundDAO;
@@ -24,12 +25,13 @@ public class TradeAction extends ActionSupport {
 	private Integer pageNum;
 	private Integer maxPage;
 	private Integer _PAGE_SIZE=20;
-	private Fund fund;
+	private Fund fund=null;
 	private Long amount;
 	private Long shares;
 	private String keywords;
 	private List<Transaction> transactionList;
 	public String buy(){
+		try{
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
@@ -37,12 +39,15 @@ public class TradeAction extends ActionSupport {
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
-		transaction.setTransactionType(Transaction.PENDING_SELL);
-		transaction.setAmount(amount);
+		transaction.setTransactionType(Transaction.PENDING_BUY);
+		transaction.setAmount(amount*100);
 		transaction.setExecuteDate(new Date());
-		transaction.setPosition(null);
 		transactionDAO.save(transaction);
-		return "buysuccess";
+		return "success";
+		}catch(Exception e){
+			e.printStackTrace();
+			 return "failure";
+		}
 	}
 
 	public String sell(){
@@ -50,17 +55,19 @@ public class TradeAction extends ActionSupport {
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
 		PositionId pid=new PositionId(customer,fund);
-		Position p=new Position(pid);
-		positionDAO.find(p);
+		Position p=positionDAO.findById(pid);
+		if(p.getShares()<shares){
+			return "failure";
+		}
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
-		transaction.setTransactionType(Transaction.PENDING_BUY);
-		transaction.setShares(shares);
+		transaction.setTransactionType(Transaction.PENDING_SELL);
+		transaction.setShares(shares*1000);
 		transaction.setExecuteDate(new Date());
 		transaction.setPosition(null);
 		transactionDAO.save(transaction);
-		return "buysuccess";
+		return "success";
 	}
 	public String search(){
 		fundlist=fundDAO.findByProperty("symbol",keywords);
@@ -88,14 +95,12 @@ public class TradeAction extends ActionSupport {
 		return "gotoTrade";
 	}
 	public String gotoResearch(){
-		fund=fundDAO.find(fund).get(0);
+		fund=fundDAO.findById(fund.getFundId());
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		Transaction t=new Transaction();
-		t.setCustomer(customer);
-		t.setFund(fund);
-		transactionList=transactionDAO.find(t);
+
+		transactionList=transactionDAO.findByTwoProperty("customer", customer, "fund", fund);
 		return "gotoResearch";
 	}
 	public String research(){
@@ -160,5 +165,7 @@ public class TradeAction extends ActionSupport {
 	public List<Transaction> getTransactionList() {
 		return transactionList;
 	}
+
+
 	
 }

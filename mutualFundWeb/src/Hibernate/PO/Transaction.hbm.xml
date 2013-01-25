@@ -13,12 +13,12 @@
         <many-to-one name="fund" class="Hibernate.PO.Fund" fetch="select">
             <column name="fund_id" />
         </many-to-one>
-        <many-to-one name="customer" class="Hibernate.PO.Customer" fetch="select">
+        <many-to-one name="customer" class="Hibernate.PO.Customer" fetch="select"  lazy="false">
             <column name="customer_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="position" class="Hibernate.PO.Position" update="false" insert="false" fetch="select">
+        <many-to-one name="position" class="Hibernate.PO.Position" update="false" insert="false" fetch="select" lazy="false" not-null="false" not-found="ignore">
             <column name="fund_id" />
-            <column name="customer_id" not-null="true" />
+            <column name="customer_id"/>
         </many-to-one>
         <property name="executeDate" type="java.util.Date">
             <column name="execute_date" length="10" not-null="true" />

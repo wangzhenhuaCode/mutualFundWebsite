@@ -52,13 +52,17 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					Double shares=Double.valueOf(format2.format(cash/price));
 					t.setShares((long)(shares*1000));
 					t.setTransactionType(Transaction.BOUGHT);
-					Long ucash=t.getCustomer().getCash();
-					t.getCustomer().setCash(ucash-t.getAmount());
+					Long ucash=t.getCustomer().getCash()-t.getAmount();
+					if(ucash<0){
+						continue;
+					}
+					t.getCustomer().setCash(ucash);
 					Position p=t.getPosition();
 					if(p!=null){
 						Long currentShares=p.getShares();
 						currentShares+=t.getShares();
 						p.setShares(currentShares);
+						session.merge(p);
 						
 					}else{
 						p=new Position();
@@ -68,9 +72,13 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 						pid.setFund(t.getFund());
 						pid.setCustomer(t.getCustomer());
 						p.setId(pid);
+						session.merge(p);
 					}
 					t.setPosition(p);
-					session.update(t);
+					
+					session.merge(t.getCustomer());
+					
+					session.merge(t);
 				}
 				for(Transaction t:selllist){
 					Double shares=(double)t.getShares()/1000;
@@ -84,28 +92,37 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					
 						Long currentShares=p.getShares();
 						currentShares-=t.getShares();
+						if(currentShares<0)continue;
 						p.setShares(currentShares);
 					
 					t.setPosition(p);
-					session.update(t);
+					session.merge(p);
+					session.merge(t.getCustomer());
+					session.merge(t);
 				}
 				for(Transaction t:depositlist){
 					t.setTransactionType(Transaction.DEPOSITED);
 					Long ucash=t.getCustomer().getCash();
 					t.getCustomer().setCash(ucash+t.getAmount());
-					session.update(t);
+					session.merge(t.getCustomer());
+					session.merge(t);
 				}
 				for(Transaction t:withdrawlist){
 					t.setTransactionType(Transaction.WITHDRAW);
-					Long ucash=t.getCustomer().getCash();
-					t.getCustomer().setCash(ucash-t.getAmount());
-					session.update(t);
+					Long ucash=t.getCustomer().getCash()-t.getAmount();
+					if(ucash<0){
+						continue;
+					}
+					t.getCustomer().setCash(ucash);
+					session.merge(t.getCustomer());
+					session.merge(t);
 				}
 				
 				tx.commit();
 				return true;
 				}catch(Exception e){
 					tx.rollback();
+					e.printStackTrace();
 					return false;
 				}
 			}

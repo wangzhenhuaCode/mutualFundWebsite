@@ -1,14 +1,24 @@
 package Struts.Action;
 
 
-import java.util.Iterator;
 
-import java.util.Map;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 
+
+
+import Hibernate.DAO.IFundDAO;
+import Hibernate.DAO.IFundPriceHistoryDAO;
+import Hibernate.PO.Fund;
+import Hibernate.PO.FundPriceHistory;
 
 
 import com.opensymphony.xwork2.Action;
@@ -17,14 +27,45 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class TradeAJAXAction extends ActionSupport{
 
-	private String email;
-	private String password;
-	private String errorInfo="";
-	private JSONArray userList;
-	private Integer page;
-	private JSONObject user;
-	private Integer lastPage;
-	private Integer bookmarkID;
+
+	private JSONArray historyList;
+	
+	private IFundDAO fundDAO;
+	private IFundPriceHistoryDAO fundPriceHistoryDAO;
+	private Integer fundId;
+	public String getHistory(){
+		try{
+		historyList=new JSONArray();
+		Fund fund=fundDAO.findById(fundId);
+		List<FundPriceHistory> list=fundPriceHistoryDAO.findByProperty("id.fund", fund);
+
+		Iterator<FundPriceHistory> i=list.iterator();
+		
+		while(i.hasNext()){
+			FundPriceHistory f= i.next();
+			JSONObject d= new JSONObject();
+			d.put("time", f.getId().getPriceDate().getTime());
+			d.put("price",(double)f.getPrice()/100);
+			historyList.add(d);
+			
+		}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return Action.SUCCESS;
+	}
+	public JSONArray getHistoryList() {
+		return historyList;
+	}
+	public void setFundDAO(IFundDAO fundDAO) {
+		this.fundDAO = fundDAO;
+	}
+	public void setFundId(Integer fundId) {
+		this.fundId = fundId;
+	}
+	public void setFundPriceHistoryDAO(IFundPriceHistoryDAO fundPriceHistoryDAO) {
+		this.fundPriceHistoryDAO = fundPriceHistoryDAO;
+	}
 
 /*
 	public String login(){
@@ -122,4 +163,6 @@ public class TradeAJAXAction extends ActionSupport{
 	public Integer getBookmarkID() {
 		return bookmarkID;
 	}*/
+	
+	
 }

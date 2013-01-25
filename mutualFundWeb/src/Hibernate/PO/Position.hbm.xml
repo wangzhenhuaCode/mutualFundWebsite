@@ -17,10 +17,10 @@
         <property name="shares" type="java.lang.Long">
             <column name="shares" />
         </property>
-        <set name="transactions" inverse="true">
+        <set name="transactions" fetch="select" inverse="true">
             <key>
                 <column name="fund_id" />
-                <column name="customer_id" not-null="true" />
+                <column name="customer_id" />
             </key>
             <one-to-many class="Hibernate.PO.Transaction" />
         </set>

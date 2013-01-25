@@ -15,8 +15,8 @@
           $( "#sellSlider" ).slider({
                                           range: "max",
                                           min: 0,
-                                          max: <s:property value="#session.customer.currentCash" />,
-                                          value: 50,
+                                          max: 50,
+                                          value: 0,
                                           slide: function( event, ui ) {
                                           $( "#sellField" ).val( ui.value );
                                           }
@@ -27,8 +27,8 @@
           $( "#buySlider" ).slider({
                                     range: "max",
                                     min: 0,
-                                    max: 100,
-                                    value: 50,
+                                    max: <s:property value="#session.customer.currentCash" />,
+                                    value: 0,
                                     slide: function( event, ui ) {
                                     $( "#buyField" ).val( ui.value );
                                     }
@@ -36,8 +36,16 @@
           $( "#buyField" ).val( $( "#buySlider" ).slider( "value" ) );
           
           
-          $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function(data) {
+          $.getJSON('<%=basePath%>ajax/ajax_getHistory.action?fundId=<s:property value="fund.fundId" />', function(data) {
                     // Create the chart
+                    var json=data.historyList;
+                   var series ={};
+                   series.data=[];
+                    $.each(json, function(key, value) {
+         
+                   	    series.data.push([value.time, value.price]);
+                   	    
+                    });
                     window.chart = new Highcharts.StockChart({
                                                              chart : {
                                                              renderTo : 'container'
@@ -50,14 +58,15 @@
                                                              title : {
                                                              text : '<s:property value="fund.name" />'
                                                              },
-                                                             
                                                              series : [{
-                                                                       name : '<s:property value="fund.symbol" />',
-                                                                       data : data,
-                                                                       tooltip: {
-                                                                       valueDecimals: 2
-                                                                       }
-                                                                       }]
+                                                 				name : '<s:property value="fund.symbol" />',
+                                                 				data : series.data,
+                                                 				tooltip: {
+                                                 					valueDecimals: 2
+                                                 				}
+                                                             }],
+                                                             
+                                                           
                                                              });
                     });
           
@@ -89,24 +98,34 @@
             <center>
             <table style="text-align:center;">
                 <tr>
-                    <td width="150"><b>Trasaction Time</b></td>
-                    <td width="150"><b>Purchase Price</b></td>
-                    <td width="150"><b>Shares</b></td>
-                    <td width="150"><b>Shares</b></td>
+                    <td ><b>Trasaction Time</b></td>
+                    <td ><b>Purchase Price</b></td>
+                    <td ><b>Shares</b></td>
+                    <td ><b>Amount</b></td>
+                    <td ><b>Status</b></td>
                 </tr>
                  <s:iterator value="transactionList" id="transaction">
                 <tr>
-                    <td ><s:property value="#transaction.executeDate" /></td>
+                    <td ><s:property value="#transaction.currentDate" /></td>
                     <td ><s:property value="#transaction.boughtPrice" /></td>
                     <td ><s:property value="#transaction.currentShares" /></td>
+                    <td ><s:property value="#transaction.currentAmount" /></td>
+                    <td ><s:if test="#transaction.transactionType==1">Sold</s:if>
+                    <s:if test="#transaction.transactionType==2">Pending Sell</s:if>
+                    <s:if test="#transaction.transactionType==3">Bought</s:if>
+                    <s:if test="#transaction.transactionType==4">Pending Buy</s:if>
+                    </td>
                 </tr>
                 </s:iterator>
                 
                 <s:if test="transactionList.size()>0">
                 <tr >
                     <td ></td>
-                    <td style="padding-top:10px;"><b>Total</b></td>
+                    
+                    <td style="padding-top:10px;"><b>Position</b></td>
                     <td style="padding-top:10px;"><s:property value="transactionList.get(0).position.currentShares" /></td>
+                	<td></td>
+                	<td></td>
                 </tr>
                 </s:if>
             </table>
@@ -118,9 +137,9 @@
             <h2 style="color:red; margin-left:20px;"><img src="images/down.png" height="20"/>&nbsp;-320.00</h2>
             </p>
          <p><h2>Transaction</h2>
-         <form method="post" action="<%=basePath%>act/trade_buy.action">
+         <form method="post" action="<%=basePath%>act/trade_sell.action?fund.fundId=<s:property value="fund.fundId" />">
             <div id="sellDiv">
-                Shares: <input type="textfield" id="sellField"/><span class="ButtonInput"><span><input type="submit" value="Sell" /></span></span>
+                Shares: <input type="textfield" id="sellField" name="shares"/><span class="ButtonInput"><span><input type="submit" value="Sell" /></span></span>
                 
                 
                 <br/>
@@ -131,9 +150,9 @@
                 
             </div>
            </form>
-           <form method="post" action="<%=basePath%>act/trade_sell.action">
+           <form method="post" action="<%=basePath%>act/trade_buy.action?fund.fundId=<s:property value="fund.fundId" />">
             <div id="buyDiv" style="margin-top:20px;">
-                Spend: <input type="textfield" id="buyField"/> <span class="ButtonInput"><span><input type="submit" value="Buy" /></span></span>
+                Spend: <input type="textfield" id="buyField" name="amount"/> <span class="ButtonInput"><span><input type="submit" value="Buy" /></span></span>
                     
                     <div id="buySlider"></div>
                 

@@ -25,7 +25,7 @@
             </key>
             <one-to-many class="Hibernate.PO.Position" />
         </set>
-        <set name="fundPriceHistories" inverse="true" lazy="false">
+        <set name="fundPriceHistories" inverse="true" lazy="false" order-by="price_date desc">
             <key>
                 <column name="fund_id" not-null="true" />
             </key>
