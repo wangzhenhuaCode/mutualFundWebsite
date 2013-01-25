@@ -177,6 +177,7 @@ public class EmployeeAction extends ActionSupport {
 			return "viewTransactionHistorySuccess";
 		}
 	}
+	
 	public String checkCustomerDeposit(){
 		errorInfo="";
 		List<Customer> list = customerDAO.find(customer);
@@ -187,5 +188,9 @@ public class EmployeeAction extends ActionSupport {
 			this.customer = list.get(0);
 			return "viewCustomerSuccess";
 		}
+	}
+	
+	public String homePage(){
+		return "homePage";
 	}
 }
