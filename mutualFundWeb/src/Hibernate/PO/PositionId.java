@@ -3,7 +3,7 @@ package Hibernate.PO;
 /**
  * PositionId entity. @author MyEclipse Persistence Tools
  */
-
+///
 public class PositionId implements java.io.Serializable {
 
 	// Fields
