@@ -15,6 +15,7 @@
         	<result name="changeCustomerPassword">/employee_customer_resetpassword.jsp</result>
         	<result name="viewCustomers">/employee_customer.jsp</result>
         	<result name="viewTransactionHistorySuccess">/employee_customer_history.jsp</result>
+        	<result name="homePage">/employee_home.jsp</result>
         	
 
         </action>
