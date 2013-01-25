@@ -121,8 +121,8 @@ public class Fund implements java.io.Serializable {
 	public String getTodayPrice() {
 		if(todayPrice==null){
 			
-			if(fundPriceHistories.size()>0){
-				Iterator i=fundPriceHistories.iterator();
+			if(this.getFundPriceHistories().size()>0){
+				Iterator i=this.getFundPriceHistories().iterator();
 				todayPrice=((FundPriceHistory)i.next()).getPrice();
 				Double coverted=(double)todayPrice/100;
 				return String.format("%1$,.2f", coverted);

@@ -8,7 +8,7 @@
 <jsp:include page="template-top.jsp" />
 
 <div class="Menu">
-            <ul><li><a href="Home.html" class="MenuButton"><span>Home</span></a></li> <li><a href="Trade.html" class="MenuButton"><span>Trade</span></a></li> <li><a href="Finance.html" class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="ActiveMenuButton"><span>History</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/customer_login.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="MenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="#" class="ActiveMenuButton"><span>History</span></a></li></ul>
         </div>
 
 <jsp:include page="template-top2.jsp" />
@@ -26,27 +26,17 @@
                     <th width="80">Share Price</th>
     				<th width="60">Amount</th>
   				</tr>
-                <tr class="pending">
-    				<td>Pending...</td>
-    				<td>Request Check</td>
-                    <td>-</td><td>-</td>
-                    <td>-</td>
-                    <td>6,000.00</td>
-  				</tr>
-                <tr class="pending">
-    				<td>Pending...</td>
-    				<td>Deposit</td>
-                    <td>-</td><td>-</td>
-                    <td>-</td>
-                    <td>3,000.00</td>
-  				</tr>
+               <s:iterator value="fundlist" id="fund">
                 <tr>
-    				<td>01/17/2013</td>
-    				<td>Buy</td>
-                    <td>1%</td><td>100.000</td>
-                    <td>50.00</td>
+                    <td><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#fund.fundId" />"><s:property value="#fund.symbol" /></a></td>
+                    <td><s:property value="#fund.name" /></td>
+                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
+                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else></font></td>
+                    <td>50.000</td>
                     <td>5,000.00</td>
-  				</tr>
+                    <td><font color="red">-123.00</td>
+                </tr>
+              </s:iterator>
 			</tbody></table>
          </p>
 

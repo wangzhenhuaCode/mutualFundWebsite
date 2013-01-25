@@ -66,8 +66,10 @@ public class TransactionDayAction extends ActionSupport{
 	public List<Fund> getFundlist() {
 		return fundlist;
 	}
-	public String[] getNewPrices() {
-		return newPrices;
+
+
+	public void setNewPrices(String[] newPrices) {
+		this.newPrices = newPrices;
 	}
 	public void setFundDAO(IFundDAO fundDAO) {
 		this.fundDAO = fundDAO;

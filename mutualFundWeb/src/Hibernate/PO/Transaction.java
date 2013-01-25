@@ -118,5 +118,12 @@ public class Transaction implements java.io.Serializable {
 	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
+	public String getBoughtPrice(){
+		Double p=((double)amount/100)/((double)shares/1000);
+		return String.format("%1$,.2f", p);
+	}
+	public String getCurrentShares(){
+		return String.format("%1$,.3f", (double)shares/1000);
+	}
 
 }

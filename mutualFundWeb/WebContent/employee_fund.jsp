@@ -8,7 +8,7 @@
 <jsp:include page="employee_template-top.jsp" />
 
 <div class="Menu">
-            <ul><li><a href="employee_home.html" class="MenuButton"><span>Home</span></a></li> <li><a href="employee_transaction.html" class="MenuButton"><span>Transaction History</span></a></li> <li><a href="employee_customer.html" class="MenuButton"><span>Account Management</span></a></li> <li><a href="employee_fund.html" class="ActiveMenuButton"><span>Fund Management</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="MenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="ActiveMenuButton"><span>Fund Management</span></a></li></ul>
         </div>
 
 <jsp:include page="template-top2.jsp" />
@@ -33,7 +33,7 @@
                     <td><s:property value="#fund.symbol" /></td>
                     <td><s:property value="#fund.name" /></td>
                     <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
-                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" /></s:if><s:else>N/A</s:else></font></td>
+                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else></font></td>
                 </tr>
                 </s:iterator>
                

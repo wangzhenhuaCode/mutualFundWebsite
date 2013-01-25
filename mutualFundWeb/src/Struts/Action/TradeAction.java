@@ -28,6 +28,7 @@ public class TradeAction extends ActionSupport {
 	private Long amount;
 	private Long shares;
 	private String keywords;
+	private List<Transaction> transactionList;
 	public String buy(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
@@ -86,7 +87,19 @@ public class TradeAction extends ActionSupport {
 		fundlist=fundDAO.getListByPage((pageNum-1)*_PAGE_SIZE, _PAGE_SIZE,null,null);
 		return "gotoTrade";
 	}
+	public String gotoResearch(){
+		fund=fundDAO.find(fund).get(0);
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> session=ctx.getSession();
+		Customer customer=(Customer)session.get("customer");
+		Transaction t=new Transaction();
+		t.setCustomer(customer);
+		t.setFund(fund);
+		transactionList=transactionDAO.find(t);
+		return "gotoResearch";
+	}
 	public String research(){
+		
 		return "";
 	}
 	public String create(){
@@ -142,6 +155,10 @@ public class TradeAction extends ActionSupport {
 
 	public void setShares(Long shares) {
 		this.shares = shares;
+	}
+
+	public List<Transaction> getTransactionList() {
+		return transactionList;
 	}
 	
 }

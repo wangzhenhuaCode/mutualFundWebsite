@@ -58,5 +58,8 @@ public class Position implements java.io.Serializable {
 	public void setTransactions(Set transactions) {
 		this.transactions = transactions;
 	}
+	public String getCurrentShares(){
+		return String.format("%1$,.3f", (double)shares/1000);
+	}
 
 }
