@@ -12,6 +12,7 @@
         </action>
        <action name="employee_*" class="EmployeeAction"  method="{1}">
         	<result name="logoutSuccess">/Login.jsp</result>
+        	<result name="resetPage">/employee_customer_resetpassword.jsp</result>
         	<result name="employeeSucessChangePassword">/employee_customer_resetpassword.jsp</result>
         	<result name="employeeFailureLogin">/Login.jsp</result>
         	<result name="goToHomePage">/employee_home.jsp</result>

@@ -25,7 +25,7 @@
 
                 <ul>
                     <li style="list-style:none;"><a href="#">Change Profile</a></li>
-                    <li style="list-style:none;"><a href="<%=basePath%>act/employee_changePassword.action">Change Password</a></li>
+                    <li style="list-style:none;"><a href="<%=basePath%>act/employee_resetPage.action">Change Password</a></li>
                     <li style="list-style:none;"><a href="<%=basePath%>act/employee_logout.action">Log out</a></li>
                 </ul>
 

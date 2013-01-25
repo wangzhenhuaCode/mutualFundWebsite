@@ -21,6 +21,7 @@ public class EmployeeAction extends ActionSupport {
 	private Customer customer;
 	private Employee employee;
 	private String newPassword;
+	private String confirmPassword;
 	private String newCustomerPassword;
 	private String errorInfo;
 	private List<Customer> customerList;
@@ -73,7 +74,7 @@ public class EmployeeAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Employee e=(Employee)session.get("employee");
-		if(e.getPassword().equals(employee.getPassword())){
+		if(newPassword.equals(confirmPassword)){
 			e.setPassword(newPassword);
 			employeeDAO.update(e);
 			return "employeeSucessChangePassword";
@@ -113,7 +114,7 @@ public class EmployeeAction extends ActionSupport {
 		}else {
 			this.customer = list.get(0);
 			customer.setPassword(newCustomerPassword);
-			return "viewCustomerSuccess";
+			return "resetCustomerPasswordSuccess";
 		}
 	}
 	public String viewTransactionHistory(){
@@ -148,6 +149,10 @@ public class EmployeeAction extends ActionSupport {
 	
 	public String homePage(){
 		return "homePage";
+	}
+	
+	public String resetPage(){
+		return "resetPage";
 	}
 	
 	
@@ -205,5 +210,10 @@ public class EmployeeAction extends ActionSupport {
 	public void setTransaction(Transaction t) {
 		this.transaction = t;
 	}
-
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
 }
