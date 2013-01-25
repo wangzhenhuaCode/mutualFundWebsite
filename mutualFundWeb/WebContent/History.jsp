@@ -50,8 +50,8 @@
 			</tbody></table>
          </p>
 
-        </div>
-        </div>
+        
+        
 
 
 <jsp:include page="template-bottom.jsp" />

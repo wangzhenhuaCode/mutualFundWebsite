@@ -94,16 +94,15 @@ public class EmployeeAction extends ActionSupport {
 		return "goToAddNewCustomerAccount";
 	}
 	
+	public String goToViewCustomerAccount() {
+		customer = customerDAO.findById(customer.getCustomerId());
+		return "goToViewCustomerAccount";
+	}
 	public String viewCustomerAccount(){
 		errorInfo="";
-		List<Customer> list = customerDAO.find(customer);
-		if(list.size()==0) {
-			errorInfo = "No customer found";
-			return "viewCustomerFailue";
-		}else {
-			this.customer = list.get(0);
-			return "viewCustomerSuccess";
-		}
+		customer = customerDAO.findById(customer.getCustomerId());
+		//customerDAO.save(customer);
+		return "viewCustomerSuccess";
 	}
 	public String resetCustomerPassword(){
 		errorInfo="";

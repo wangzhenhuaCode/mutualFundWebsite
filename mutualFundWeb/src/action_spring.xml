@@ -25,12 +25,14 @@
 		<property name="fundDAO" ref="FundDAO" />
 		<property name="positionDAO" ref="PositionDAO" />
 		<property name="transactionDAO" ref="TransactionDAO" />
+		
 	</bean>
 	<bean id="TradeAction"
 		class="Struts.Action.TradeAction" scope="prototype">
 		<property name="fundDAO" ref="FundDAO" />
 		<property name="transactionDAO" ref="TransactionDAO" />
 		<property name="positionDAO" ref="PositionDAO" />
+		<property name="customerDAO" ref="CustomerDAO" />
 	</bean>
 	<bean id="TradeAJAXAction"
 		class="Struts.Action.TradeAJAXAction" scope="prototype">
