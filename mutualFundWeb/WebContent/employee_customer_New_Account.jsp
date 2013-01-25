@@ -14,10 +14,28 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
-		<form method="post" action="<%=basePath%>act/customer_addNewCustomerAccount.action" id="form">
+		<form method="post" action="<%=basePath%>act/employee_createCustomerAccount.action" id="form">
 			<h2>Create a New Account</h2>
 		
 			<table>
+				<tr>
+				<td>User Name</td> 
+				</tr>
+				
+				<tr>
+				<td><input type="text" name="customer.username"></td>
+				</tr>
+				
+				<tr>
+				<td>Password</td> 
+				<td>Confirm Password</td>
+				</tr>
+				
+				<tr>
+				<td><input type="text" name="customer.password"></td>
+				<td><input type="text" name="password"></td>
+				</tr>
+				
 				<tr>
 				<td>First Name</td> 
 				<td>Last Name</td>
@@ -29,22 +47,15 @@
 				</tr>
 				
 				<tr>
-<<<<<<< HEAD
-				<td>AddressLine1</td>
-				<td>AddressLine2</td>
-				</tr>
-				<tr>
-				<td><input type="text" name="customer.addrLine1"></td>
-				<td><input type="text" name="customer.addrLine2"></td>
-=======
 				<td>Address Line 1</td>
 				<td>Address Line 2</td>
 				</tr>
+				
 				<tr>
 				<td><input type="text" name="customer.addLine1"></td>
 				<td><input type="text" name="customer.addLine2"></td>
->>>>>>> ca770e0604d7ac6704744bb232a5cbf16d58897b
 				</tr>
+				
 				<tr>
 				<td>City</td>
 				<td>State</td>
@@ -62,6 +73,6 @@
 				<td><input type="radio" name="accountType" value="customer" checked>Customer <input type="radio" name="accountType" value="employee">Employee</td>
 				</tr>
 			</table> 
-			<span class="ButtonInput"><span align="center"><input type="button" value="Create" style="width:100px"></span></span>
+			<span class="ButtonInput"><span align="center"><input type="submit" value="Create" style="width:100px"></span></span>
 		</form>
 <jsp:include page="template-bottom.jsp" />

@@ -114,6 +114,12 @@ public class EmployeeAction extends ActionSupport {
 			return "employeeFailureLogin";
 		}
 	}
+	public String createCustomerAccount(){
+		errorInfo="";
+		customerDAO.save(customer);
+		return "addNewCustomerSuccess";
+		
+	}
 	public String logout(){
 		errorInfo="";
 		ActionContext ctx=ActionContext.getContext();
@@ -142,16 +148,15 @@ public class EmployeeAction extends ActionSupport {
 		
 	}
 	public String viewCustomers() {
-		customerList = customerDAO.getListByPage(0, pageNum, null, null);
+		customerList = customerDAO.findAll();
 		maxPage=customerDAO.count(null,null)/20+1;
 		return "viewCustomers";
 	}
-	public String addNewCustomerAccount(){
-		errorInfo="";
-		customerDAO.save(customer);
-		return "addNewCustomerAccountSuccess";
-		
+	
+	public String goToAddNewCustomerAccount() {
+		return "goToAddNewCustomerAccount";
 	}
+	
 	public String viewCustomerAccount(){
 		errorInfo="";
 		List<Customer> list = customerDAO.find(customer);

@@ -34,12 +34,12 @@
   				
   				<s:iterator value="transactionList" id="transaction">
                 <tr>
-                    <td><s:property value="#transaction.executeDate"/></td>
+                    <td><s:property value="#transaction.currentDate"/></td>
                     <td><s:property value="#transaction.transactionType"/></td>
                     <td><s:property value="#transaction.fund.name"/></td>
-                    <td><s:property value="#transaction.shares"/></td>
-                    <td></td>
-                    <td><s:property value="#transaction.amount"/></td>
+                    <td><s:property value="#transaction.currentShares"/></td>
+                    <td><s:property value="#transaction.boughtPrice"/></td>
+                    <td><s:property value="#transaction.currentAmount"/></td>
                 </tr>
                 </s:iterator>
                  
