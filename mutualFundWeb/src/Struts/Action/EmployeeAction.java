@@ -23,8 +23,6 @@ public class EmployeeAction extends ActionSupport {
 	private String newPassword;
 	private String newCustomerPassword;
 	private String errorInfo;
-	private Fund fund;
-	private IFundDAO fundDAO;
 	private List<Customer> customerList;
 	private List<Transaction> transactionList;
 	private int pageNum;
@@ -37,15 +35,7 @@ public class EmployeeAction extends ActionSupport {
 	private String username;
 	private String password;
 	
-	public String transactionPage() {
-		return "goToTransactionPage";
-	}
-	public String fundPage() {
-		return "goToFundPage";
-	}
-	public String customerPage() {
-		return "goToCustomerPage";
-	}
+
 	public String login(){
 		errorInfo="";
 		List<Employee> list=employeeDAO.findByProperty("username", username);
@@ -66,6 +56,7 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public String createCustomerAccount(){
 		errorInfo="";
+		customer.setCash((long)0);
 		customerDAO.save(customer);
 		return "addNewCustomerSuccess";
 		
@@ -91,12 +82,7 @@ public class EmployeeAction extends ActionSupport {
 			return "employeeFailureChangePassword";
 		}
 	}
-	public String addNewFund(){
-		errorInfo="";
-		fundDAO.save(fund);
-		return "addNewFundSuccess";
-		
-	}
+
 	public String viewCustomers() {
 		customerList = customerDAO.findAll();
 		maxPage=customerDAO.count(null,null)/20+1;
@@ -185,18 +171,13 @@ public class EmployeeAction extends ActionSupport {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public void setFund(Fund fund) {
-		this.fund = fund;
-	}
 	public void setEmployeeDAO(IEmployeeDAO employeeDAO) {
 		this.employeeDAO = employeeDAO;
 	}
 	public void setCustomerDAO(ICustomerDAO customerDAO) {
 		this.customerDAO = customerDAO;
 	}
-	public void setFundDAO(IFundDAO fundDAO) {
-		this.fundDAO = fundDAO;
-	}
+
 	public Integer getPageNum() {
 		return pageNum;
 	}

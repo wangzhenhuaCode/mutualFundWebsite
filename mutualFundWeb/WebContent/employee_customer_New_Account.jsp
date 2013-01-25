@@ -52,8 +52,8 @@
 				</tr>
 				
 				<tr>
-				<td><input type="text" name="customer.addLine1"></td>
-				<td><input type="text" name="customer.addLine2"></td>
+				<td><input type="text" name="customer.addrLine1"></td>
+				<td><input type="text" name="customer.addrLine2"></td>
 				</tr>
 				
 				<tr>
