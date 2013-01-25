@@ -12,6 +12,7 @@
 	<bean id="EmployeeAction"
 		class="Struts.Action.EmployeeAction">
 		<property name="employeeDAO" ref="EmployeeDAO" />
+		<property name="customerDAO" ref="CustomerDAO" />
 	</bean>
 	<bean id="FinanceAction"
 		class="Struts.Action.FinanceAction">

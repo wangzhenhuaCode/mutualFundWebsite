@@ -14,6 +14,8 @@
         	<result name="employeeSucessLogin" type="redirectAction">transaction_gotoTrans.action</result>
         	<result name="changeCustomerPassword">/employee_customer_resetpassword.jsp</result>
         	<result name="viewCustomers">/employee_customer.jsp</result>
+        	<result name="viewTransactionHistorySuccess">/employee_customer_history.jsp</result>
+        	
 
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">
