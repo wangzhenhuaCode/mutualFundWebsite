@@ -49,7 +49,7 @@
             
             <br /><br />
             
-            <form method="post" action="">
+            <form method="post" action="<%=basePath%>act/trade_buy.action">
                 
                 <table>
                     <tr>
