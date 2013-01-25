@@ -16,7 +16,7 @@
 <jsp:include page="employee_template-top2.jsp" />
 
             
-            <form method="post" action="<%=basePath%>act/finance_deposit.action">
+            <form method="post" action="<%=basePath%>act/finance_deposit.action?customer.customerId=<s:property value="customer.customerId" />">
             <h2>Deposit Check:</h2>
             
             
@@ -26,7 +26,7 @@
 			<table>
             	<tr>
                 <td>Amount:</td>
-                <td><input type="text" style="width:120px"><td>
+                <td><input type="text" style="width:120px" name="amount"><td>
                 <td><span class="ButtonInput"><span><input type="submit" value="Deposit" ></span></span></td>
                 <td><span class="ButtonInput"><span><input type="button" value="Cancel"></span></span></td>
                 </tr>

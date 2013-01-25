@@ -32,10 +32,10 @@
                 <s:iterator value="customerList" id="customer">
                 <tr>
                 	<td><strong><s:property value="#customer.firstname" /><s:property value="#customer.lastname" /></strong></td>
-                    <td><a href="<%=basePath%>act/employee_goToViewCustomerAccount.action?customer.customerId=<s:property value="#customer.id"/>">View Account</a></td>
-                    <td><a href="<%=basePath%>act/employee_goToCheckCustomerdeposit.action?customer.customerId=<s:property value="#customer.id"/>">Deposit Check</a></td>
-                    <td><a href="<%=basePath%>act/employee_goToResetCustomerPassword.action?customer.customerId=<s:property value="#customer.id"/>">Reset Password</a></td>
-                    <td><a href="<%=basePath%>act/employee_goToViewTransactionHistory.action?customer.customerId=<s:property value="#customer.id"/>">Transaction History</a></td>
+                    <td><a href="<%=basePath%>act/employee_goToViewCustomerAccount.action?customer.customerId=<s:property value="#customer.customerId"/>">View Account</a></td>
+                    <td><a href="<%=basePath%>act/employee_depositPage?customer.customerId=<s:property value="#customer.customerId"/>">Deposit Check</a></td>
+                    <td><a href="<%=basePath%>act/employee_goToResetCustomerPassword.action?customer.customerId=<s:property value="#customer.customerId"/>">Reset Password</a></td>
+                    <td><a href="<%=basePath%>act/employee_goToViewTransactionHistory.action?customer.customerId=<s:property value="#customer.customerId"/>">Transaction History</a></td>
                 </tr>
                 </s:iterator>
             	</tbody>

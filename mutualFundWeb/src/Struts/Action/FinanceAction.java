@@ -47,6 +47,7 @@ public class FinanceAction extends ActionSupport {
 	}
 	
 	public String depositPage(){
+		customer=customerDAO.findById(customer.getCustomerId());
 		return "gotoDeposit";
 	}
 	
@@ -55,9 +56,7 @@ public class FinanceAction extends ActionSupport {
 			errorInfo="Amount cannot be negative!";
 			return "depositFailure";
 		}
-		ActionContext ctx=ActionContext.getContext();
-		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
@@ -90,6 +89,14 @@ public class FinanceAction extends ActionSupport {
 
 	public List<Transaction> getTransactionList() {
 		return transactionList;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }
