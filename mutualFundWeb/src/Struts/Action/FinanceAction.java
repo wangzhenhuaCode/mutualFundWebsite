@@ -32,7 +32,7 @@ public class FinanceAction extends ActionSupport {
 	
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_WITHDRAW);
-		transaction.setAmount((long)(amount*100));
+		transaction.setAmount((long)(amount*(-100)));
 		transaction.setExecuteDate(new Date());
 		transactionDAO.save(transaction);
 		return "requestSuccess";

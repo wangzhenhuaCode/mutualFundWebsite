@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.springframework.orm.hibernate3.HibernateCallback;
 
 import Hibernate.BaseDAO.BaseHibernateDAO;
+import Hibernate.PO.Customer;
 import Hibernate.PO.Fund;
 import Hibernate.PO.FundPriceHistory;
 import Hibernate.PO.Position;
@@ -42,44 +43,40 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 				org.hibernate.Transaction tx=session.beginTransaction();
 				try{
 				HashMap<Integer, Long> map =new HashMap<Integer, Long>();
+				
 				DecimalFormat format1 = new DecimalFormat("#.##");
 				DecimalFormat format2 = new DecimalFormat("#.###");
 				for(FundPriceHistory fp:pricelist){
 					session.save(fp);
 					map.put(fp.getId().getFund().getFundId(), fp.getPrice());
 				}
+				
 				for(Transaction t:buylist){
-					Double cash=(double)t.getAmount()/100;
+					Double cash=(double)t.getAmount()/(-100);
 					Double price=(double)map.get(t.getFund().getFundId())/100;
 					Double shares=Double.valueOf(format2.format(cash/price));
 					t.setShares((long)(shares*1000));
-					t.setTransactionType(Transaction.BOUGHT);
-					Long ucash=t.getCustomer().getCash()-t.getAmount();
+					Customer customer=t.getCustomer();
+					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
+					Long ucash=t.getAmount()+customer.getCash();
 					if(ucash<0){
 						continue;
 					}
-					t.getCustomer().setCash(ucash);
-					Position p=t.getPosition();
-					if(p!=null){
+					customer.setCash(ucash);
+					t.setTransactionType(Transaction.BOUGHT);
+					PositionId pid=new PositionId(t.getCustomer(),t.getFund());
+					
+					Position p=(Position) session.load(Position.class, pid);
 						Long currentShares=p.getShares();
 						currentShares+=t.getShares();
 						p.setShares(currentShares);
-						session.merge(p);
 						
-					}else{
-						p=new Position();
-						Long currentShares=t.getShares();
-						p.setShares(currentShares);
-						PositionId pid=new PositionId();
-						pid.setFund(t.getFund());
-						pid.setCustomer(t.getCustomer());
-						p.setId(pid);
-						session.merge(p);
-					}
-					t.setPosition(p);
+						
 					
-					session.merge(t.getCustomer());
 					
+					t.setExecuteDate(new Date());
+					session.merge(customer);
+					session.merge(p);
 					session.merge(t);
 				}
 				for(Transaction t:selllist){
@@ -87,10 +84,16 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					Double price=(double)map.get(t.getFund().getFundId())/100;
 					Double amount=Double.valueOf(format1.format(shares*price));
 					t.setAmount((long)(amount*100));
-					t.setTransactionType(Transaction.SELLED);
-					Long ucash=t.getCustomer().getCash();
-					t.getCustomer().setCash(ucash+t.getAmount());
-					Position p=t.getPosition();
+					
+					Customer customer=t.getCustomer();
+					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
+					Long ucash=t.getAmount()+customer.getCash();
+					customer.setCash(ucash);
+					
+					
+					PositionId pid=new PositionId(t.getCustomer(),t.getFund());
+					
+					Position p=(Position) session.load(Position.class, pid);
 					
 						Long currentShares=p.getShares();
 						currentShares-=t.getShares();
@@ -98,27 +101,44 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 						p.setShares(currentShares);
 					
 					t.setPosition(p);
+					t.setExecuteDate(new Date());
+					t.setTransactionType(Transaction.SELLED);
+					
+					session.merge(customer);
 					session.merge(p);
-					session.merge(t.getCustomer());
+					
 					session.merge(t);
 				}
 				for(Transaction t:depositlist){
 					t.setTransactionType(Transaction.DEPOSITED);
-					Long ucash=t.getCustomer().getCash()+t.getAmount();
-					t.getCustomer().setCash(ucash);
-					session.merge(t.getCustomer());
+					Customer customer=t.getCustomer();
+					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
+					Long ucash=t.getAmount()+customer.getCash();
+					customer.setCash(ucash);
+					
+					t.setExecuteDate(new Date());
+					session.merge(customer);
 					session.merge(t);
 				}
 				for(Transaction t:withdrawlist){
-					t.setTransactionType(Transaction.WITHDRAW);
-					Long ucash=t.getCustomer().getCash()-t.getAmount();
+					
+					Customer customer=t.getCustomer();
+					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
+					Long ucash=t.getAmount()+customer.getCash();
+					
 					if(ucash<0){
 						continue;
 					}
+					customer.setCash(ucash);
+					
+					t.setTransactionType(Transaction.WITHDRAW);
 					t.getCustomer().setCash(ucash);
-					session.merge(t.getCustomer());
+					t.setExecuteDate(new Date());
+					session.merge(customer);
 					session.merge(t);
 				}
+				
+				session.flush();
 				
 				tx.commit();
 				return true;

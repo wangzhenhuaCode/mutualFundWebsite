@@ -33,6 +33,7 @@ public class TradeAction extends ActionSupport {
 	private List<Transaction> transactionList;
 	private List<Position> positionList;
 	private ICustomerDAO customerDAO;
+	private Position position;
 	private Customer customer;
 	public String buy(){
 		try{
@@ -44,8 +45,18 @@ public class TradeAction extends ActionSupport {
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
 		transaction.setTransactionType(Transaction.PENDING_BUY);
-		transaction.setAmount((long)(amount*100));
+		transaction.setAmount((long)(amount*(-100)));
 		transaction.setExecuteDate(new Date());
+		
+		PositionId pid=new PositionId(customer,fund);
+		Position p=positionDAO.findById(pid);
+		if(p==null){
+			p=new Position(pid);
+			p.setShares((long)0);
+			positionDAO.save(p);
+		}
+	
+		transaction.setPosition(p);
 		transactionDAO.save(transaction);
 		return "success";
 		}catch(Exception e){
@@ -59,7 +70,7 @@ public class TradeAction extends ActionSupport {
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
 		PositionId pid=new PositionId(customer,fund);
-		Position p=positionDAO.findById(pid);
+		Position p=positionDAO.load(Position.class,pid);
 		if(p.getShares()<shares){
 			return "failure";
 		}
@@ -69,7 +80,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_SELL);
 		transaction.setShares((long)(shares*1000));
 		transaction.setExecuteDate(new Date());
-		transaction.setPosition(null);
+		transaction.setPosition(p);
 		transactionDAO.save(transaction);
 		return "success";
 	}
@@ -105,6 +116,11 @@ public class TradeAction extends ActionSupport {
 		Customer customer=(Customer)session.get("customer");
 
 		transactionList=transactionDAO.findByTwoProperty("customer", customer, "fund", fund);
+		if(transactionList.size()>0){
+			PositionId pid=new PositionId(customer,fund);
+			
+			position=positionDAO.load(Position.class, pid);
+		}
 		return "gotoResearch";
 	}
 
@@ -203,6 +219,10 @@ public class TradeAction extends ActionSupport {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public Position getPosition() {
+		return position;
 	}
 
 

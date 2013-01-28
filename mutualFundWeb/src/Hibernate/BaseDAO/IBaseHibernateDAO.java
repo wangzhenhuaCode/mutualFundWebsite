@@ -12,6 +12,8 @@ public interface IBaseHibernateDAO<T> {
 
 	public void delete(T object);
 	
+	public T load(Class c, Serializable id);
+	
 	public Integer count(String property, String value);
 	
 	public List<T> findByProperty(String propertyName, Object value);

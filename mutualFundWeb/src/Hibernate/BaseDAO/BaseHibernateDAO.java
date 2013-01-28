@@ -55,6 +55,9 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 	public T findById(Serializable id){
 		return (T) getHibernateTemplate().get(className, id);  
 	}
+	public T load(Class c, Serializable id){
+		return (T) getHibernateTemplate().load(c, id);  
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<T> findByProperty(String propertyName, Object value) {
