@@ -24,6 +24,8 @@
             <input type="hidden" name="customer.customerId"  value="<s:property value="customer.customerId"/>" />
              <input type="hidden" name="customer.username"  value="<s:property value="customer.username"/>" />
               <input type="hidden" name="customer.password"  value="<s:property value="customer.password"/>" />
+              <input type="hidden" name="customer.cash"  value="<s:property value="customer.cash"/>" />
+
             <h2>View / Edit Profile</h2>
             <br />
 			<table>
@@ -58,7 +60,7 @@
                     <td><b>Balance</b></td>
 				</tr>
 				<tr>
-                    <td><input type="text" value="<s:property value="customer.cash"/>" name="customer.cash" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+                    <td><input type="text" value="<s:property value="customer.cash"/>" name="customer.cash" style="border: 0px solid #000000; background-color: #f6f6f6;" disabled/></td>
 				</tr>
 				
 			</table>
