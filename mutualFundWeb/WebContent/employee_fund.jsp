@@ -43,7 +43,7 @@
             
             <br />
             
-            <form method="post" action="<%=basePath%>/act/trade_create.action">
+            <form method="post" action="<%=basePath%>/act/trade_employeeCreate.action">
                 
                 <table>
                     <tr>

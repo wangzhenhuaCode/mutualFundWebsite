@@ -124,7 +124,7 @@ public class TradeAction extends ActionSupport {
 		return "gotoResearch";
 	}
 
-	public String create(){
+	public String employeeCreate(){
 		fundDAO.save(fund);
 		return "create";
 	}
