@@ -35,7 +35,7 @@ public class TransactionDayAction extends ActionSupport{
 		try {
 			date = (new SimpleDateFormat("yyyy-MM-dd")).parse(datestring);
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
+			
 			return "failureTrans";
 		}
 		List<Transaction> buylist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_BUY);
