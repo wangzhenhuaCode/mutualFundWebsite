@@ -17,15 +17,13 @@ import Hibernate.PO.Transaction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 
 public class TradeAction extends ActionSupport {
 	private IFundDAO fundDAO;
 	private IPositionDAO positionDAO;
 	private ITransactionDAO transactionDAO;
 	private List<Fund> fundlist;
-	private Integer pageNum;
-	private Integer maxPage;
-	private Integer _PAGE_SIZE=20;
 	private Fund fund=null;
 	private Double amount;
 	private Double shares;
@@ -35,12 +33,17 @@ public class TradeAction extends ActionSupport {
 	private ICustomerDAO customerDAO;
 	private Position position;
 	private Customer customer;
+	private String errorInfo;
 	public String buy(){
+		errorInfo="";
 		try{
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		if(amount*100>customer.getCash()) return "buyfailure";
+		if(amount*100>customer.getCash()){
+			errorInfo="Insufficient amount!";
+			return "transactFaluer";
+		}
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
@@ -61,18 +64,21 @@ public class TradeAction extends ActionSupport {
 		return "success";
 		}catch(Exception e){
 			e.printStackTrace();
-			 return "failure";
+			errorInfo="Operation failure!";
+			 return "transactFaluer";
 		}
 	}
 
 	public String sell(){
+		errorInfo="";
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
 		if(p.getShares()<shares){
-			return "failure";
+			errorInfo="Insufficient shares!";
+			return "transactFaluer";
 		}
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
@@ -90,26 +96,17 @@ public class TradeAction extends ActionSupport {
 		return "";
 	}
 	public String gotoTrade(){
-		fundlist=fundDAO.getListByPage(0, _PAGE_SIZE,null,null);
-		maxPage=fundDAO.count(null,null)/20+1;
+		fundlist=fundDAO.findAll();
+		
 		return "gotoTrade";
 	}
 	public String employeeGotoTrade(){
-		fundlist=fundDAO.getListByPage(0, _PAGE_SIZE,null,null);
-		maxPage=fundDAO.count(null,null)/20+1;
+		fundlist=fundDAO.findAll();
 		return "employeeGotoTrade";
 	}
-	public String changePage(){
-		if(maxPage==null)
-			maxPage=fundDAO.count(null,null)/_PAGE_SIZE+1;
-		if(pageNum<1)
-			pageNum=1;
-		if(pageNum>maxPage)
-			pageNum=maxPage;
-		fundlist=fundDAO.getListByPage((pageNum-1)*_PAGE_SIZE, _PAGE_SIZE,null,null);
-		return "gotoTrade";
-	}
+	
 	public String gotoResearch(){
+		
 		fund=fundDAO.findById(fund.getFundId());
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
@@ -123,10 +120,23 @@ public class TradeAction extends ActionSupport {
 		}
 		return "gotoResearch";
 	}
-
+	@InputConfig(resultName="employeeGotoTrade")
 	public String employeeCreate(){
 		fundDAO.save(fund);
+		
 		return "create";
+	}
+	
+	public void validateEmployeeCreate(){
+		if(fund.getName()==null||fund.getName().equals("")){
+			this.addFieldError("name", "Empty fund name");
+			fundlist=fundDAO.findAll();
+		}
+		if(fund.getSymbol()==null||fund.getSymbol().equals("")){
+			this.addFieldError("symbol", "Empty fund symbol");
+			if(fundlist==null)
+				fundlist=fundDAO.findAll();
+		}
 	}
 	public String showPosition(){
 		ActionContext ctx=ActionContext.getContext();
@@ -169,21 +179,7 @@ public class TradeAction extends ActionSupport {
 		return fundlist;
 	}
 
-	public Integer getPageNum() {
-		return pageNum;
-	}
 
-	public void setPageNum(Integer pageNum) {
-		this.pageNum = pageNum;
-	}
-
-	public Integer getMaxPage() {
-		return maxPage;
-	}
-
-	public void setMaxPage(Integer maxPage) {
-		this.maxPage = maxPage;
-	}
 
 	public Fund getFund() {
 		return fund;
@@ -223,6 +219,14 @@ public class TradeAction extends ActionSupport {
 
 	public Position getPosition() {
 		return position;
+	}
+
+	public String getErrorInfo() {
+		return errorInfo;
+	}
+
+	public void setErrorInfo(String errorInfo) {
+		this.errorInfo = errorInfo;
 	}
 
 

@@ -43,7 +43,7 @@
             
             <br />
             
-            <form method="post" action="<%=basePath%>/act/trade_employeeCreate.action">
+            <s:form method="post" action="/act/trade_employeeCreate.action" validate="true">
                 
                 <table>
                     <tr>
@@ -68,8 +68,8 @@
                 Fund Description<br/>
                 <textArea width="500" height="300" name="fund.description"></textArea><br/>
                 <span class="ButtonInput"><span><input type="submit" value="Add New Fund" /></span></span>
-                
-            </form>
+                <s:fielderror/>
+            </s:form>
             
 
 <jsp:include page="template-bottom.jsp" />

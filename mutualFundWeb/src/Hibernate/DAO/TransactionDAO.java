@@ -35,7 +35,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 		}
 		
 	}
-	public boolean transactionDay(final List<Transaction> buylist,final  List<Transaction> selllist,final List<Transaction> depositlist,final List<Transaction> withdrawlist,final List<FundPriceHistory> pricelist){
+	public boolean transactionDay(final List<Transaction> buylist,final  List<Transaction> selllist,final List<Transaction> depositlist,final List<Transaction> withdrawlist,final List<FundPriceHistory> pricelist,final Date date){
 		boolean b=(Boolean) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -74,7 +74,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 						
 					
 					
-					t.setExecuteDate(new Date());
+					t.setExecuteDate(date);
 					session.merge(customer);
 					session.merge(p);
 					session.merge(t);
@@ -101,7 +101,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 						p.setShares(currentShares);
 					
 					t.setPosition(p);
-					t.setExecuteDate(new Date());
+					t.setExecuteDate(date);
 					t.setTransactionType(Transaction.SELLED);
 					
 					session.merge(customer);
@@ -116,7 +116,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					Long ucash=t.getAmount()+customer.getCash();
 					customer.setCash(ucash);
 					
-					t.setExecuteDate(new Date());
+					t.setExecuteDate(date);
 					session.merge(customer);
 					session.merge(t);
 				}
@@ -133,7 +133,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					
 					t.setTransactionType(Transaction.WITHDRAW);
 					t.getCustomer().setCash(ucash);
-					t.setExecuteDate(new Date());
+					t.setExecuteDate(date);
 					session.merge(customer);
 					session.merge(t);
 				}

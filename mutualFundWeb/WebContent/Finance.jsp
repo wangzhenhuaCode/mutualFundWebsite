@@ -20,7 +20,7 @@
         <p>
             <br />
             <h3>Request History</h3>
-            <form method="post" action="<%=basePath%>act/finance_requestCheck.action">
+            <s:form method="post" action="act/finance_requestCheck.action" validation="true">
                <table class="bottomBorder">
 			   	<col width="250">
 				<col width="250">
@@ -59,7 +59,8 @@
 		<div align = "left">
             <span class="ButtonInput"><span align="center"><input type="submit" value="Request Check"/></span></span>
 		</div>
-		</form>
+		<s:fielderror/>
+		</s:form>
         </p>
 
 

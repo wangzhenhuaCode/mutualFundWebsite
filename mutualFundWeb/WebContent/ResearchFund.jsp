@@ -76,7 +76,7 @@
 		</script>
 
     <div class="Menu">
-            <ul><li><a href="<%=basePath%>act/customer_login.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/trade_showPosition.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
         </div>
 
 <jsp:include page="template-top2.jsp" />
@@ -138,6 +138,7 @@
             <h2 style="color:red; margin-left:20px;"><img src="images/down.png" height="20"/>&nbsp;-320.00</h2>
             </p>-->
          <p><h2>Transaction</h2>
+         <font color="red"><s:property value="errorInfo" /></font>
          <s:if test="position.shares>0" > 
          <form method="post" action="<%=basePath%>act/trade_sell.action?fund.fundId=<s:property value="fund.fundId" />">
             <div id="sellDiv">

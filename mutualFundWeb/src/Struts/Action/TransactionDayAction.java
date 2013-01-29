@@ -24,26 +24,29 @@ public class TransactionDayAction extends ActionSupport{
 	private List<Fund> fundlist;
 	private String[] newPrices;
 	private String datestring;
-
+	private String errorInfo;
 	public String gotoTrans(){
 		fundlist=fundDAO.findAll();
+		errorInfo="";
 		return "gototrans";
 	}
 	public String transact(){
+		errorInfo="";
 		fundlist=fundDAO.findAll();
 		Date date;
 		try {
 			date = (new SimpleDateFormat("yyyy-MM-dd")).parse(datestring);
 		} catch (ParseException e1) {
-			
+			errorInfo="Wrong time format!";
 			return "failureTrans";
 		}
 		List<Transaction> buylist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_BUY);
 		List<Transaction> selllist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_SELL);
 		List<Transaction> depositlist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_DEPOSIT);
 		List<Transaction> withdrawlist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_WITHDRAW);
-		if(fundlist.size()!=newPrices.length)
-			return "failureTrans";
+		if(fundlist.size()!=newPrices.length){
+			errorInfo="Please fill price for all funds";
+			return "failureTrans";}
 		List<FundPriceHistory> pricelist=new ArrayList<FundPriceHistory>();
 		for(int i=0;i<fundlist.size();i++){
 			try{
@@ -56,11 +59,15 @@ public class TransactionDayAction extends ActionSupport{
 				instance.setId(id);
 				pricelist.add(instance);
 			}catch(Exception e){
+				errorInfo="Please fill price for all funds";
 				return "failureTrans";
 			}
 			
 		}
-		if(!transactionDAO.transactionDay(buylist, selllist, depositlist, withdrawlist, pricelist))return "failureTrans";
+		if(!transactionDAO.transactionDay(buylist, selllist, depositlist, withdrawlist, pricelist,date)){
+			errorInfo="Repeated transition day";
+			return "failureTrans";
+		}
 		return "successTrans";
 	}
 	public List<Fund> getFundlist() {
@@ -82,5 +89,8 @@ public class TransactionDayAction extends ActionSupport{
 	}
 	public void setDatestring(String datestring) {
 		this.datestring = datestring;
+	}
+	public String getErrorInfo() {
+		return errorInfo;
 	}
 }

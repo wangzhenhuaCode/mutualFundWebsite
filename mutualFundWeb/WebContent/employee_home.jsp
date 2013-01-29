@@ -13,7 +13,14 @@
 
 <jsp:include page="employee_template-top2.jsp" />
 
-
+<script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="js/ui/css/redmond/jquery-ui-1.9.2.custom.css" />
+    <script src="js/ui/js/jquery-ui-1.9.2.custom.js"></script>
+    <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({dateFormat:"yy-mm-dd"});
+  });
+  </script>
  <h2>Welcome, <s:property value="#session.employee.firstname" /></h2>
             
             <br />
@@ -44,10 +51,10 @@
             <div align = "left">
             <br />
             <h3>New Trading Date:</h3>
-            <input type="text", style="width: 120px" name="datestring"/>
+            <input type="text" id="datepicker" style="width: 120px" name="datestring"/>
             <br />
             <br />
-                
+                <font color="red"><s:property value="errorInfo" /></font>
                 <span class="ButtonInput"><span align="center"><input type="submit" value="Update Transaction Day & Prices"/></span></span>
                 
 			</div>

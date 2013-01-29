@@ -59,7 +59,7 @@
 			<div class="inputName">
 				<tr>
 				<td><strong>Password:</strong></td>
-				<td><input type="text" name="password" style="width: 200px" />
+				<td><input type="password" name="password" style="width: 200px" />
 					</td>
 				</tr>
 			</div>
