@@ -42,7 +42,8 @@
         </div><div class="MainColumn">
         <div class="ArticleBorder"><div class="ArticleBL"><div></div></div><div class="ArticleBR"><div></div></div><div class="ArticleTL"></div><div class="ArticleTR"><div></div></div><div class="ArticleT"></div><div class="ArticleR"><div></div></div><div class="ArticleB"><div></div></div><div class="ArticleL"></div><div class="ArticleC"></div>
         <div class="Article">
-        <h2 style="margin-left:250px;">Login</h2>
+        <h2 style="margin-left:240px;">Login</h2>
+        <br />
 
         <form method="post" action="<%=basePath%>act/employee_login.action" id="form">
 
