@@ -21,7 +21,7 @@ public class FinanceAction extends ActionSupport {
 	private List<Transaction> transactionList;
 	private Double amount;
 	
-	@InputConfig(resultName="employeeGotoTrade")
+	@InputConfig(resultName="gotoFinance")
 	public String requestCheck(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
@@ -36,6 +36,11 @@ public class FinanceAction extends ActionSupport {
 		return "requestSuccess";
 	}
 	public void validateRequestCheck(){
+		if(amount==null){
+			this.addFieldError("amount", "Amount can not be null");
+			transactionList=transactionDAO.findByProperty("customer", customer);
+			return;
+		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
@@ -62,12 +67,9 @@ public class FinanceAction extends ActionSupport {
 		customer=customerDAO.findById(customer.getCustomerId());
 		return "gotoDeposit";
 	}
-	
+	@InputConfig(resultName="gotoDeposit")
 	public String deposit(){
-		if(amount<0) {
-			errorInfo="Amount cannot be negative!";
-			return "depositFailure";
-		}
+		
 		
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
@@ -76,6 +78,16 @@ public class FinanceAction extends ActionSupport {
 		transaction.setExecuteDate(new Date());
 		transactionDAO.save(transaction);
 		return "depositSuccess";
+	}
+	public void validateDeposit(){
+		if(amount==null){
+			this.addFieldError("amount", "Amount can not be null");
+			customer=customerDAO.findById(customer.getCustomerId());
+		}
+		else if(amount<0) {
+			this.addFieldError("amount", "Amount can not be negative");
+			customer=customerDAO.findById(customer.getCustomerId());
+		}
 	}
 	
 	public void setAmount(Double amount) {

@@ -16,9 +16,9 @@
 <jsp:include page="employee_template-top2.jsp" />
 
             
-            <form method="post" action="<%=basePath%>act/finance_deposit.action?customer.customerId=<s:property value="customer.customerId" />">
+            <s:form method="post" action="act/finance_deposit.action" validate="true">
             <h2>Deposit Check:</h2>
-            
+            <s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
             
             <h3><s:property value="customer.firstname" />&nbsp<s:property value="customer.lastname" />'s Account:</h3>
             <h3>Balance: $<s:property value="customer.currentCash"/></h3>
@@ -31,7 +31,9 @@
                 <td><a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a></td>
                 </tr>
 			</table>
-            </form>
+			<s:fielderror/>
+            </s:form>
+            
 
 
 <jsp:include page="template-bottom.jsp" />

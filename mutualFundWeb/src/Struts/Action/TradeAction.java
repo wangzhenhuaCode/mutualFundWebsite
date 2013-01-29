@@ -33,17 +33,14 @@ public class TradeAction extends ActionSupport {
 	private ICustomerDAO customerDAO;
 	private Position position;
 	private Customer customer;
-	private String errorInfo;
+	@InputConfig(resultName="gotoResearch")
 	public String buy(){
-		errorInfo="";
+		
 		try{
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		if(amount*100>customer.getCash()){
-			errorInfo="Insufficient amount!";
-			return "transactFaluer";
-		}
+
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
@@ -64,22 +61,34 @@ public class TradeAction extends ActionSupport {
 		return "success";
 		}catch(Exception e){
 			e.printStackTrace();
-			errorInfo="Operation failure!";
-			 return "transactFaluer";
+			research();
+			this.addFieldError("operation", "Operation error");
+			return "gotoResearch";
 		}
 	}
-
+	public void validateBuy(){
+		if(amount==null){
+			this.addFieldError("amount", "Invalid amount");
+			research();
+			return;
+		}
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> session=ctx.getSession();
+		Customer customer=(Customer)session.get("customer");
+		if(amount*100>customer.getCash()){
+			research();
+			this.addFieldError("buy", "Insufficient amount");
+		}
+	}
+	@InputConfig(resultName="gotoResearch")
 	public String sell(){
-		errorInfo="";
+		
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
-		if(p.getShares()<shares){
-			errorInfo="Insufficient shares!";
-			return "transactFaluer";
-		}
+
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
@@ -89,6 +98,23 @@ public class TradeAction extends ActionSupport {
 		transaction.setPosition(p);
 		transactionDAO.save(transaction);
 		return "success";
+	}
+	public void validateSell(){
+		if(shares==null){
+			this.addFieldError("shares", "Invalid shares");
+			research();
+			return;
+		}
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> session=ctx.getSession();
+		Customer customer=(Customer)session.get("customer");
+		PositionId pid=new PositionId(customer,fund);
+		Position p=positionDAO.load(Position.class,pid);
+		if(p.getShares()<shares){
+			this.addFieldError("shares", "Insufficient shares");
+			research();
+		}
+		
 	}
 	public String search(){
 		fundlist=fundDAO.findByProperty("symbol",keywords);
@@ -104,9 +130,7 @@ public class TradeAction extends ActionSupport {
 		fundlist=fundDAO.findAll();
 		return "employeeGotoTrade";
 	}
-	
-	public String gotoResearch(){
-		
+	public void research(){
 		fund=fundDAO.findById(fund.getFundId());
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
@@ -118,6 +142,10 @@ public class TradeAction extends ActionSupport {
 			
 			position=positionDAO.load(Position.class, pid);
 		}
+	}
+	public String gotoResearch(){
+		
+		research();
 		return "gotoResearch";
 	}
 	@InputConfig(resultName="employeeGotoTrade")
@@ -221,13 +249,7 @@ public class TradeAction extends ActionSupport {
 		return position;
 	}
 
-	public String getErrorInfo() {
-		return errorInfo;
-	}
 
-	public void setErrorInfo(String errorInfo) {
-		this.errorInfo = errorInfo;
-	}
 
 
 	

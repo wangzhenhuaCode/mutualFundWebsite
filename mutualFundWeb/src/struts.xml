@@ -40,8 +40,6 @@
         	<result name="goToAddNewCustomerAccount">/employee_customer_New_Account.jsp</result>
         	<result name="goToViewCustomerAccount">/employee_customer_viewChangeProfile.jsp</result>
         	<result name="viewCustomerSuccess" type="redirectAction">employee_viewCustomers.action</result>
-		
-
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">
         	<result name="depositSuccess" type="redirectAction">employee_viewCustomers.action</result>
@@ -55,11 +53,6 @@
         	<result name="gotoResearch" >/ResearchFund.jsp</result>
         	<result name="gotoTrade" >/Trade.jsp</result>
         	<result name="success" type="redirectAction">trade_gotoTrade.action</result>
-        	<result name="transactFaluer" type="redirectAction">
-        	<param name="actionName">trade_gotoResearch.action</param>  
-        		<param name="errorInfo">${errorInfo}</param>
-        		<param name="fund.fundId">${fund.fundId}</param>
-			</result>
         	<result name="home">/Home.jsp</result>
         	<result name="viewHistory">/History.jsp</result>
         	<result name="employeeViewHistory">/employee_customer_history.jsp</result>
