@@ -21,22 +21,22 @@
             <br />
             <h3>Request History</h3>
             <form method="post" action="<%=basePath%>act/finance_requestCheck.action">
-               <table class="bottomBorder">
-			   	<col width="250">
-				<col width="250">
-				<col width="50">
+               <table class="bottomBorder" align="left">
+			   	<col width="150">
+				<col width="150">
+				<col width="150">
 
 			   		<tr style="padding-bot:10px;">
-						<td><Strong align="left">Date</strong>
-						<td><Strong align="right">Ammount</strong>
-						<td><Strong align="right">Status</strong>
+						<td><Strong>Date</strong></td>
+						<td><Strong>Ammount</strong></td>
+						<td><Strong>Status</strong></td>
 						
 					</tr>
 					<s:iterator value="transactionList" id="transaction">
 					<s:if test="#transaction.transactionType>4">
 					<tr>
 						<td><s:property value="#transaction.currentDate" /></td>
-						<td><s:property value="#transaction.currentAmount" /></td>
+						<td align="right"><s:property value="#transaction.currentAmount" /></td>
 						<td><s:if test="#transaction.transactionType==5">Deposited</s:if>
                     <s:if test="#transaction.transactionType==6">Pending Deposit</s:if>
                     <s:if test="#transaction.transactionType==7">Withdrew</s:if>
