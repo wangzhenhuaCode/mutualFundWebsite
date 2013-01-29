@@ -10,8 +10,8 @@
         	<result name="index">/login.jsp</result>
         	
         </action>
-       <action name="employee_*" class="EmployeeAction"  method="{1}">
-        	<result name="logoutSuccess">/Login.jsp</result>
+       	<action name="employee_*" class="EmployeeAction"  method="{1}">
+        	<result name="logoutSuccess">/Login.jsp</result> 
         	<result name="resetPage">/employee_customer_resetpassword.jsp</result>
         	<result name="employeeSucessChangePassword">/employee_customer_resetpassword.jsp</result>
         	<result name="employeeFailureLogin">/Login.jsp</result>
@@ -20,15 +20,15 @@
         	<result name="goToFundPage">/employee_fund.jsp</result>
         	<result name="goToTransactionPage">/employee_transaction.jsp</result>
         	<result name="employeeSucessLogin" type="redirectAction">transaction_gotoTrans.action</result>
-        	<result name="changeCustomerPassword">/employee_customer_resetpassword.jsp</result>
+        	<result name="goToRestCustomerPassword">/employee_customer_resetpassword.jsp</result>
         	<result name="viewCustomers">/employee_customer.jsp</result>
         	<result name="homePage">/Home.jsp</result>
         	<result name="addNewCustomerSuccess" type="redirectAction">/employee_viewCustomers.action</result>
         	<result name="goToAddNewCustomerAccount">/employee_customer_New_Account.jsp</result>
         	<result name="goToViewCustomerAccount">/employee_customer_viewChangeProfile.jsp</result>
-        	<result name="viewCustomerSuccess" type="redirectAction">/employee_viewCustomers.action</result>
-		
-
+        	<result name="viewCustomerSuccess" type="redirectAction">/employee_viewCustomerAccount.action</result>
+        	<result name="resetCustomerPasswordSuccess" type="redirectAction">/employee_viewCustomers.action</result>
+						
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">
         	<result name="depositSuccess">/employee_customer_deposit_check.jsp</result>

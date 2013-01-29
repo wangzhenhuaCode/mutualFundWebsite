@@ -23,6 +23,7 @@ public class EmployeeAction extends ActionSupport {
 	private String newPassword;
 	private String confirmPassword;
 	private String newCustomerPassword;
+	private String confirmCustomerPassword;
 	private String errorInfo;
 	private List<Customer> customerList;
 	private List<Transaction> transactionList;
@@ -101,20 +102,18 @@ public class EmployeeAction extends ActionSupport {
 	public String viewCustomerAccount(){
 		errorInfo="";
 		customer = customerDAO.findById(customer.getCustomerId());
-		//customerDAO.save(customer);
+		//customerDAO.update(customer);
 		return "viewCustomerSuccess";
 	}
+	public String goToResetCustomerPassword() {
+		customer = customerDAO.findById(customer.getCustomerId());
+		return "goToRestCustomerPassword";
+	}
 	public String resetCustomerPassword(){
-		errorInfo="";
-		List<Customer> list = customerDAO.find(customer);
-		if(list.size()==0) {
-			errorInfo = "No customer found";
-			return "resetCustomerPasswordFailue";
-		}else {
-			this.customer = list.get(0);
-			customer.setPassword(newCustomerPassword);
-			return "resetCustomerPasswordSuccess";
-		}
+		customer = customerDAO.findById(customer.getCustomerId());
+		customer.setPassword(newCustomerPassword);
+		return "resetCustomerPasswordSuccess";
+		
 	}
 	public String viewTransactionHistory(){
 		errorInfo="";
@@ -153,11 +152,6 @@ public class EmployeeAction extends ActionSupport {
 	public String resetPage(){
 		return "resetPage";
 	}
-	
-	
-	
-	
-	
 	
 	public void setUsername(String username) {
 		this.username = username;
