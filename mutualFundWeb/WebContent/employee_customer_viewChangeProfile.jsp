@@ -65,7 +65,7 @@
 				
 			</table>
             Click field to change the value.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="ButtonInput"><span><input type="submit" value="Update" /></span></span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="ButtonInput"><span><input type="submit" value="Update" /></span></span>&nbsp;&nbsp;&nbsp;
             <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
             </form>
             
