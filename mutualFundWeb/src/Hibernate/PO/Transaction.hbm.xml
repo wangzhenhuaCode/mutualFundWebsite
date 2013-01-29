@@ -16,8 +16,8 @@
         <many-to-one name="customer" class="Hibernate.PO.Customer" fetch="select"  lazy="false">
             <column name="customer_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="position" class="Hibernate.PO.Position" update="false" insert="false" fetch="select" lazy="false" not-null="false" not-found="ignore">
-            <column name="fund_id" />
+        <many-to-one name="position" class="Hibernate.PO.Position" update="false" insert="false" fetch="select" not-null="false" >
+            <column name="fund_id" not-null="false"/>
             <column name="customer_id"/>
         </many-to-one>
         <property name="executeDate" type="java.util.Date">

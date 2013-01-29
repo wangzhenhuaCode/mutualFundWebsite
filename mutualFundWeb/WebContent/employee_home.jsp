@@ -13,7 +13,14 @@
 
 <jsp:include page="employee_template-top2.jsp" />
 
-
+<script type="text/javascript" src="js/jquery.js"></script>
+    <link rel="stylesheet" href="js/ui/css/redmond/jquery-ui-1.9.2.custom.css" />
+    <script src="js/ui/js/jquery-ui-1.9.2.custom.js"></script>
+    <script>
+  $(function() {
+    $( "#datepicker" ).datepicker({dateFormat:"yy-mm-dd"});
+  });
+  </script>
  <h2>Welcome, <s:property value="#session.employee.firstname" /></h2>
             
             <br />
@@ -22,9 +29,8 @@
             <form method="post" action="<%=basePath%>/act/transaction_transact.action">
            <table class="bottomBorder">
 				<col width="150">
-				<col width="150">
 				<col width="100">
-
+				<col width="100">
 
                 <tr>
                     <th>Fund Ticker</th>
@@ -34,7 +40,7 @@
                 <s:iterator value="fundlist" id="fund">
                 <tr>
                     <td><a href="<%=basePath%>act/trade_employeeResearch.action?fund.fundId=<s:property value="#fund.fundId" />"><s:property value="#fund.symbol" /></a></td>
-                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
+                    <td align="right"><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
                     <td><input type="text" style="width: 100px" name="newPrices"/></td>
                 </tr>
                 </s:iterator>
@@ -44,10 +50,12 @@
             <div align = "left">
             <br />
             <h3>New Trading Date:</h3>
-            <input type="text", style="width: 120px" name="datestring"/>
+
+            <input type="text" id="datepicker" style="width: 120px" name="datestring"/>
+
             <br />
             <br />
-                
+                <font color="red"><s:property value="errorInfo" /></font>
                 <span class="ButtonInput"><span align="center"><input type="submit" value="Update Transaction Day & Prices"/></span></span>
                 
 			</div>

@@ -9,6 +9,6 @@ import Hibernate.PO.Transaction;
 
 public interface ITransactionDAO extends IBaseHibernateDAO<Transaction> {
 	public List<Transaction> findPendingTransaction(final Date date,final Integer type);
-	public boolean transactionDay(final List<Transaction> buylist,final  List<Transaction> selllist,final List<Transaction> depositlist,final List<Transaction> withdrawlist,final List<FundPriceHistory> pricelist);
+	public boolean transactionDay(final List<Transaction> buylist,final  List<Transaction> selllist,final List<Transaction> depositlist,final List<Transaction> withdrawlist,final List<FundPriceHistory> pricelist,final Date date);
 
 }

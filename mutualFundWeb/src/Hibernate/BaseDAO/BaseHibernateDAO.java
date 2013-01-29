@@ -36,6 +36,13 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 			throw re;
 		}
 	}
+	public void merge(T object) {
+		try {
+			getHibernateTemplate().merge(object);
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
 
 	public void delete(T object) {
 		try {
@@ -54,6 +61,9 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 	}
 	public T findById(Serializable id){
 		return (T) getHibernateTemplate().get(className, id);  
+	}
+	public T load(Class c, Serializable id){
+		return (T) getHibernateTemplate().load(c, id);  
 	}
 
 	@SuppressWarnings("unchecked")

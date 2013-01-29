@@ -15,7 +15,7 @@
 
             
         <h2>Trade Our Funds</h2>
-            
+            <br />
             
             
             
@@ -31,8 +31,8 @@
                 <tr>
                     <td><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#fund.fundId" />"><s:property value="#fund.symbol" /></a></td>
                     <td><s:property value="#fund.name" /></td>
-                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>-</s:else></td>
-                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>-</s:else></font></td>
+                    <td align="right"><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>-</s:else></td>
+                    <td align="right"><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>-</s:else></font></td>
                   
                 </tr>
               </s:iterator>

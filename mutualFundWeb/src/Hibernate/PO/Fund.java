@@ -114,7 +114,7 @@ public class Fund implements java.io.Serializable {
 					percentage=((double)todayPrice-(double)p)/(double)p*100;
 					return String.format("%1$,.2f", percentage);
 				
-			}else return "N/A";
+			}else return null;
 		}else return String.format("%1$,.2f", percentage);
 	}
 
@@ -127,7 +127,7 @@ public class Fund implements java.io.Serializable {
 				Double coverted=(double)todayPrice/100;
 				return String.format("%1$,.2f", coverted);
 			}else
-				return "N/A";
+				return null;
 		}
 		else{
 			Double coverted=(double)todayPrice/100;

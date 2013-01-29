@@ -100,9 +100,13 @@ public class EmployeeAction extends ActionSupport {
 		return "goToViewCustomerAccount";
 	}
 	public String viewCustomerAccount(){
+		try{
 		errorInfo="";
-		customer = customerDAO.findById(customer.getCustomerId());
-		//customerDAO.update(customer);
+		System.out.println("test");
+		customerDAO.update(customer);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return "viewCustomerSuccess";
 	}
 	public String goToResetCustomerPassword() {

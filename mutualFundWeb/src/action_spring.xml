@@ -39,4 +39,5 @@
 		<property name="fundDAO" ref="FundDAO" />
 		<property name="fundPriceHistoryDAO" ref="FundPriceHistoryDAO" />
 	</bean>
+	<bean id="Authentication" class="Struts.Action.ActionAuthentication"/>
 </beans>

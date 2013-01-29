@@ -12,11 +12,11 @@
     <script src="js/ui/js/jquery-ui-1.9.2.custom.js"></script>
     <script type="text/javascript">
     
-        $(function() {<s:if test="transactionList.get(0).position.shares>0" > 
+        $(function() {<s:if test="position.shares>0" > 
           $( "#sellSlider" ).slider({
                                           range: "max",
                                           min: 0,
-                                          max:  <s:property value="transactionList.get(0).position.currentShares" />,
+                                          max:  <s:property value="position.currentShares" />,
                                           value: 0,
                                           slide: function( event, ui ) {
                                           $( "#sellField" ).val( ui.value );
@@ -76,7 +76,7 @@
 		</script>
 
     <div class="Menu">
-            <ul><li><a href="<%=basePath%>act/customer_login.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/trade_showPosition.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
         </div>
 
 <jsp:include page="template-top2.jsp" />
@@ -124,7 +124,7 @@
                     <td ></td>
                     
                     <td style="padding-top:10px;"><b>Position</b></td>
-                    <td style="padding-top:10px;"><s:property value="transactionList.get(0).position.currentShares" /></td>
+                    <td style="padding-top:10px;"><s:property value="position.currentShares" /></td>
                 	<td></td>
                 	<td></td>
                 </tr>
@@ -138,7 +138,8 @@
             <h2 style="color:red; margin-left:20px;"><img src="images/down.png" height="20"/>&nbsp;-320.00</h2>
             </p>-->
          <p><h2>Transaction</h2>
-         <s:if test="transactionList.get(0).position.shares>0" > 
+         <font color="red"><s:property value="errorInfo" /></font>
+         <s:if test="position.shares>0" > 
          <form method="post" action="<%=basePath%>act/trade_sell.action?fund.fundId=<s:property value="fund.fundId" />">
             <div id="sellDiv">
                 Shares: <input type="textfield" id="sellField" name="shares"/><span class="ButtonInput"><span><input type="submit" value="Sell" /></span></span>

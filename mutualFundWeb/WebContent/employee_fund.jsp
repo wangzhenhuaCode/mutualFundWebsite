@@ -14,6 +14,7 @@
 <jsp:include page="template-top2.jsp" />
 
             <h2>Fund Listed:</h2>
+            <br />
             
             <table class="bottomBorder">
                 
@@ -32,8 +33,8 @@
                 <tr>
                     <td><s:property value="#fund.symbol" /></td>
                     <td><s:property value="#fund.name" /></td>
-                    <td><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
-                    <td><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else></font></td>
+                    <td align="right"><s:if test="#fund.todayPrice!=null"><s:property value="#fund.todayPrice" /></s:if><s:else>N/A</s:else></td>
+                    <td align="right"><font color="red"><s:if test="#fund.percentage!=null"><s:property value="#fund.percentage" />%</s:if><s:else>N/A</s:else></font></td>
                 </tr>
                 </s:iterator>
                
@@ -43,7 +44,7 @@
             
             <br />
             
-            <form method="post" action="<%=basePath%>/act/trade_create.action">
+            <s:form method="post" action="/act/trade_employeeCreate.action" validate="true">
                 
                 <table>
                     <tr>
@@ -64,12 +65,17 @@
                         </td>
                         
                     </tr>
+                    <tr>
+                    <td>
+                    Fund Description
+                    </td>
+                    </tr>
                 </table>
-                Fund Description<br/>
-                <textArea width="500" height="300" name="fund.description"></textArea><br/>
-                <span class="ButtonInput"><span><input type="submit" value="Add New Fund" /></span></span>
                 
-            </form>
+                <textArea width="800" height="400" name="fund.description"></textArea><br/>
+                <span class="ButtonInput"><span><input type="submit" value="Add New Fund" /></span></span>
+                <s:fielderror/>
+            </s:form>
             
 
 <jsp:include page="template-bottom.jsp" />

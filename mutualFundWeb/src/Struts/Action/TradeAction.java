@@ -17,15 +17,13 @@ import Hibernate.PO.Transaction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 
 public class TradeAction extends ActionSupport {
 	private IFundDAO fundDAO;
 	private IPositionDAO positionDAO;
 	private ITransactionDAO transactionDAO;
 	private List<Fund> fundlist;
-	private Integer pageNum;
-	private Integer maxPage;
-	private Integer _PAGE_SIZE=20;
 	private Fund fund=null;
 	private Double amount;
 	private Double shares;
@@ -33,35 +31,54 @@ public class TradeAction extends ActionSupport {
 	private List<Transaction> transactionList;
 	private List<Position> positionList;
 	private ICustomerDAO customerDAO;
+	private Position position;
 	private Customer customer;
+	private String errorInfo;
 	public String buy(){
+		errorInfo="";
 		try{
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		if(amount*100>customer.getCash()) return "buyfailure";
+		if(amount*100>customer.getCash()){
+			errorInfo="Insufficient amount!";
+			return "transactFaluer";
+		}
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
 		transaction.setTransactionType(Transaction.PENDING_BUY);
-		transaction.setAmount((long)(amount*100));
+		transaction.setAmount((long)(amount*(-100)));
 		transaction.setExecuteDate(new Date());
+		
+		PositionId pid=new PositionId(customer,fund);
+		Position p=positionDAO.findById(pid);
+		if(p==null){
+			p=new Position(pid);
+			p.setShares((long)0);
+			positionDAO.save(p);
+		}
+	
+		transaction.setPosition(p);
 		transactionDAO.save(transaction);
 		return "success";
 		}catch(Exception e){
 			e.printStackTrace();
-			 return "failure";
+			errorInfo="Operation failure!";
+			 return "transactFaluer";
 		}
 	}
 
 	public String sell(){
+		errorInfo="";
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
 		PositionId pid=new PositionId(customer,fund);
-		Position p=positionDAO.findById(pid);
+		Position p=positionDAO.load(Position.class,pid);
 		if(p.getShares()<shares){
-			return "failure";
+			errorInfo="Insufficient shares!";
+			return "transactFaluer";
 		}
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
@@ -69,7 +86,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_SELL);
 		transaction.setShares((long)(shares*1000));
 		transaction.setExecuteDate(new Date());
-		transaction.setPosition(null);
+		transaction.setPosition(p);
 		transactionDAO.save(transaction);
 		return "success";
 	}
@@ -79,38 +96,47 @@ public class TradeAction extends ActionSupport {
 		return "";
 	}
 	public String gotoTrade(){
-		fundlist=fundDAO.getListByPage(0, _PAGE_SIZE,null,null);
-		maxPage=fundDAO.count(null,null)/20+1;
+		fundlist=fundDAO.findAll();
+		
 		return "gotoTrade";
 	}
 	public String employeeGotoTrade(){
-		fundlist=fundDAO.getListByPage(0, _PAGE_SIZE,null,null);
-		maxPage=fundDAO.count(null,null)/20+1;
+		fundlist=fundDAO.findAll();
 		return "employeeGotoTrade";
 	}
-	public String changePage(){
-		if(maxPage==null)
-			maxPage=fundDAO.count(null,null)/_PAGE_SIZE+1;
-		if(pageNum<1)
-			pageNum=1;
-		if(pageNum>maxPage)
-			pageNum=maxPage;
-		fundlist=fundDAO.getListByPage((pageNum-1)*_PAGE_SIZE, _PAGE_SIZE,null,null);
-		return "gotoTrade";
-	}
+	
 	public String gotoResearch(){
+		
 		fund=fundDAO.findById(fund.getFundId());
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
 
 		transactionList=transactionDAO.findByTwoProperty("customer", customer, "fund", fund);
+		if(transactionList.size()>0){
+			PositionId pid=new PositionId(customer,fund);
+			
+			position=positionDAO.load(Position.class, pid);
+		}
 		return "gotoResearch";
 	}
-
-	public String create(){
+	@InputConfig(resultName="employeeGotoTrade")
+	public String employeeCreate(){
 		fundDAO.save(fund);
+		
 		return "create";
+	}
+	
+	public void validateEmployeeCreate(){
+		if(fund.getName()==null||fund.getName().equals("")){
+			this.addFieldError("name", "Empty fund name");
+			fundlist=fundDAO.findAll();
+		}
+		if(fund.getSymbol()==null||fund.getSymbol().equals("")){
+			this.addFieldError("symbol", "Empty fund symbol");
+			if(fundlist==null)
+				fundlist=fundDAO.findAll();
+		}
 	}
 	public String showPosition(){
 		ActionContext ctx=ActionContext.getContext();
@@ -153,21 +179,7 @@ public class TradeAction extends ActionSupport {
 		return fundlist;
 	}
 
-	public Integer getPageNum() {
-		return pageNum;
-	}
 
-	public void setPageNum(Integer pageNum) {
-		this.pageNum = pageNum;
-	}
-
-	public Integer getMaxPage() {
-		return maxPage;
-	}
-
-	public void setMaxPage(Integer maxPage) {
-		this.maxPage = maxPage;
-	}
 
 	public Fund getFund() {
 		return fund;
@@ -203,6 +215,18 @@ public class TradeAction extends ActionSupport {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public String getErrorInfo() {
+		return errorInfo;
+	}
+
+	public void setErrorInfo(String errorInfo) {
+		this.errorInfo = errorInfo;
 	}
 
 

@@ -17,17 +17,17 @@
 <jsp:include page="employee_template-top2.jsp" />
 
             <form method="post" action="<%=basePath%>act/employee_viewTransactionHistory.action">
-            <h2><s:property value="customer.firstName"/> <s:property value="customer.lastName"/>'s Transaction History</h2>
+            <h2><s:property value="customer.firstname"/> <s:property value="customer.lastName"/>'s Transaction History</h2>
             
             <p>
             <br />
-             <table class="bottomBorder" cellspacing="15px">
+             <table class="bottomBorder" cellspacing="15px" align="left">
   				<tbody align="center" ><tr>
     				<th width="120">Transaction Date</th>
-    				<th width="100">Operation</th>
-                    <th width="80">Fund Name</th>
+    				<th width="90">Operation</th>
+				<th width="80">Fund Name</th>
     				<th width="60">Shares</th>
-                    <th width="80">Share Price</th>
+				<th width="80">Share Price</th>
     				<th width="60">Amount</th>
   				</tr>
                <s:iterator value="transactionList" id="transaction">
@@ -44,9 +44,9 @@
                     <s:if test="#transaction.transactionType==8">Pending Withdraw</s:if>
                     </td>
                     <td><s:if test="#transaction.fund!=null"><a href="<%=basePath%>act/trade_employeeResearch.action?fund.fundId=<s:property value="#transaction.fund.fundId" />"><s:property value="#transaction.fund.symbol" /></a></s:if><s:else>-</s:else></td>
-                    <td><s:property value="#transaction.currentShares" /></td>
-                    <td><s:if test="#transaction.fund!=null"><s:property value="#transaction.boughtPrice" /></s:if></td>
-                    <td><s:property value="#transaction.currentAmount" /></td>
+                    <td align="right"><s:property value="#transaction.currentShares" /></td>
+                    <td align="right"><s:if test="#transaction.fund!=null"><s:property value="#transaction.boughtPrice" /></s:if></td>
+                    <td align="right"><s:property value="#transaction.currentAmount" /></td>
                    
                 </tr>
               </s:iterator>

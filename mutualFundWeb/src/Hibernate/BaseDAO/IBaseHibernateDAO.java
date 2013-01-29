@@ -9,8 +9,12 @@ public interface IBaseHibernateDAO<T> {
 	public Serializable save(T object);
 
 	public void update(T object);
+	
+	public void merge(T object);
 
 	public void delete(T object);
+	
+	public T load(Class c, Serializable id);
 	
 	public Integer count(String property, String value);
 	
