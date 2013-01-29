@@ -14,6 +14,7 @@
 <jsp:include page="template-top2.jsp" />
 
             <h2>Fund Listed:</h2>
+            <br />
             
             <table class="bottomBorder">
                 
