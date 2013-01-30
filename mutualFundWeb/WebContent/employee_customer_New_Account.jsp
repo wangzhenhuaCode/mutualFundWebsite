@@ -14,6 +14,7 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
+
 		<s:form method="post" action="act/employee_createCustomerAccount.action" validate="true" id="form">
 			<h2>Create a New Account</h2>
 		
