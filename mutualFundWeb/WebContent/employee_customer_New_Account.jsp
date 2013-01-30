@@ -123,13 +123,11 @@
 				</td>
 				<td><input type="text" size="5" name="customer.zip"></td>
 				</tr>
-				<tr>
-				<td>Account Type</td>
-				</tr>
-				<tr>
-				<td><input type="radio" name="accountType" value="customer" checked>Customer <input type="radio" name="accountType" value="employee">Employee</td>
-				</tr>
+				
+				
 			</table> 
+			<br />
+			<br />
 			<span class="ButtonInput"><span align="center"><input type="submit" value="Create" style="width:100px"></span></span>&nbsp;&nbsp;&nbsp;
 			<a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
 			<s:fielderror/>
