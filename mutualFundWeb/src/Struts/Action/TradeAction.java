@@ -43,11 +43,12 @@ public class TradeAction extends ActionSupport {
 
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
-		transaction.setFund(fund);
+		
 		transaction.setTransactionType(Transaction.PENDING_BUY);
 		transaction.setAmount((long)(amount*(-100)));
+		transaction.setShares((long)0);
 		transaction.setExecuteDate(new Date());
-		
+		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.findById(pid);
 		if(p==null){
@@ -55,7 +56,7 @@ public class TradeAction extends ActionSupport {
 			p.setShares((long)0);
 			positionDAO.save(p);
 		}
-		
+		transaction.setFund(fund);
 		transaction.setPosition(p);
 		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		long pending=customer.getPendingCash();
@@ -95,6 +96,7 @@ public class TradeAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
+		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
 		long pending=p.getPendingShare();
@@ -106,6 +108,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setFund(fund);
 		transaction.setTransactionType(Transaction.PENDING_SELL);
 		transaction.setShares((long)(shares*1000));
+		transaction.setAmount((long)0);
 		transaction.setExecuteDate(new Date());
 		transaction.setPosition(p);
 		if(!transactionDAO.operateTransaction(transaction, p)){
@@ -124,8 +127,10 @@ public class TradeAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
+		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
+		long shares=p.getShares();
 		if((p.getShares()-p.getPendingShare())<shares){
 			this.addFieldError("shares", "Insufficient shares");
 			research();

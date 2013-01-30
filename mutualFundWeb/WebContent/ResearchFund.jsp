@@ -139,8 +139,8 @@
             </p>-->
          <p><h2>Transaction</h2>
          <font color="red"><s:property value="errorInfo" /></font>
-         <s:if test="position.shares>0" > 
-         <s:form method="post" action="act/trade_sell.action" validate="true">
+         <s:if test="position.available>0" > 
+         <form method="post" action="act/trade_sell.action" >
           <s:hidden name="fund.fundId" value="%{fund.fundId}"></s:hidden>
             <div id="sellDiv">
                 Shares: <input type="textfield" id="sellField" name="shares"/><span class="ButtonInput"><span><input type="submit" value="Sell" /></span></span>
@@ -153,10 +153,10 @@
                 
                 
             </div>
-           </s:form>
+           </form>
            </s:if>
-            <s:if test="#session.customer.cash>0" > 
-           <s:form method="post" action="act/trade_buy.action" validate="true">
+            <s:if test="#session.customer.available>0" > 
+           <form method="post" action="act/trade_buy.action">
            <s:hidden name="fund.fundId" value="%{fund.fundId}"></s:hidden>
             <div id="buyDiv" style="margin-top:20px;">
                 Spend: <input type="textfield" id="buyField" name="amount"/> <span class="ButtonInput"><span><input type="submit" value="Buy" /></span></span>
@@ -164,7 +164,7 @@
                     <div id="buySlider"></div>
                 
             </div>
-            </s:form>
+            </form>
             </s:if>
             <s:fielderror/>
             </p>

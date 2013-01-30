@@ -165,6 +165,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					
 				}catch(Exception e){
 					tx.rollback();
+					e.printStackTrace();
 					return false;
 				}
 				tx.commit();

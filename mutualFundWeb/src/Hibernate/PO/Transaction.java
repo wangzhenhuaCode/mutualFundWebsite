@@ -120,13 +120,20 @@ public class Transaction implements java.io.Serializable {
 		this.amount = amount;
 	}
 	public String getBoughtPrice(){
+		
+		if(transactionType%2==0 )return "-";
+		if(transactionType>4)return "-";
 		Double p=Math.abs(((double)amount/100)/((double)shares/1000));
 		return String.format("%1$,.2f", p);
 	}
 	public String getCurrentShares(){
+		if(transactionType%2==0 &&transactionType!=2)return "-";
+		if(transactionType>4)return "-";
 		return String.format("%1$,.3f", (double)shares/1000);
 	}
 	public String getCurrentAmount(){
+		if(transactionType==2)return "-";
+		
 		return String.format("%1$,.2f", (double)amount/100);
 	}
 	public String getCurrentDate(){

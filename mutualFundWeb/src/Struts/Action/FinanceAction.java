@@ -60,7 +60,7 @@ public class FinanceAction extends ActionSupport {
 			transactionList=transactionDAO.findByProperty("customer", customer);
 			
 		}
-		if(amount>customer.getCash()+customer.getPendingCash()){
+		if(amount*100>customer.getCash()+customer.getPendingCash()){
 			this.addFieldError("amount", "Amount exceeds current balance");
 			if(transactionList==null)
 				transactionList=transactionDAO.findByProperty("customer", customer);
@@ -80,12 +80,8 @@ public class FinanceAction extends ActionSupport {
 	}
 	@InputConfig(resultName="gotoDeposit")
 	public String deposit(){
-		ActionContext ctx=ActionContext.getContext();
-		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
-		
 		Transaction transaction=new Transaction();
-		transaction.setCustomer(customer);
+		
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
 		transaction.setAmount((long)(amount*100));
 		transaction.setExecuteDate(new Date());
@@ -93,12 +89,13 @@ public class FinanceAction extends ActionSupport {
 		long pending=customer.getPendingCash();
 		pending+=(long)(amount*(100));
 		customer.setPendingCash(pending);
+		transaction.setCustomer(customer);
 		if(!transactionDAO.operateTransaction(transaction, customer)){
 			this.addFieldError("operation", "System busy, please try again");
 			customer=customerDAO.findById(customer.getCustomerId());
 			return "gotoDeposit";
 		}
-		session.put("customer", customer);
+		
 		return "depositSuccess";
 	}
 	public void validateDeposit(){
