@@ -2,7 +2,7 @@
         </div></div></div></div>
             
         <div class="Footer">
-           Technical Support - <a href="#">Contact Us</a>
+           Technical Support - <a href="http://www.ebusiness.cs.cmu.edu/">Contact Us</a>
         </div>                
 
     </div>

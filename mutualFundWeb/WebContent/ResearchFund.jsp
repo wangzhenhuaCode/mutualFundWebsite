@@ -76,7 +76,7 @@
 		</script>
 
     <div class="Menu">
-            <ul><li><a href="<%=basePath%>act/trade_showPosition.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="History.html" class="MenuButton"><span>History</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/trade_showPosition.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/trade_gotoTrade.action" class="ActiveMenuButton"><span>Trade</span></a></li> <li><a href='<%=basePath%>act/finance_financePage.action' class="MenuButton"><span>Finance</span></a></li> <li><a href="<%=basePath%>act/trade_viewHistory.action" class="MenuButton"><span>History</span></a></li></ul>
         </div>
 
 <jsp:include page="template-top2.jsp" />
@@ -99,7 +99,7 @@
             <center>
             <table style="text-align:center;">
                 <tr>
-                    <td ><b>Trasaction Time</b></td>
+                    <td ><b>Transaction Time</b></td>
                     <td ><b>Purchase Price</b></td>
                     <td ><b>Shares</b></td>
                     <td ><b>Amount</b></td>

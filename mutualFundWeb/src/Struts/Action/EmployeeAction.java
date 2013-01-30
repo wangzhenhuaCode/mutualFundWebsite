@@ -25,6 +25,7 @@ public class EmployeeAction extends ActionSupport {
 	private String confirmPassword;
 	private String newCustomerPassword;
 	private String confirmCustomerPassword;
+	
 	private String errorInfo;
 	private List<Customer> customerList;
 	private List<Transaction> transactionList;
@@ -56,12 +57,39 @@ public class EmployeeAction extends ActionSupport {
 			return "employeeFailureLogin";
 		}
 	}
+	@InputConfig(resultName="goToAddNewCustomerAccount")
 	public String createCustomerAccount(){
 		errorInfo="";
 		customer.setCash((long)0);
 		customerDAO.save(customer);
 		return "addNewCustomerSuccess";
 		
+	}
+	public void validateCreateCustomerAccount(){
+		if(customer.getUsername()==null || customer.getUsername().trim()==""){
+			this.addFieldError("changePassword", "User Name cannot be empty");
+		}
+		if(customer.getFirstname()==null || customer.getFirstname().trim()==""){
+			this.addFieldError("changePassword", "First Name cannot be empty");
+		}
+		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim()==""){
+			this.addFieldError("changePassword", "Address Line1 cannot be empty");
+		}
+		if(customer.getCity()==null || customer.getCity().trim()==""){
+			this.addFieldError("changePassword", "City cannot be empty");
+		}
+		if(customer.getState()==null){
+			this.addFieldError("changePassword", "State cannot be empty");
+		}
+		if(customer.getLastname()==null || customer.getLastname().trim()==""){
+			this.addFieldError("changePassword", "Last Name cannot be empty");
+		}
+		if(customer.getZip()==null || customer.getZip()==""){
+			this.addFieldError("changePassword", "Zip Code cannot be empty");
+		}
+		if(customer.getPassword()==null || customer.getPassword().trim()==""){
+			this.addFieldError("changePassword", "Password cannot be empty");
+		}
 	}
 	public String logout(){
 		errorInfo="";
@@ -135,7 +163,7 @@ public class EmployeeAction extends ActionSupport {
 		return "resetCustomerPasswordSuccess";
 	}
 	public void validateResetCustomerPassword() {
-		
+		customer = customerDAO.findById(customer.getCustomerId());
 		if(newCustomerPassword==null ||confirmCustomerPassword==null){
 			this.addFieldError("changePassword", "Password Can Not Be Empty");
 			customer = customerDAO.findById(customer.getCustomerId());
@@ -245,5 +273,8 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+	public void setConfirmCustomerPassword(String confirmCustomerPassword) {
+		this.confirmCustomerPassword = confirmCustomerPassword;
 	}
 }

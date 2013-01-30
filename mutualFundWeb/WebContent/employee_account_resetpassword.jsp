@@ -9,16 +9,15 @@
 
 <div class="Menu">
 
-            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="MenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
 
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
 
 		<s:form method="post" action="act/employee_resetCustomerPassword.action" validate = "true" id="form">
+        <h2 >Reset Your Password</h2>
 		<s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
-        <h2 >Reset Password for <s:property value="customer.firstname" />&nbsp;<s:property value="customer.lastname" /> </h2>
-		
             <br />
 		<table >
 			<col width="150">
@@ -33,7 +32,7 @@
 			<div class="inputName">
 				<tr>
 				<td><strong>Confirm Password:</strong></td>
-				<td><input type="text" name="confirmCustomerPassword" style="width: 200px" />
+				<td><input type="text" name="newCustomerPassword" style="width: 200px" />
 					</td>
 				</tr>
 			</div>
