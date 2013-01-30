@@ -20,12 +20,12 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
-         <form method="post" action="<%=basePath%>act/employee_viewCustomerAccount.action" id="form">
-            <input type="hidden" name="customer.customerId"  value="<s:property value="customer.customerId"/>" />
-             <input type="hidden" name="customer.username"  value="<s:property value="customer.username"/>" />
-              <input type="hidden" name="customer.password"  value="<s:property value="customer.password"/>" />
-              <input type="hidden" name="customer.cash"  value="<s:property value="customer.cash"/>" />
-
+         <s:form method="post" action="act/employee_viewCustomerAccount.action" validate= "true" id="form">
+            <s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
+       		<s:hidden name="customer.username" value="%{customer.username}"></s:hidden>
+       		<s:hidden name="customer.password" value="%{customer.password}"></s:hidden>
+       		<s:hidden name="customer.cash" value="%{customer.cash}"></s:hidden>
+       		
             <h2>View / Edit Profile</h2>
             <br />
 			<table>
@@ -67,6 +67,7 @@
             Click field to change the value.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span class="ButtonInput"><span><input type="submit" value="Update" /></span></span>&nbsp;&nbsp;&nbsp;
             <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
-            </form>
+           	<s:fielderror/>
+           </s:form>
             
 <jsp:include page="template-bottom.jsp" />

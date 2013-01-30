@@ -14,7 +14,7 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
-		<form method="post" action="<%=basePath%>act/employee_createCustomerAccount.action" id="form">
+		<s:form method="post" action="act/employee_createCustomerAccount.action" validate="true" id="form">
 			<h2>Create a New Account</h2>
 		
 			<table>
@@ -75,5 +75,5 @@
 			</table> 
 			<span class="ButtonInput"><span align="center"><input type="submit" value="Create" style="width:100px"></span></span>&nbsp;&nbsp;&nbsp;
 			<a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
-		</form>
+		</s:form>
 <jsp:include page="template-bottom.jsp" />

@@ -33,7 +33,7 @@
         	<result name="goToFundPage">/employee_fund.jsp</result>
         	<result name="goToTransactionPage">/employee_transaction.jsp</result>
         	<result name="employeeSucessLogin" type="redirectAction">transaction_gotoTrans.action</result>
-        	<result name="goToRestCustomerPassword">/employee_customer_resetpassword.jsp</result>
+        	<result name="goToResetCustomerPassword">/employee_customer_resetpassword.jsp</result>
         	<result name="viewCustomers">/employee_customer.jsp</result>
         	<result name="homePage">/Home.jsp</result>
         	<result name="addNewCustomerSuccess" type="redirectAction">/employee_viewCustomers.action</result>
@@ -41,7 +41,7 @@
         	<result name="goToViewCustomerAccount">/employee_customer_viewChangeProfile.jsp</result>
 
         	<result name="resetCustomerPasswordSuccess" type="redirectAction">/employee_viewCustomers.action</result>
-        	<result name="viewCustomerSuccess" type="redirectAction">employee_viewCustomers.action</result>
+        	<result name="viewCustomerSuccess">employee_customer_viewChangeProfile.jsp</result>
 
         </action>
         <action name="finance_*" class="FinanceAction"  method="{1}">

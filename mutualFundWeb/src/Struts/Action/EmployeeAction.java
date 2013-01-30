@@ -14,6 +14,7 @@ import Hibernate.PO.Transaction;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 
 public class EmployeeAction extends ActionSupport {
 	private IEmployeeDAO employeeDAO;
@@ -37,7 +38,6 @@ public class EmployeeAction extends ActionSupport {
 	private String username;
 	private String password;
 	
-
 	public String login(){
 		errorInfo="";
 		List<Employee> list=employeeDAO.findByProperty("username", username);
@@ -99,26 +99,58 @@ public class EmployeeAction extends ActionSupport {
 		customer = customerDAO.findById(customer.getCustomerId());
 		return "goToViewCustomerAccount";
 	}
+	
+	@InputConfig(resultName="goToViewCustomerAccount")
 	public String viewCustomerAccount(){
-		try{
-		errorInfo="";
-		System.out.println("test");
 		customerDAO.update(customer);
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 		return "viewCustomerSuccess";
 	}
+	
+	public void validateViewCustomerAccount() {
+		if(customer.getUsername().trim().length()==0)
+			this.addFieldError("viewCustomerAccount", "User Name Cannot Be Empty");
+		if(customer.getFirstname().trim().length()==0)
+			this.addFieldError("viewCustomerAccount", "First Name Cannot Be Empty");
+		if(customer.getLastname().trim().length()==0)
+			this.addFieldError("viewCustomerAccount", "Last Name Cannot Be Empty");
+		if(customer.getAddrLine1().trim().length()==0)
+			this.addFieldError("viewCustomerAccount", "Address Line1 Cannot Be Empty");
+		/*
+		if(customer.getCity().trim().length()==0)
+			this.addFieldError("viewCustomerAccount", "City Cannot Be Empty");
+		*/
+		customer = customerDAO.findById(customer.getCustomerId());
+		return;
+	}
+	
 	public String goToResetCustomerPassword() {
 		customer = customerDAO.findById(customer.getCustomerId());
-		return "goToRestCustomerPassword";
+		return "goToResetCustomerPassword";
 	}
+	
+	@InputConfig(resultName="goToResetCustomerPassword")
 	public String resetCustomerPassword(){
 		customer = customerDAO.findById(customer.getCustomerId());
 		customer.setPassword(newCustomerPassword);
 		return "resetCustomerPasswordSuccess";
+	}
+	public void validateResetCustomerPassword() {
+		
+		if(newCustomerPassword==null ||confirmCustomerPassword==null){
+			this.addFieldError("changePassword", "Password Can Not Be Empty");
+			customer = customerDAO.findById(customer.getCustomerId());
+			return;
+		}
+		
+		if(!newCustomerPassword.equals(this.confirmCustomerPassword)) {
+			this.addFieldError("changePassword", "Password Not The Same");
+			customer = customerDAO.findById(customer.getCustomerId());
+			return; 
+		}
 		
 	}
+	
+	
 	public String viewTransactionHistory(){
 		errorInfo="";
 		List<Customer> list = customerDAO.find(customer);
@@ -136,6 +168,7 @@ public class EmployeeAction extends ActionSupport {
 			return "viewTransactionHistorySuccess";
 		}
 	}
+	
 	
 	public String checkCustomerDeposit(){
 		errorInfo="";
