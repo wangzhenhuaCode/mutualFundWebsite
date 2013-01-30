@@ -16,9 +16,9 @@
 
 
 <jsp:include page="template-top2.jsp" />
-		<form method="post" action="<%=basePath%>act/employee_resetCustomerPassword.action?customer.customerId=<s:property value="customer.customerId"/>" id="form">
+		<s:form method="post" action="act/employee_resetCustomerPassword.action" validate = "true" id="form">
         <h2 >Reset Password for <s:property value="customer.firstname" /><s:property value="customer.lastname" /> </h2>
-
+		<s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
             <br />
 		<table >
 			<col width="150">
@@ -42,6 +42,7 @@
             <span class="ButtonInput"><span align="center"><input type="submit" value="Reset"/></span></span>
            <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
 		</div>
-		</form>
+		<s:fielderror/>
+		</s:form>
        
 <jsp:include page="template-bottom.jsp" />
