@@ -13,9 +13,8 @@
 
         </div>
 
+<jsp:include page="employee_template-top2.jsp" />
 
-
-<jsp:include page="template-top2.jsp" />
 		<s:form method="post" action="act/employee_resetCustomerPassword.action" validate = "true" id="form">
         <h2 >Reset Password for <s:property value="customer.firstname" /><s:property value="customer.lastname" /> </h2>
 		<s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
