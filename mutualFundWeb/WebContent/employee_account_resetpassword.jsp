@@ -5,7 +5,7 @@
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
     %>
      <base href="<%=basePath%>">
-<jsp:include page="template-top.jsp" />
+<jsp:include page="employee_template-top.jsp" />
 
 <div class="Menu">
 
@@ -13,10 +13,10 @@
 
         </div>
 
-<jsp:include page="template-top2.jsp" />
+<jsp:include page="employee_template-top2.jsp" />
 
 		<s:form method="post" action="act/employee_resetCustomerPassword.action" validate = "true" id="form">
-        <h2 >Reset Your Password </h2>
+        <h2 >Reset Your Password</h2>
 		<s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
             <br />
 		<table >
