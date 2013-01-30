@@ -146,7 +146,7 @@ blockquote a:hover{color:#000!important;text-decoration:none;}
 
 
 table.bottomBorder { border-collapse:collapse; table-layout:fixed;}
-table.bottomBorder tr { height:1em;  }
-table.bottomBorder td { max-width:150px; overflow:hidden; display:block;}
-table.bottomBorder th { overflow:hidden; word-wrap:break-word; border-bottom:1px dotted black;padding:5px; }
+table.bottomBorder tr { height:1em; }
+table.bottomBorder td { max-width:150px; overflow:hidden;}
+table.bottomBorder th { overflow:hidden; word-wrap:break-word; border-bottom:1px dotted black; padding:5px; }
                 
