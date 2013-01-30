@@ -26,21 +26,21 @@
 			<div class="name">
 				<tr>
 					<td><strong>New Password:</strong></td>
-					<td><input type="text" , name="newCustomerPassword"
+					<td><input type="text" name="newCustomerPassword"
 						style="width: 200px" /></td>
 				</tr>
 			</div>
 			<div class="inputName">
 				<tr>
 				<td><strong>Confirm Password:</strong></td>
-				<td><input type="text" , name="newCustomerPassword" style="width: 200px" />
+				<td><input type="text" name="newCustomerPassword" style="width: 200px" />
 					</td>
-				<tr>
+				</tr>
 			</div>
 		</table>
        <div align = "right" style="margin-right:280px;">
             <span class="ButtonInput"><span align="center"><input type="submit" value="Reset"/></span></span>
-           <span class="ButtonInput"><span align="center"><input type="button" value="Cancel"/></span></span>
+           <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
 		</div>
 		</form>
        

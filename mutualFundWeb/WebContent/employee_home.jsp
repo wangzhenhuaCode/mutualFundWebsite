@@ -23,20 +23,15 @@
   </script>
  <h2>Welcome, <s:property value="#session.employee.firstname" /></h2>
             
-            <div align = "left">
             <br />
+			
+			<form method="post" action="<%=basePath%>/act/transaction_transact.action">
+            
             <h3>New Transaction Day:</h3>
-
             <input type="text" id="datepicker" style="width: 120px" name="datestring"/>
-
             <br />
-            
-			</div>
-            
-            <br />
+               
             <h3>Fund Prices:</h3>
-            
-            <form method="post" action="<%=basePath%>/act/transaction_transact.action">
            <table class="bottomBorder">
 				<col width="150">
 				<col width="100">

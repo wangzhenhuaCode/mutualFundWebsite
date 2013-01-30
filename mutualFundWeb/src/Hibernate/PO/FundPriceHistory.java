@@ -10,7 +10,7 @@ public class FundPriceHistory implements java.io.Serializable {
 
 	private FundPriceHistoryId id;
 	private Long price;
-
+	private Integer version;
 	// Constructors
 
 	/** default constructor */
@@ -39,6 +39,14 @@ public class FundPriceHistory implements java.io.Serializable {
 
 	public void setPrice(Long price) {
 		this.price = price;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 }

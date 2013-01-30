@@ -15,18 +15,15 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
+
 		<form method="post" action="<%=basePath%>act/customer_viewCustomers.action" id="form">
             <h2>Account Management</h2>
-            
+            <br />
             <a href="<%=basePath%>act/employee_goToAddNewCustomerAccount.action" class="Button"><span> Create New Account</span></a>
-            
-            <p></p>
-            <p></p>
-            
+
             <h4>Customer List:</h4>
             
-            <p></p>
-            <p></p>
+            
             <table class="bottomBorder" cellspacing="20px">
            
                 <tbody align="left">

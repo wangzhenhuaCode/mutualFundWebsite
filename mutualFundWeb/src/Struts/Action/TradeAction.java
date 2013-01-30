@@ -55,7 +55,11 @@ public class TradeAction extends ActionSupport {
 			p.setShares((long)0);
 			positionDAO.save(p);
 		}
-	
+		long pending=customer.getPendingCash();
+		pending+=(long)(amount*(-100));
+		customer.setPendingCash(pending);
+		customerDAO.merge(customer);
+		session.put("customer", customer);
 		transaction.setPosition(p);
 		transactionDAO.save(transaction);
 		return "success";
@@ -75,7 +79,7 @@ public class TradeAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		if(amount*100>customer.getCash()){
+		if(amount*100>(customer.getCash()+customer.getPendingCash())){
 			research();
 			this.addFieldError("buy", "Insufficient amount");
 		}
@@ -88,7 +92,10 @@ public class TradeAction extends ActionSupport {
 		Customer customer=(Customer)session.get("customer");
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
-
+		long pending=p.getPendingShare();
+		pending+=(long)(shares*1000);
+		positionDAO.merge(p);
+		p.setPendingShare(pending);
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
 		transaction.setFund(fund);
@@ -110,7 +117,7 @@ public class TradeAction extends ActionSupport {
 		Customer customer=(Customer)session.get("customer");
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
-		if(p.getShares()<shares){
+		if((p.getShares()-p.getPendingShare())<shares){
 			this.addFieldError("shares", "Insufficient shares");
 			research();
 		}

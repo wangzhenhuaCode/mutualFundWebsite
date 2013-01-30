@@ -15,43 +15,45 @@ public class CustomerAction extends ActionSupport {
 	private String errorInfo;
 	private String username;
 	private String password;
-	public String login(){
-		
-		errorInfo=""; 
-		List<Customer> list=customerDAO.findByProperty("username", username);
-		if(list.size()==0){
-			errorInfo="Username error!";
+
+	public String login() {
+
+		errorInfo = "";
+		List<Customer> list = customerDAO.findByProperty("username", username);
+		if (list.size() == 0) {
+			errorInfo = "Username error!";
 			return "customerFailureLogin";
 		}
-		if(list.get(0).getPassword().equals(password)){
-			ActionContext ctx=ActionContext.getContext();
-			Map<String,Object> session=ctx.getSession();
+		if (list.get(0).getPassword().equals(password)) {
+			ActionContext ctx = ActionContext.getContext();
+			Map<String, Object> session = ctx.getSession();
 			session.put("customer", list.get(0));
 			return "customerSucessLogin";
-		}
-		else{
-			errorInfo="Password error!";
+		} else {
+			errorInfo = "Password error!";
 			return "customerFailureLogin";
 		}
 	}
-	public String changePassword(){
-		errorInfo="";
-		ActionContext ctx=ActionContext.getContext();
-		Map<String,Object> session=ctx.getSession();
-		Customer c=(Customer)session.get("customer");
-		if(c.getPassword().equals(customer.getPassword())){
+
+	public String changePassword() {
+		errorInfo = "";
+		ActionContext ctx = ActionContext.getContext();
+		Map<String, Object> session = ctx.getSession();
+		Customer c = (Customer) session.get("customer");
+		if (c.getPassword().equals(customer.getPassword())) {
 			c.setPassword(newPassword);
 			customerDAO.update(c);
 			return "customerSucessChangePassword";
-		}else{
-			errorInfo="Password Error";
+		} else {
+			errorInfo = "Password Error";
 			return "customerFailureChangePassword";
 		}
-		
+
 	}
-	public String logout(){
-		ActionContext ctx=ActionContext.getContext();
-		Map<String,Object> session=ctx.getSession();
+
+	public String logout() {
+		ActionContext ctx = ActionContext.getContext();
+		Map<String, Object> session = ctx.getSession();
 		session.remove("customer");
 		return "logout";
 	}
@@ -59,20 +61,25 @@ public class CustomerAction extends ActionSupport {
 	public Customer getCustomer() {
 		return customer;
 	}
+
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
+
 	public void setCustomerDAO(ICustomerDAO customerDAO) {
 		this.customerDAO = customerDAO;
 	}
+
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }

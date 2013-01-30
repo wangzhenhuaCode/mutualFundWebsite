@@ -19,7 +19,7 @@ public class Fund implements java.io.Serializable {
 	private Set positions = new HashSet(0);
 	private Set fundPriceHistories = new HashSet(0);
 	private Set transactions = new HashSet(0);
-
+	private Integer version;
 	
 	private Long todayPrice;
 	private Double percentage;
@@ -133,6 +133,14 @@ public class Fund implements java.io.Serializable {
 			Double coverted=(double)todayPrice/100;
 			return String.format("%1$,.2f", coverted);
 		}
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 }

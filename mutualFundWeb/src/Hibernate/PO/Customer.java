@@ -22,6 +22,8 @@ public class Customer implements java.io.Serializable {
 	private Integer state;
 	private String zip;
 	private Long cash;
+	private Long pendingCash;
+	private Integer version;
 	private Set transactions = new HashSet(0);
 	private Set positions = new HashSet(0);
 
@@ -172,6 +174,25 @@ public class Customer implements java.io.Serializable {
 	}
 	public String getCurrentCash(){
 		return String.format("%1$,.2f", (double)cash/100);
+	}
+
+	public Long getPendingCash() {
+		return pendingCash;
+	}
+
+	public void setPendingCash(Long pendingCash) {
+		this.pendingCash = pendingCash;
+	}
+	public String getAvailable(){
+		return String.format("%1$,.2f", (double)(cash+pendingCash)/100);
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 }

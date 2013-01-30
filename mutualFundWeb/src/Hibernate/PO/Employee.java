@@ -13,7 +13,7 @@ public class Employee implements java.io.Serializable {
 	private String password;
 	private String firstname;
 	private String lastname;
-
+	private Integer version;
 	// Constructors
 
 	/** default constructor */
@@ -69,6 +69,14 @@ public class Employee implements java.io.Serializable {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 
 }

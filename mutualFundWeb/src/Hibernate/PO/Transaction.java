@@ -26,7 +26,7 @@ public class Transaction implements java.io.Serializable {
 	private Long shares;
 	private Integer transactionType;
 	private Long amount;
-
+	private Integer version;
 	// Constructors
 
 	/** default constructor */
@@ -132,5 +132,13 @@ public class Transaction implements java.io.Serializable {
 	public String getCurrentDate(){
 		SimpleDateFormat sdf=new SimpleDateFormat("MMM dd, yyyy");
 		return sdf.format(executeDate);
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 }

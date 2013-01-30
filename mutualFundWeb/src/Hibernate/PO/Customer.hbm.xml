@@ -7,11 +7,12 @@
  
 -->
 <hibernate-mapping>
-    <class name="Hibernate.PO.Customer" table="customer" catalog="mutualfund">
+    <class name="Hibernate.PO.Customer" table="customer" catalog="mutualfund" dynamic-update="true" dynamic-insert="true" optimistic-lock="version">
         <id name="customerId" type="java.lang.Integer">
             <column name="customer_id" />
             <generator class="identity" />
         </id>
+        <version column="version" name="version" type="java.lang.Integer" />
         <property name="username"  type="java.lang.String">
             <column name="username" length="50" not-null="true" unique="true" />
         </property>
@@ -42,6 +43,9 @@
         <property name="cash" type="java.lang.Long">
             <column name="cash"  not-null="true" />
         </property>
+         <property name="pendingCash" type="java.lang.Long">
+            <column name="pending_cash"  not-null="false" />
+        </property>
         <set name="transactions" inverse="true">
             <key>
                 <column name="customer_id" not-null="true" />
@@ -54,5 +58,6 @@
             </key>
             <one-to-many class="Hibernate.PO.Position" />
         </set>
+        
     </class>
 </hibernate-mapping>

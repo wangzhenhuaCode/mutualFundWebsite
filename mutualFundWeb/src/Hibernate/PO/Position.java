@@ -14,7 +14,8 @@ public class Position implements java.io.Serializable {
 	private PositionId id;
 	private Long shares;
 	private Set transactions = new HashSet(0);
-
+	private Long pendingShare;
+	private Integer version;
 	// Constructors
 
 	/** default constructor */
@@ -62,4 +63,27 @@ public class Position implements java.io.Serializable {
 		return String.format("%1$,.3f", (double)shares/1000);
 	}
 
+
+	public Long getPendingShare() {
+		return pendingShare;
+	}
+
+	public void setPendingShare(Long pendingShare) {
+		this.pendingShare = pendingShare;
+	}
+
+	public String getAvailable(){
+		
+		return String.format("%1$,.3f", (double)(shares-pendingShare)/1000);
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
+
+	
 }
