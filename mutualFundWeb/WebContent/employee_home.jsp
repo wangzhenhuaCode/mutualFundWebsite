@@ -30,10 +30,7 @@
             <input type="text" id="datepicker" style="width: 120px" name="datestring"/>
 
             <br />
-            <br />
-                <font color="red"><s:property value="errorInfo" /></font>
-                <span class="ButtonInput"><span align="center"><input type="submit" value="Update Transaction Day & Prices"/></span></span>
-                
+            
 			</div>
             
             <br />
@@ -59,7 +56,10 @@
                 </s:iterator>
                 
             </table>
-			
+			<br />
+                <font color="red"><s:property value="errorInfo" /></font>
+                <span class="ButtonInput"><span align="center"><input type="submit" value="Update Transaction Day & Prices"/></span></span>
+                
                        
            <br />
 </form>
