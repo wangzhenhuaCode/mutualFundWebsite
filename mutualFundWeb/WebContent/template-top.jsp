@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    %>
+     <base href="<%=basePath%>">
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +23,7 @@
 
         <div class="Header">
           <div class="HeaderTitle">
-            <h1><a href="#">&nbsp;&nbsp;Mutual Fund Trade</a></h1>
+            <h1><a href="<%=basePath%>act/trade_showPosition.action">&nbsp;&nbsp;Mutual Fund Trade</a></h1>
             <h2>&nbsp;&nbsp;&nbsp;Team 6</h2>
           </div>
           </div>

@@ -24,7 +24,7 @@
 
         <div class="Header">
           <div class="HeaderTitle">
-            <h1><a href="#">&nbsp;&nbsp;Mutual Fund Trade</a></h1>
+            <h1><a href="<%=basePath%>act/transaction_gotoTrans.action">&nbsp;&nbsp;Mutual Fund Trade</a></h1>
             <h2>&nbsp;&nbsp;&nbsp;Administrator</h2>
           </div>
         </div>

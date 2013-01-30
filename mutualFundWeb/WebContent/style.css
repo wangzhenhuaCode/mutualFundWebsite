@@ -145,8 +145,8 @@ blockquote a:hover{color:#000!important;text-decoration:none;}
 .BackLink a{color:#000;}
 
 
-table.bottomBorder { border-collapse:collapse; table-layout:fixed;}
+table.bottomBorder { border-collapse:collapse; table-layout:fixed; }
 table.bottomBorder tr { height:1em; }
-table.bottomBorder td { max-width:150px; overflow:hidden;}
+table.bottomBorder td { max-width:150px; overflow:hidden; }
 table.bottomBorder th { overflow:hidden; word-wrap:break-word; border-bottom:1px dotted black; padding:5px; }
                 
