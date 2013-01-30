@@ -37,7 +37,11 @@ public class FinanceAction extends ActionSupport {
 		pending+=(long)(amount*(-100));
 		customer.setPendingCash(pending);
 		
-		transactionDAO.operateTransaction(transaction, customer);
+		if(!transactionDAO.operateTransaction(transaction, customer)){
+			this.addFieldError("operation", "System busy, please try again");
+			transactionList=transactionDAO.findByProperty("customer", customer);
+			return "gotoFinance";
+		}
 		session.put("customer", customer);
 		
 		return "requestSuccess";
@@ -89,7 +93,11 @@ public class FinanceAction extends ActionSupport {
 		long pending=customer.getPendingCash();
 		pending+=(long)(amount*(100));
 		customer.setPendingCash(pending);
-		transactionDAO.operateTransaction(transaction, customer);
+		if(!transactionDAO.operateTransaction(transaction, customer)){
+			this.addFieldError("operation", "System busy, please try again");
+			customer=customerDAO.findById(customer.getCustomerId());
+			return "gotoDeposit";
+		}
 		session.put("customer", customer);
 		return "depositSuccess";
 	}

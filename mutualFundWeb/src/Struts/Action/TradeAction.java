@@ -61,7 +61,11 @@ public class TradeAction extends ActionSupport {
 		long pending=customer.getPendingCash();
 		pending+=(long)(amount*(-100));
 		customer.setPendingCash(pending);
-		transactionDAO.operateTransaction(transaction, customer);
+		if(!transactionDAO.operateTransaction(transaction, customer)){
+			this.addFieldError("operation", "System busy, please try again");
+			research();
+			return "gotoResearch";
+		}
 		session.put("customer", customer);
 		return "success";
 		}catch(Exception e){
@@ -104,7 +108,11 @@ public class TradeAction extends ActionSupport {
 		transaction.setShares((long)(shares*1000));
 		transaction.setExecuteDate(new Date());
 		transaction.setPosition(p);
-		transactionDAO.operateTransaction(transaction, p);
+		if(!transactionDAO.operateTransaction(transaction, p)){
+			this.addFieldError("operation", "System busy, please try again");
+			research();
+			return "gotoResearch";
+		}
 		return "success";
 	}
 	public void validateSell(){
