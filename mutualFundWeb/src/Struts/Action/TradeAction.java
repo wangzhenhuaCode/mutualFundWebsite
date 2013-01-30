@@ -82,6 +82,11 @@ public class TradeAction extends ActionSupport {
 			research();
 			return;
 		}
+		if(amount<0.01){
+			this.addFieldError("amount", "Invalid amount");
+			research();
+			return;
+		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
@@ -120,6 +125,11 @@ public class TradeAction extends ActionSupport {
 	}
 	public void validateSell(){
 		if(shares==null){
+			this.addFieldError("shares", "Invalid shares");
+			research();
+			return;
+		}
+		if(shares<0.001){
 			this.addFieldError("shares", "Invalid shares");
 			research();
 			return;

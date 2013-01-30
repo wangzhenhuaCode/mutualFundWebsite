@@ -55,8 +55,8 @@ public class FinanceAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		if(amount<0) {
-			this.addFieldError("amount", "Amount can not be negative");
+		if(amount<0.01) {
+			this.addFieldError("amount", "Amount can not be negative or too small");
 			transactionList=transactionDAO.findByProperty("customer", customer);
 			
 		}
@@ -103,8 +103,8 @@ public class FinanceAction extends ActionSupport {
 			this.addFieldError("amount", "Amount can not be null");
 			customer=customerDAO.findById(customer.getCustomerId());
 		}
-		else if(amount<0) {
-			this.addFieldError("amount", "Amount can not be negative");
+		else if(amount<0.01) {
+			this.addFieldError("amount", "Amount can not be negative or too small");
 			customer=customerDAO.findById(customer.getCustomerId());
 		}
 	}
