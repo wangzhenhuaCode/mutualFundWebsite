@@ -128,7 +128,7 @@
 			</table> 
 			<br />
 			<br />
-			<span class="ButtonInput"><span align="center"><input type="submit" value="Create" style="width:100px"></span></span>&nbsp;&nbsp;&nbsp;
+			<span class="ButtonInput"><span><input type="submit" value="Create" style="width:100px"></span></span>&nbsp;&nbsp;&nbsp;
 			<a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
 			<s:fielderror/>
 		</s:form>
