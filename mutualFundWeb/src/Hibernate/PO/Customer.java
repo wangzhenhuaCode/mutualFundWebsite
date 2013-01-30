@@ -19,7 +19,7 @@ public class Customer implements java.io.Serializable {
 	private String addrLine1;
 	private String addrLine2;
 	private String city;
-	private Integer state;
+	private String state;
 	private String zip;
 	private Long cash;
 	private Long pendingCash;
@@ -133,11 +133,13 @@ public class Customer implements java.io.Serializable {
 		this.city = city;
 	}
 
-	public Integer getState() {
-		return this.state;
+
+
+	public String getState() {
+		return state;
 	}
 
-	public void setState(Integer state) {
+	public void setState(String state) {
 		this.state = state;
 	}
 
