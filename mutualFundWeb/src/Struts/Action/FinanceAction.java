@@ -32,12 +32,14 @@ public class FinanceAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_WITHDRAW);
 		transaction.setAmount((long)(amount*(-100)));
 		transaction.setExecuteDate(new Date());
+		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		long pending=customer.getPendingCash();
 		pending+=(long)(amount*(-100));
 		customer.setPendingCash(pending);
-		customerDAO.merge(customer);
+		
+		transactionDAO.operateTransaction(transaction, customer);
 		session.put("customer", customer);
-		transactionDAO.save(transaction);
+		
 		return "requestSuccess";
 	}
 	public void validateRequestCheck(){
@@ -83,12 +85,12 @@ public class FinanceAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
 		transaction.setAmount((long)(amount*100));
 		transaction.setExecuteDate(new Date());
+		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		long pending=customer.getPendingCash();
 		pending+=(long)(amount*(100));
 		customer.setPendingCash(pending);
-		customerDAO.merge(customer);
+		transactionDAO.operateTransaction(transaction, customer);
 		session.put("customer", customer);
-		transactionDAO.save(transaction);
 		return "depositSuccess";
 	}
 	public void validateDeposit(){

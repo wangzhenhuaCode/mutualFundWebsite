@@ -21,7 +21,7 @@
     
         $(function() {
           
-          $.getJSON('<%=basePath%>ajax/ajax_getHistory.action?fundId=<s:property value="fund.fundId" />', function(data) {
+          $.getJSON('<%=basePath%>ajax/ajax_findHistory.action?fundId=<s:property value="fund.fundId" />', function(data) {
                     // Create the chart
                     var json=data.historyList;
                    var series ={};

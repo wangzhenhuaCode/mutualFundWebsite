@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import Hibernate.DAO.IFundDAO;
 import Hibernate.DAO.IPositionDAO;
@@ -15,6 +16,7 @@ import Hibernate.PO.FundPriceHistory;
 import Hibernate.PO.FundPriceHistoryId;
 import Hibernate.PO.Transaction;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class TransactionDayAction extends ActionSupport{
@@ -31,6 +33,15 @@ public class TransactionDayAction extends ActionSupport{
 		return "gototrans";
 	}
 	public String transact(){
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> application=ctx.getApplication();
+		if(application.containsKey("application")){
+			if(application.get("application").equals("true")){
+				errorInfo="System busy!";
+				return "failureTrans";
+			}
+		}
+		application.put("transitionLock", true);
 		errorInfo="";
 		fundlist=fundDAO.findAll();
 		Date date;
@@ -68,6 +79,7 @@ public class TransactionDayAction extends ActionSupport{
 			errorInfo="Repeated transition day";
 			return "failureTrans";
 		}
+		application.put("transitionLock", false);
 		return "successTrans";
 	}
 	public List<Fund> getFundlist() {

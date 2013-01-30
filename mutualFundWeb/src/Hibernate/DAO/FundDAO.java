@@ -14,7 +14,16 @@ public class FundDAO extends BaseHibernateDAO<Fund> implements IFundDAO {
 	public List<Fund> search(final String keywords){
 		try {
 			String queryString = "from " + entityName
-					+ " as model where model.symbol like %"+keywords+"%"+" or "+" model.name like %"+keywords+"%";
+					+ " as model where model.symbol like '%"+keywords+"%'  or "+" model.name like '%"+keywords+"%'";
+			return getHibernateTemplate().find(queryString);
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
+	public List<Fund> autoCompleteSearch(final String keywords){
+		try {
+			String queryString = "from " + entityName
+					+ " as model where model.symbol like '"+keywords+"%' or "+" model.name like '"+keywords+"%'";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			throw re;
