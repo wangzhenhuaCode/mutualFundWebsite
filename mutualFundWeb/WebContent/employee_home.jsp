@@ -25,7 +25,7 @@
             
             <div align = "left">
             <br />
-            <h3>New Trading Date:</h3>
+            <h3>New Transaction Day:</h3>
 
             <input type="text" id="datepicker" style="width: 120px" name="datestring"/>
 
