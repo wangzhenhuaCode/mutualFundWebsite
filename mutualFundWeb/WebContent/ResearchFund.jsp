@@ -99,7 +99,7 @@
             <center>
             <table style="text-align:center;">
                 <tr>
-                    <td ><b>Trasaction Time</b></td>
+                    <td ><b>Transaction Time</b></td>
                     <td ><b>Purchase Price</b></td>
                     <td ><b>Shares</b></td>
                     <td ><b>Amount</b></td>

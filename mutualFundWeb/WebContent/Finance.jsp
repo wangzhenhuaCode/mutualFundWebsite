@@ -30,7 +30,7 @@
 
 			   		<tr style="padding-bot:10px;">
 						<td><Strong>Date</strong></td>
-						<td><Strong>Ammount</strong></td>
+						<td><Strong>Amount</strong></td>
 						<td><Strong>Status</strong></td>
 						
 					</tr>
