@@ -26,7 +26,7 @@
                 <ul>
 
                     <li><a href="#">Create New Administrator</a></li>
-                    <li><a href="<%=basePath%>act/employee_resetPage.action">Change Password</a></li>
+                    <li><a href="＃">Change Password</a></li>
                     <li><a href="<%=basePath%>act/employee_logout.action">Log out</a></li>
 
                 </ul>
