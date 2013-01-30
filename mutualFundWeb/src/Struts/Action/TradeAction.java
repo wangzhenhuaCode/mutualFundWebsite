@@ -55,13 +55,18 @@ public class TradeAction extends ActionSupport {
 			p.setShares((long)0);
 			positionDAO.save(p);
 		}
+		
+		transaction.setPosition(p);
+		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		long pending=customer.getPendingCash();
 		pending+=(long)(amount*(-100));
 		customer.setPendingCash(pending);
-		customerDAO.merge(customer);
+		if(!transactionDAO.operateTransaction(transaction, customer)){
+			this.addFieldError("operation", "System busy, please try again");
+			research();
+			return "gotoResearch";
+		}
 		session.put("customer", customer);
-		transaction.setPosition(p);
-		transactionDAO.save(transaction);
 		return "success";
 		}catch(Exception e){
 			e.printStackTrace();
@@ -94,7 +99,7 @@ public class TradeAction extends ActionSupport {
 		Position p=positionDAO.load(Position.class,pid);
 		long pending=p.getPendingShare();
 		pending+=(long)(shares*1000);
-		positionDAO.merge(p);
+		
 		p.setPendingShare(pending);
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);
@@ -103,7 +108,11 @@ public class TradeAction extends ActionSupport {
 		transaction.setShares((long)(shares*1000));
 		transaction.setExecuteDate(new Date());
 		transaction.setPosition(p);
-		transactionDAO.save(transaction);
+		if(!transactionDAO.operateTransaction(transaction, p)){
+			this.addFieldError("operation", "System busy, please try again");
+			research();
+			return "gotoResearch";
+		}
 		return "success";
 	}
 	public void validateSell(){

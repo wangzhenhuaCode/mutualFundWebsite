@@ -72,7 +72,8 @@
                     </tr>
                 </table>
                 
-                <textArea width="800" height="400" name="fund.description"></textArea><br/>
+                <textArea rows="3" cols="48" name="fund.description"></textArea><br />
+                <br />
                 <span class="ButtonInput"><span><input type="submit" value="Add New Fund" /></span></span>
                 <s:fielderror/>
             </s:form>

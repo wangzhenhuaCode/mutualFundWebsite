@@ -59,10 +59,11 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					Customer customer=t.getCustomer();
 					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
 					Long ucash=t.getAmount()+customer.getCash();
-					if(ucash<0){
+					/*if(ucash<0){
 						continue;
-					}
+					}*/
 					customer.setCash(ucash);
+					customer.setPendingCash((long)0);
 					t.setTransactionType(Transaction.BOUGHT);
 					PositionId pid=new PositionId(t.getCustomer(),t.getFund());
 					
@@ -89,7 +90,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
 					Long ucash=t.getAmount()+customer.getCash();
 					customer.setCash(ucash);
-					
+					customer.setPendingCash((long)0);
 					
 					PositionId pid=new PositionId(t.getCustomer(),t.getFund());
 					
@@ -115,7 +116,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
 					Long ucash=t.getAmount()+customer.getCash();
 					customer.setCash(ucash);
-					
+					customer.setPendingCash((long)0);
 					t.setExecuteDate(date);
 					session.merge(customer);
 					session.merge(t);
@@ -125,10 +126,11 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					Customer customer=t.getCustomer();
 					customer=(Customer) session.load(Customer.class, customer.getCustomerId());
 					Long ucash=t.getAmount()+customer.getCash();
-					
+					/*
 					if(ucash<0){
 						continue;
-					}
+					}*/
+					customer.setPendingCash((long)0);
 					customer.setCash(ucash);
 					
 					t.setTransactionType(Transaction.WITHDRAW);
@@ -149,6 +151,51 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 				}
 			}
 		});
+		return b;
+	}
+	public boolean operateTransaction(final Transaction trasanction, final Customer customer){
+		boolean b=(Boolean) getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				org.hibernate.Transaction tx=session.beginTransaction();
+				try{
+					if(customer!=null)
+						session.merge(customer);
+					session.save(trasanction);
+					
+				}catch(Exception e){
+					tx.rollback();
+					return false;
+				}
+				tx.commit();
+				return true;
+				
+			}
+			
+			});
+		return b;
+	}
+	
+	public boolean operateTransaction(final Transaction trasanction, final Position position){
+		boolean b=(Boolean) getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				org.hibernate.Transaction tx=session.beginTransaction();
+				try{
+					
+					session.merge(position);
+					session.save(trasanction);
+					
+				}catch(Exception e){
+					tx.rollback();
+					return false;
+				}
+				tx.commit();
+				return true;
+				
+			}
+			
+			});
 		return b;
 	}
 }
