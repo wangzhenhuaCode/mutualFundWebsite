@@ -65,9 +65,4 @@
 		</s:form>
         </p>
 
-
-        
-
-
-       
 <jsp:include page="template-bottom.jsp" />
