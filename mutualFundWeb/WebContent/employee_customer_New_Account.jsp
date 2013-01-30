@@ -33,7 +33,7 @@
 				
 				<tr>
 				<td><input type="text" name="customer.password"></td>
-				<td><input type="text" name="password"></td>
+				<td><input type="text" name="confirmPassword"></td>
 				</tr>
 				
 				<tr>
@@ -75,5 +75,6 @@
 			</table> 
 			<span class="ButtonInput"><span align="center"><input type="submit" value="Create" style="width:100px"></span></span>&nbsp;&nbsp;&nbsp;
 			<a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
+			<s:fielderror/>
 		</s:form>
 <jsp:include page="template-bottom.jsp" />
