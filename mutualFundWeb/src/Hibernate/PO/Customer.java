@@ -35,7 +35,7 @@ public class Customer implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Customer(String username, String password, String firstname,
-			String lastname, String addrLine1, String city, Integer state,
+			String lastname, String addrLine1, String city, String state,
 			String zip, Long cash) {
 		this.username = username;
 		this.password = password;
@@ -51,7 +51,7 @@ public class Customer implements java.io.Serializable {
 	/** full constructor */
 	public Customer(String username, String password, String firstname,
 			String lastname, String addrLine1, String addrLine2, String city,
-			Integer state, String zip, Long cash, Set transactions,
+			String state, String zip, Long cash, Set transactions,
 			Set positions) {
 		this.username = username;
 		this.password = password;
