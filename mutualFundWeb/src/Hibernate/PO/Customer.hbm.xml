@@ -34,7 +34,7 @@
         <property name="city" type="java.lang.String">
             <column name="city" length="20" not-null="true" />
         </property>
-        <property name="state" type="java.lang.Integer">
+        <property name="state" type="java.lang.String">
             <column name="state" not-null="true" />
         </property>
         <property name="zip" type="java.lang.String">
