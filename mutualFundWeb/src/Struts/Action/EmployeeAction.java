@@ -25,6 +25,7 @@ public class EmployeeAction extends ActionSupport {
 	private String confirmPassword;
 	private String newCustomerPassword;
 	private String confirmCustomerPassword;
+	
 	private String errorInfo;
 	private List<Customer> customerList;
 	private List<Transaction> transactionList;
@@ -162,7 +163,7 @@ public class EmployeeAction extends ActionSupport {
 		return "resetCustomerPasswordSuccess";
 	}
 	public void validateResetCustomerPassword() {
-		
+		customer = customerDAO.findById(customer.getCustomerId());
 		if(newCustomerPassword==null ||confirmCustomerPassword==null){
 			this.addFieldError("changePassword", "Password Can Not Be Empty");
 			customer = customerDAO.findById(customer.getCustomerId());
@@ -272,5 +273,8 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+	public void setConfirmCustomerPassword(String confirmCustomerPassword) {
+		this.confirmCustomerPassword = confirmCustomerPassword;
 	}
 }
