@@ -162,6 +162,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					if(customer!=null)
 						session.merge(customer);
 					session.save(trasanction);
+					session.flush();
 					
 				}catch(Exception e){
 					tx.rollback();
@@ -186,7 +187,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					
 					session.merge(position);
 					session.save(trasanction);
-					
+					session.flush();
 				}catch(Exception e){
 					tx.rollback();
 					return false;
