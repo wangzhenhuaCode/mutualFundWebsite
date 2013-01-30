@@ -11,7 +11,7 @@
             <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="MenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="ActiveMenuButton"><span>Fund Management</span></a></li></ul>
         </div>
 
-<jsp:include page="template-top2.jsp" />
+<jsp:include page="employee_template-top2.jsp" />
 
             <h2>Fund Listed:</h2>
             <br />

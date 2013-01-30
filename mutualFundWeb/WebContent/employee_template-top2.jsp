@@ -24,9 +24,11 @@
             <div class="BlockContentBorderBorder"><div class="BlockContentBorderBL"><div></div></div><div class="BlockContentBorderBR"><div></div></div><div class="BlockContentBorderTL"></div><div class="BlockContentBorderTR"><div></div></div><div class="BlockContentBorderT"></div><div class="BlockContentBorderR"><div></div></div><div class="BlockContentBorderB"><div></div></div><div class="BlockContentBorderL"></div><div class="BlockContentBorderC"></div><div class="BlockContentBorder">
 
                 <ul>
-                    <li style="list-style:none;"><a href="<%=basePath%>act/employee_reset.action">Change Profile</a></li>
-                    <li style="list-style:none;"><a href="<%=basePath%>act/employee_resetPage.action">Change Password</a></li>
-                    <li style="list-style:none;"><a href="<%=basePath%>act/employee_logout.action">Log out</a></li>
+
+                    <li><a href="#">Create New Administrator</a></li>
+                    <li><a href="<%=basePath%>act/employee_resetPage.action">Change Password</a></li>
+                    <li><a href="<%=basePath%>act/employee_logout.action">Log out</a></li>
+
                 </ul>
 
             </div></div>
