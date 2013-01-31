@@ -33,8 +33,8 @@
 				</tr>
 				
 				<tr>
-				<td><input type="text" name="employee.password"></td>
-				<td><input type="text" name="confirmPassword"></td>
+				<td><input type="password" name="employee.password"></td>
+				<td><input type="password" name="confirmPassword"></td>
 				</tr>
 				
 				<tr>
