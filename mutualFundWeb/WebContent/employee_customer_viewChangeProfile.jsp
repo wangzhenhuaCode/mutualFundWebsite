@@ -115,17 +115,15 @@
                     </td>
                     <td><input type="text" value="<s:property value="customer.zip"/>" name="customer.zip" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
 				</tr>
-				<tr>
-                    <td><b>Balance</b></td>
-				</tr>
-				<tr>
-                    <td><input type="text" value="<s:property value="customer.cash"/>" name="customer.cash" style="border: 0px solid #000000; background-color: #f6f6f6;" disabled/></td>
-				</tr>
+				
 				
 			</table>
-            Click field to change the value.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <br />Click field to change the value.<br />
+            <br />
+            <div align="right" style="margin-right:330px">
             <span class="ButtonInput"><span><input type="submit" value="Update" /></span></span>&nbsp;&nbsp;&nbsp;
             <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
+           	</div>
            	<s:fielderror/>
            </s:form>
             

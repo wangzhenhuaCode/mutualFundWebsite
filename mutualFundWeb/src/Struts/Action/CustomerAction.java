@@ -10,6 +10,7 @@ import Hibernate.PO.Customer;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 
 public class CustomerAction extends ActionSupport {
 	private ICustomerDAO customerDAO;
@@ -42,22 +43,29 @@ public class CustomerAction extends ActionSupport {
 			return "customerFailureLogin";
 		}
 	}
-
+	@InputConfig(resultName="customerFailureChangePassword")
 	public String changePassword() {
-		errorInfo = "";
+		
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
 		Customer c=null;
-		c = (Customer) session.get("customer");
-		if (newCustomerPassword.equals(confirmCustomerPassword)) {
-			c.setPassword(newCustomerPassword);
-			customerDAO.update(c);
-			return "customerSucessChangePassword";
-		} else {
-			errorInfo = "Password Error";
-			return "customerFailureChangePassword";
-		}
+		c =customerDAO.load(Customer.class, ((Customer) session.get("customer")).getCustomerId());
+		newCustomerPassword=getMD5Str(newCustomerPassword);
+		c.setPassword(newCustomerPassword);
+		customerDAO.merge(c);
+		session.put("customer", c);
+		return "customerSucessChangePassword";
+	
+		
 
+	}
+	public void validateChangePassword(){
+		if(newCustomerPassword==null||newCustomerPassword.equals("")){
+			this.addFieldError("password", "Password can not be null");
+		}
+		if (!newCustomerPassword.equals(confirmCustomerPassword)){
+			this.addFieldError("password", "Two passwords are not equal");
+		}
 	}
 
 	public String gotoChangeProfile(){

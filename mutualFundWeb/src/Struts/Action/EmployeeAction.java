@@ -152,21 +152,26 @@ public class EmployeeAction extends ActionSupport {
 		session.remove("employee");
 		return "logoutSuccess";
 	}
+	@InputConfig(resultName="employeeFailureChangePassword")
 	public String changePassword(){
 		errorInfo="";
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Employee e=(Employee)session.get("employee");
-		if(newPassword.equals(confirmPassword)){
-			e.setPassword(newPassword);
-			employeeDAO.update(e);
-			return "employeeSucessChangePassword";
-		}else{
-			errorInfo="Password Error";
-			return "employeeFailureChangePassword";
+		Employee employee=employeeDAO.load(Employee.class, e.getEmployeeId());
+		employee.setPassword(getMD5Str(newPassword));
+		employeeDAO.merge(employee);
+		session.put("employee", employee);
+		
+	}
+	public void validateChangePassword(){
+		if(newPassword==null||newPassword.equals("")){
+			this.addFieldError("password", "Password can not be null");
+		}
+		if(!newPassword.equals(confirmPassword)){
+			this.addFieldError("password", "Two passwords are not equal");
 		}
 	}
-
 	public String viewCustomers() {
 		customerList = customerDAO.findAll();
 		maxPage=customerDAO.count(null,null)/20+1;
