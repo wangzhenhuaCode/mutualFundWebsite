@@ -16,7 +16,7 @@
     </script>
 
 		<div class="Menu">
-            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="MenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="ActiveMenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
@@ -25,7 +25,9 @@
        		<s:hidden name="customer.username" value="%{customer.username}"></s:hidden>
        		<s:hidden name="customer.password" value="%{customer.password}"></s:hidden>
        		<s:hidden name="customer.cash" value="%{customer.cash}"></s:hidden>
+
        		<s:hidden name="customer.version" value="%{customer.version}"></s:hidden>
+
             <h2>View / Edit Profile</h2>
             <br />
 			<table>

@@ -9,13 +9,13 @@
 
 <div class="Menu">
 
-            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="MenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>/act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
+            <ul><li><a href="<%=basePath%>act/transaction_gotoTrans.action" class="ActiveMenuButton"><span>Home</span></a></li> <li><a href="<%=basePath%>act/employee_viewCustomers.action" class="MenuButton"><span>Account Management</span></a></li> <li><a href="<%=basePath%>act/trade_employeeGotoTrade.action" class="MenuButton"><span>Fund Management</span></a></li></ul>
 
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
 
-		<s:form method="post" action="act/employee_createCustomerAccount.action" validate="true" id="form">
+		<s:form method="post" action="act/employee_createEmployeeAccount.action" validate="true" id="form">
 			<h2>Create a New Account</h2>
 		
 			<table>
