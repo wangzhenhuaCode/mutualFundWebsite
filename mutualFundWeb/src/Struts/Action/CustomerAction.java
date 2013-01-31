@@ -41,7 +41,8 @@ public class CustomerAction extends ActionSupport {
 		errorInfo = "";
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
-		Customer c = (Customer) session.get("customer");
+		Customer c=null;
+		c = (Customer) session.get("customer");
 		if (newCustomerPassword.equals(confirmCustomerPassword)) {
 			c.setPassword(newCustomerPassword);
 			customerDAO.update(c);
