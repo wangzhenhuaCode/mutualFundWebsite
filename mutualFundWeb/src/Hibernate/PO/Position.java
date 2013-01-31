@@ -84,6 +84,8 @@ public class Position implements java.io.Serializable {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
-
+	public Double getAvailableShare(){
+		return (double)(shares-pendingShare)/1000;
+	}
 	
 }

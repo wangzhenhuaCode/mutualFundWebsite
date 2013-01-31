@@ -100,7 +100,9 @@ public class FinanceAction extends ActionSupport {
 			customer=customerDAO.findById(customer.getCustomerId());
 			return "gotoDeposit";
 		}
-		
+		ActionContext ctx=ActionContext.getContext();
+		Map<String,Object> session=ctx.getSession();
+		session.put("customer", customer);
 		return "depositSuccess";
 	}
 	public void validateDeposit(){

@@ -188,7 +188,9 @@ public class Customer implements java.io.Serializable {
 	public String getAvailable(){
 		return String.format("%1$,.2f", (double)(cash+pendingCash)/100);
 	}
-
+	public double getAvailableCash(){
+		return (double)(cash+pendingCash)/100;
+	}
 	public Integer getVersion() {
 		return version;
 	}

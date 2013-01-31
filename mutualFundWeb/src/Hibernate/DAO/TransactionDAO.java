@@ -104,7 +104,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 					t.setPosition(p);
 					t.setExecuteDate(date);
 					t.setTransactionType(Transaction.SELLED);
-					
+					p.setPendingShare(0L);
 					session.merge(customer);
 					session.merge(p);
 					

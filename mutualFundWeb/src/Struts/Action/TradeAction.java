@@ -126,6 +126,7 @@ public class TradeAction extends ActionSupport {
 			research();
 			return "gotoResearch";
 		}
+		session.put("customer", customer);
 		return "success";
 	}
 	public void validateSell(){
@@ -149,7 +150,7 @@ public class TradeAction extends ActionSupport {
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
 		long shares=p.getShares();
-		if((p.getShares()-p.getPendingShare())<shares){
+		if((p.getShares()-p.getPendingShare())<shares*1000){
 			this.addFieldError("shares", "Insufficient shares");
 			research();
 		}
