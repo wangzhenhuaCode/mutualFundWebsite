@@ -15,7 +15,7 @@
 	    </param-value>
    </context-param>
   <welcome-file-list>
-    <welcome-file>Login.jsp</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
   
   <filter>

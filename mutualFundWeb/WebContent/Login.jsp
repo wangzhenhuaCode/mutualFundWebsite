@@ -76,7 +76,7 @@
 			
 		</table>
 
-		
+		<s:fielderror/>
 		
        <div align = "right" style="margin-right:250px;">
             <span class="ButtonInput"><span align="center"><input type="submit" value="Login"/></span></span>

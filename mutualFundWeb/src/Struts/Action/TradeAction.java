@@ -39,7 +39,7 @@ public class TradeAction extends ActionSupport {
 		try{
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 
 		Transaction transaction=new Transaction();
 		transaction.setCustomer(customer);

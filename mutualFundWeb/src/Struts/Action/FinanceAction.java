@@ -25,7 +25,7 @@ public class FinanceAction extends ActionSupport {
 	public String requestCheck(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		Transaction transaction=new Transaction();
 	
 		transaction.setCustomer(customer);
@@ -49,7 +49,7 @@ public class FinanceAction extends ActionSupport {
 	public void validateRequestCheck(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		if(amount==null){
 			this.addFieldError("amount", "Amount can not be null");
 			transactionList=transactionDAO.findByProperty("customer", customer);

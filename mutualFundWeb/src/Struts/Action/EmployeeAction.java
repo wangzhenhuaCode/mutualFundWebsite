@@ -29,7 +29,6 @@ public class EmployeeAction extends ActionSupport {
 	private String confirmPassword;
 	private String newCustomerPassword;
 	private String confirmCustomerPassword;
-	
 	private String errorInfo;
 	private List<Customer> customerList;
 	private List<Transaction> transactionList;
@@ -144,6 +143,10 @@ public class EmployeeAction extends ActionSupport {
 		if(customer.getPassword()==null || customer.getPassword().trim().equals("")){
 			this.addFieldError("newAccount", "Password cannot be empty");
 		}
+		String temp=customer.getPassword();
+		if(!temp.equals(this.confirmCustomerPassword)) {
+			this.addFieldError("newAccount", "Password not the same");
+		}
 	}
 	public String logout(){
 		errorInfo="";
@@ -162,6 +165,7 @@ public class EmployeeAction extends ActionSupport {
 		employee.setPassword(getMD5Str(newPassword));
 		employeeDAO.merge(employee);
 		session.put("employee", employee);
+		return "employeeSucessChangePassword";
 		
 	}
 	public void validateChangePassword(){
@@ -171,6 +175,12 @@ public class EmployeeAction extends ActionSupport {
 		if(!newPassword.equals(confirmPassword)){
 			this.addFieldError("password", "Two passwords are not equal");
 		}
+
+	}
+	
+	public String goToChangepassword(){
+		return "goToChangepassword";
+
 	}
 	public String viewCustomers() {
 		customerList = customerDAO.findAll();
@@ -292,6 +302,9 @@ public class EmployeeAction extends ActionSupport {
 		if(employee.getUsername()==null || employee.getUsername().trim().equals("")){
 			this.addFieldError("newAccount", "User Name cannot be empty");
 		}
+		if(employeeDAO.findByProperty("username", employee.getUsername()).size()!=0){
+			this.addFieldError("newAccount", "The User Already Existed");
+		}
 		if(employee.getFirstname()==null || employee.getFirstname().trim().equals("")){
 			this.addFieldError("newAccount", "First Name cannot be empty");
 		}
@@ -300,6 +313,10 @@ public class EmployeeAction extends ActionSupport {
 		}
 		if(employee.getPassword()==null || employee.getPassword().trim().equals("")){
 			this.addFieldError("newAccount", "Password cannot be empty");
+		}
+		String temp=employee.getPassword();
+		if(!temp.equals(this.confirmPassword)) {
+			this.addFieldError("newAccount", "Password not the same");
 		}
 	}
 	

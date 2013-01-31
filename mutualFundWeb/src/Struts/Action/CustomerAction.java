@@ -21,15 +21,15 @@ public class CustomerAction extends ActionSupport {
 	private String errorInfo;
 	private String username;
 	private String password;
-
+	@InputConfig(resultName="loginPage")
 	public String login() {
 
-		errorInfo = "";
+		
 		password=getMD5Str(password);
 		List<Customer> list = customerDAO.findByProperty("username", username);
 		if (list.size() == 0) {
-			errorInfo = "Username error!";
-			return "customerFailureLogin";
+			this.addFieldError("username", "Username error!");
+			return "loginPage";
 		}
 		if (list.get(0).getPassword().equals(password)) {
 			ActionContext ctx = ActionContext.getContext();
@@ -39,9 +39,21 @@ public class CustomerAction extends ActionSupport {
 				session.remove("employee");
 			return "customerSucessLogin";
 		} else {
-			errorInfo = "Password error!";
-			return "customerFailureLogin";
+			this.addFieldError("username", "Password error!");
+			return "loginPage";
 		}
+	}
+	public void validateLogin(){
+		if(username==null||username.equals("")){
+			this.addFieldError("username", "Username null");
+		}
+		if(username.length()>50){
+			this.addFieldError("username", "Username should be within 50");
+		}
+		if(password==null||password.equals("")){
+			this.addFieldError("username", "Password null");
+		}
+		
 	}
 	@InputConfig(resultName="customerFailureChangePassword")
 	public String changePassword() {
@@ -49,14 +61,14 @@ public class CustomerAction extends ActionSupport {
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
 		Customer c=null;
+
 		c =customerDAO.load(Customer.class, ((Customer) session.get("customer")).getCustomerId());
 		newCustomerPassword=getMD5Str(newCustomerPassword);
 		c.setPassword(newCustomerPassword);
 		customerDAO.merge(c);
 		session.put("customer", c);
 		return "customerSucessChangePassword";
-	
-		
+
 
 	}
 	public void validateChangePassword(){
@@ -75,7 +87,7 @@ public class CustomerAction extends ActionSupport {
 	public String changeProfile(){
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
-		Customer oldcustomer=(Customer) session.get("customer");
+		Customer oldcustomer=customerDAO.load(Customer.class,((Customer) session.get("customer")).getCustomerId());
 		customer.setVersion(oldcustomer.getVersion());
 		customer.setCustomerId(oldcustomer.getCustomerId());
 		customer.setCash(oldcustomer.getCash());
@@ -97,7 +109,9 @@ public class CustomerAction extends ActionSupport {
 		session.remove("customer");
 		return "logout";
 	}
-
+	public String gotoLogin(){
+		return "loginPage";
+	}
 	public Customer getCustomer() {
 		return customer;
 	}
