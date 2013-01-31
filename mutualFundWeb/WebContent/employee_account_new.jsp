@@ -17,7 +17,7 @@
 
 		<s:form method="post" action="act/employee_createEmployeeAccount.action" validate="true" id="form">
 			<h2>Create a New Account</h2>
-		
+			
 			<table>
 				<tr>
 				<td>User Name</td> 
