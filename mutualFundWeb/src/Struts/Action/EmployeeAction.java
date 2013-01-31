@@ -1,5 +1,8 @@
 package Struts.Action;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Map;
 
@@ -40,10 +43,11 @@ public class EmployeeAction extends ActionSupport {
 	private String password;
 	@InputConfig(resultName="employeeFailureLogin")
 	public String login(){
-		errorInfo="";
+		
+		//password=getMD5Str(password);
 		List<Employee> list=employeeDAO.findByProperty("username", username);
 		if(list.size()==0){
-			errorInfo="Username error!";
+			this.addFieldError("username", "Username error!");
 			return "employeeFailureLogin";
 		}
 		if(list.get(0).getPassword().equals(password)){
@@ -53,13 +57,52 @@ public class EmployeeAction extends ActionSupport {
 			return "employeeSucessLogin";
 		}
 		else{
-			errorInfo="Password error!";
+			
+			this.addFieldError("password", "Password error!");
 			return "employeeFailureLogin";
 		}
 	}
 	public void validateLogin(){
+		if(username==null||username.equals("")){
+			this.addFieldError("username", "Username null");
+		}
+		if(username.length()>50){
+			this.addFieldError("username", "Username should be within 50");
+		}
+		if(password==null||password.equals("")){
+			this.addFieldError("username", "Password null");
+		}
 		
 	}
+	private String getMD5Str(String str) {  
+        MessageDigest messageDigest = null;  
+ 
+       try {  
+            messageDigest = MessageDigest.getInstance("MD5");  
+ 
+            messageDigest.reset();  
+ 
+            messageDigest.update(str.getBytes("UTF-8"));  
+        } catch (NoSuchAlgorithmException e) {  
+            System.out.println("NoSuchAlgorithmException caught!");  
+            System.exit(-1);  
+        } catch (UnsupportedEncodingException e) {  
+            e.printStackTrace();  
+        }  
+ 
+       byte[] byteArray = messageDigest.digest();  
+ 
+        StringBuffer md5StrBuff = new StringBuffer();  
+ 
+       for (int i = 0; i < byteArray.length; i++) {              
+           if (Integer.toHexString(0xFF & byteArray[i]).length() == 1)  
+                md5StrBuff.append("0").append(Integer.toHexString(0xFF & byteArray[i]));  
+           else  
+                md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));  
+        }  
+ 
+       return md5StrBuff.toString();  
+    }  
 	@InputConfig(resultName="goToAddNewCustomerAccount")
 	public String createCustomerAccount(){
 		customer.setCash((long)0);

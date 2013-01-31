@@ -63,6 +63,7 @@
 				<td><input type="password" name="password" style="width: 200px" />
 					</td>
 				</tr>
+				
 			</div>
 			<tr>
 			<td>
@@ -72,6 +73,7 @@
 					<input type="radio" name="type" onclick="javascript:$('#form').attr('action','<%=basePath%>act/employee_login.action');" checked>Employee  
 			</td>
 			</tr>
+			
 		</table>
 
 		

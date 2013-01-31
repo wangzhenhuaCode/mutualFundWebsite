@@ -27,7 +27,7 @@
        		<s:hidden name="customer.cash" value="%{customer.cash}"></s:hidden>
 
        		<s:hidden name="customer.version" value="%{customer.version}"></s:hidden>
-
+			<s:hidden name="customer.pendingCash" value="%{customer.pendingCash}"></s:hidden>
             <h2>View / Edit Profile</h2>
             <br />
 			<table>

@@ -136,12 +136,14 @@ public class TradeAction extends ActionSupport {
 			return;
 		}
 		if(shares<0.001){
-			this.addFieldError("shares", "Share should be less than 1 billion");
+			this.addFieldError("shares", "Share is too small");
 			research();
 			return;
 		}
 		if(shares>Transaction.MAX_TRANSACTION_SHARE){
-			
+			this.addFieldError("shares", "Share should be less than 1 billion");
+			research();
+			return;
 		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
