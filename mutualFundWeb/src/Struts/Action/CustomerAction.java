@@ -54,6 +54,18 @@ public class CustomerAction extends ActionSupport {
 
 	}
 
+	public String gotoChangeProfile(){
+		return "changeProfile";
+	}
+	
+	public String changeProfile(){
+		ActionContext ctx = ActionContext.getContext();
+		Map<String, Object> session = ctx.getSession();
+		customerDAO.update(customer);
+		session.put("customer", customer);
+		return "changeProfileSuccess";
+	}
+	
 	public String gotoChangePassword(){
 		return "resetPassword";
 	}
