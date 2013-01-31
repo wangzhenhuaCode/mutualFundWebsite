@@ -26,14 +26,14 @@
 			<div class="name">
 				<tr>
 					<td><strong>New Password:</strong></td>
-					<td><input type="text" name="newCustomerPassword"
+					<td><input type="password" name="newCustomerPassword"
 						style="width: 200px" /></td>
 				</tr>
 			</div>
 			<div class="inputName">
 				<tr>
 				<td><strong>Confirm Password:</strong></td>
-				<td><input type="text" name="confirmCustomerPassword" style="width: 200px" />
+				<td><input type="password" name="confirmCustomerPassword" style="width: 200px" />
 					</td>
 				</tr>
 			</div>
