@@ -24,6 +24,7 @@ public class EmployeeAction extends ActionSupport {
 	private ICustomerDAO customerDAO;
 	private Customer customer;
 	private Employee employee;
+	
 	private String newPassword;
 	private String confirmPassword;
 	private String newCustomerPassword;
@@ -272,13 +273,24 @@ public class EmployeeAction extends ActionSupport {
 		return "goToCreateEmployeeAccount";
 	}
 	
-	@InputConfig(resultName="goToResetCustomerPassword")
+	@InputConfig(resultName="goToCreateEmployeeAccount")
 	public String createEmployeeAccount(){
 		employeeDAO.save(employee);
 		return "createEmployeeAccountSuccess";
 	}
 	public void validateCreateEmployeeAccount(){
-		
+		if(employee.getUsername()==null || employee.getUsername().trim().equals("")){
+			this.addFieldError("newAccount", "User Name cannot be empty");
+		}
+		if(employee.getFirstname()==null || employee.getFirstname().trim().equals("")){
+			this.addFieldError("newAccount", "First Name cannot be empty");
+		}
+		if(employee.getLastname()==null || employee.getLastname().trim().equals("")){
+			this.addFieldError("newAccount", "Last Name cannot be empty");
+		}
+		if(employee.getPassword()==null || employee.getPassword().trim().equals("")){
+			this.addFieldError("newAccount", "Password cannot be empty");
+		}
 	}
 	
 	public String homePage(){
@@ -347,5 +359,8 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public void setConfirmCustomerPassword(String confirmCustomerPassword) {
 		this.confirmCustomerPassword = confirmCustomerPassword;
+	}
+	public Employee getEmployee() {
+		return employee;
 	}
 }
