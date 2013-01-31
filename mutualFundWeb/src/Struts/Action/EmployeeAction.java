@@ -38,7 +38,7 @@ public class EmployeeAction extends ActionSupport {
 
 	private String username;
 	private String password;
-	
+	@InputConfig(resultName="employeeFailureLogin")
 	public String login(){
 		errorInfo="";
 		List<Employee> list=employeeDAO.findByProperty("username", username);
@@ -56,6 +56,9 @@ public class EmployeeAction extends ActionSupport {
 			errorInfo="Password error!";
 			return "employeeFailureLogin";
 		}
+	}
+	public void validateLogin(){
+		
 	}
 	@InputConfig(resultName="goToAddNewCustomerAccount")
 	public String createCustomerAccount(){
