@@ -66,29 +66,32 @@ public class EmployeeAction extends ActionSupport {
 		
 	}
 	public void validateCreateCustomerAccount(){
-		if(customer.getUsername()==null || customer.getUsername().trim()==""){
-			this.addFieldError("changePassword", "User Name cannot be empty");
+		if(customer.getUsername()==null || customer.getUsername().trim().equals("")){
+			this.addFieldError("newAccount", "User Name cannot be empty");
 		}
-		if(customer.getFirstname()==null || customer.getFirstname().trim()==""){
-			this.addFieldError("changePassword", "First Name cannot be empty");
+		if(customerDAO.findByProperty("username", customer.getUsername()).size()!=0){
+			this.addFieldError("newAccount", "The User Already Existed");
 		}
-		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim()==""){
-			this.addFieldError("changePassword", "Address Line1 cannot be empty");
+		if(customer.getFirstname()==null || customer.getFirstname().trim().equals("")){
+			this.addFieldError("newAccount", "First Name cannot be empty");
 		}
-		if(customer.getCity()==null || customer.getCity().trim()==""){
-			this.addFieldError("changePassword", "City cannot be empty");
+		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
+			this.addFieldError("newAccount", "Address Line1 cannot be empty");
+		}
+		if(customer.getCity()==null || customer.getCity().trim().equals("")){
+			this.addFieldError("newAccount", "City cannot be empty");
 		}
 		if(customer.getState()==null){
-			this.addFieldError("changePassword", "State cannot be empty");
+			this.addFieldError("newAccount", "State cannot be empty");
 		}
-		if(customer.getLastname()==null || customer.getLastname().trim()==""){
-			this.addFieldError("changePassword", "Last Name cannot be empty");
+		if(customer.getLastname()==null || customer.getLastname().trim().equals("")){
+			this.addFieldError("newAccount", "Last Name cannot be empty");
 		}
-		if(customer.getZip()==null || customer.getZip()==""){
-			this.addFieldError("changePassword", "Zip Code cannot be empty");
+		if(customer.getZip()==null || customer.getZip().equals("")){
+			this.addFieldError("newAccount", "Zip Code cannot be empty");
 		}
-		if(customer.getPassword()==null || customer.getPassword().trim()==""){
-			this.addFieldError("changePassword", "Password cannot be empty");
+		if(customer.getPassword()==null || customer.getPassword().trim().equals("")){
+			this.addFieldError("newAccount", "Password cannot be empty");
 		}
 	}
 	public String logout(){
@@ -143,12 +146,10 @@ public class EmployeeAction extends ActionSupport {
 			this.addFieldError("viewCustomerAccount", "Last Name Cannot Be Empty");
 		if(customer.getAddrLine1().trim().length()==0)
 			this.addFieldError("viewCustomerAccount", "Address Line1 Cannot Be Empty");
-		/*
 		if(customer.getCity().trim().length()==0)
 			this.addFieldError("viewCustomerAccount", "City Cannot Be Empty");
-		*/
+		
 		customer = customerDAO.findById(customer.getCustomerId());
-		return;
 	}
 	
 	public String goToResetCustomerPassword() {
@@ -163,7 +164,6 @@ public class EmployeeAction extends ActionSupport {
 		return "resetCustomerPasswordSuccess";
 	}
 	public void validateResetCustomerPassword() {
-		customer = customerDAO.findById(customer.getCustomerId());
 		if(newCustomerPassword==null ||confirmCustomerPassword==null){
 			this.addFieldError("changePassword", "Password Can Not Be Empty");
 			customer = customerDAO.findById(customer.getCustomerId());

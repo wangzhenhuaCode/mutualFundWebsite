@@ -41,9 +41,10 @@
         	<result name="goToViewCustomerAccount">/employee_customer_viewChangeProfile.jsp</result>
 
         	<result name="resetCustomerPasswordSuccess" type="redirectAction">/employee_viewCustomers.action</result>
-        	<result name="viewCustomerSuccess">employee_customer_viewChangeProfile.jsp</result>
+        	<result name="viewCustomerSuccess" type="redirectAction">employee_goToViewCustomerAccount.action?customer.customerId=${customer.customerId}</result>
 
         </action>
+        
         <action name="finance_*" class="FinanceAction"  method="{1}">
         	<result name="depositSuccess" type="redirectAction">employee_viewCustomers.action</result>
         	<result name="requestSuccess" type="redirectAction">finance_financePage.action</result>
