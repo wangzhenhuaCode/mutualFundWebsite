@@ -1,5 +1,8 @@
 package Struts.Action;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import Hibernate.DAO.ICustomerDAO;
@@ -21,6 +24,7 @@ public class CustomerAction extends ActionSupport {
 	public String login() {
 
 		errorInfo = "";
+		password=getMD5Str(password);
 		List<Customer> list = customerDAO.findByProperty("username", username);
 		if (list.size() == 0) {
 			errorInfo = "Username error!";
@@ -30,6 +34,8 @@ public class CustomerAction extends ActionSupport {
 			ActionContext ctx = ActionContext.getContext();
 			Map<String, Object> session = ctx.getSession();
 			session.put("customer", list.get(0));
+			if(session.containsKey("emploee"))
+				session.remove("employee");
 			return "customerSucessLogin";
 		} else {
 			errorInfo = "Password error!";
@@ -61,6 +67,13 @@ public class CustomerAction extends ActionSupport {
 	public String changeProfile(){
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
+		Customer oldcustomer=(Customer) session.get("customer");
+		customer.setVersion(oldcustomer.getVersion());
+		customer.setCustomerId(oldcustomer.getCustomerId());
+		customer.setCash(oldcustomer.getCash());
+		customer.setUsername(oldcustomer.getUsername());
+		customer.setPassword(oldcustomer.getPassword());
+		customer.setPendingCash(oldcustomer.getPendingCash());
 		customerDAO.update(customer);
 		session.put("customer", customer);
 		return "changeProfileSuccess";
@@ -108,5 +121,34 @@ public class CustomerAction extends ActionSupport {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	private String getMD5Str(String str) {  
+        MessageDigest messageDigest = null;  
+ 
+       try {  
+            messageDigest = MessageDigest.getInstance("MD5");  
+ 
+            messageDigest.reset();  
+ 
+            messageDigest.update(str.getBytes("UTF-8"));  
+        } catch (NoSuchAlgorithmException e) {  
+            System.out.println("NoSuchAlgorithmException caught!");  
+            System.exit(-1);  
+        } catch (UnsupportedEncodingException e) {  
+            e.printStackTrace();  
+        }  
+ 
+       byte[] byteArray = messageDigest.digest();  
+ 
+        StringBuffer md5StrBuff = new StringBuffer();  
+ 
+       for (int i = 0; i < byteArray.length; i++) {              
+           if (Integer.toHexString(0xFF & byteArray[i]).length() == 1)  
+                md5StrBuff.append("0").append(Integer.toHexString(0xFF & byteArray[i]));  
+           else  
+                md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));  
+        }  
+ 
+       return md5StrBuff.toString();  
+    }  
 
 }
