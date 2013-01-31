@@ -161,6 +161,7 @@ public class EmployeeAction extends ActionSupport {
 	public String resetCustomerPassword(){
 		customer = customerDAO.findById(customer.getCustomerId());
 		customer.setPassword(newCustomerPassword);
+		customerDAO.update(customer);
 		return "resetCustomerPasswordSuccess";
 	}
 	public void validateResetCustomerPassword() {
