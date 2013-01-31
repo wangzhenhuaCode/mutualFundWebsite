@@ -26,6 +26,7 @@
        		<s:hidden name="customer.cash" value="%{#session.customer.cash}"></s:hidden>
          <s:hidden name="customer.customerId" value="%{#session.customer.customerId}"></s:hidden>
        		<s:hidden name="customer.version" value="%{#session.customer.version}"></s:hidden>
+       		<s:hidden name="customer.pendingCash" value="%{#session.customer.pendingCash}"></s:hidden>
             <h2>View / Edit Profile</h2>
             <br />
 			<table>
