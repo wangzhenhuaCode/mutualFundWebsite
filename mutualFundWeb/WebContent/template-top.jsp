@@ -24,7 +24,7 @@
         <div class="Header">
           <div class="HeaderTitle">
             <h1><a href="<%=basePath%>act/trade_showPosition.action">&nbsp;&nbsp;Mutual Fund Trade</a></h1>
-            <h2>&nbsp;&nbsp;&nbsp;Team 6</h2>
+            <h2>&nbsp;&nbsp;&nbsp;Customer</h2>
           </div>
           </div>
           
