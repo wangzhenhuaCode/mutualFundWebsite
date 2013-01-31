@@ -24,6 +24,7 @@
  <h2>Welcome, <s:property value="#session.employee.firstname" /></h2>
             
             <br />
+			<font color="red"><s:property value="errorInfo" /></font>
 			
 			<form method="post" action="<%=basePath%>/act/transaction_transact.action">
             
@@ -52,7 +53,7 @@
                 
             </table>
 			<br />
-                <font color="red"><s:property value="errorInfo" /></font>
+                
                 <span class="ButtonInput"><span align="center"><input type="submit" value="Update Transaction Day & Prices"/></span></span>
                 
                        
