@@ -47,7 +47,7 @@
             <div class="BlockContentBorderBorder"><div class="BlockContentBorderBL"><div></div></div><div class="BlockContentBorderBR"><div></div></div><div class="BlockContentBorderTL"></div><div class="BlockContentBorderTR"><div></div></div><div class="BlockContentBorderT"></div><div class="BlockContentBorderR"><div></div></div><div class="BlockContentBorderB"><div></div></div><div class="BlockContentBorderL"></div><div class="BlockContentBorderC"></div><div class="BlockContentBorder">
 
                 <ul>
-                    <li><a href="#">Change Profile</a></li>
+                    <li><a href="<%=basePath%>act/customer_gotoChangeProfile.action">Change Profile</a></li>
                     <li><a href="<%=basePath%>act/customer_gotoChangePassword.action">Change Password</a></li>
                     <li><a href="<%=basePath%>act/customer_logout.action">Log out</a></li>
                 </ul>

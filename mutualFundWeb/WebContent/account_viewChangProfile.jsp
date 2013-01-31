@@ -20,9 +20,9 @@
         </div>
 
 <jsp:include page="template-top2.jsp" />
-         <s:form method="post" action="act/employee_viewCustomerAccount.action" validate= "true" id="form">
+         <s:form method="post" action="act/customer_gotoChangeProfile.action" validate= "true" id="form">
          
-         <s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
+         <s:hidden name="customer.customerId" value="%{#session.customer.customerId}"></s:hidden>
        		
             <h2>View / Edit Profile</h2>
             <br />
@@ -32,8 +32,8 @@
                     <td><b>Last Name</b></td>
 				</tr>
 				<tr>
-                    <td><input type="text" value="<s:property value="customer.firstname"/>" name="customer.firstname" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
-                    <td><input type="text" value="<s:property value="customer.lastname"/>" name="customer.lastname" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+                    <td><input type="text" value="<s:property value="#session.customer.firstname"/>" name="customer.firstname" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+                    <td><input type="text" value="<s:property value="#session.customer.lastname"/>" name="customer.lastname" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
 				</tr>
 				
 				<tr>
@@ -41,8 +41,8 @@
                     <td><b>Address Line2</b></td>
 				</tr>
 				<tr>
-                    <td><input type="text" value="<s:property value="customer.addrLine1"/>" name="customer.addrLine1" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
-                    <td><input type="text" value="<s:property value="customer.addrLine2"/>" name="customer.addrLine2" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+                    <td><input type="text" value="<s:property value="#session.customer.addrLine1"/>" name="customer.addrLine1" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+                    <td><input type="text" value="<s:property value="#session.customer.addrLine2"/>" name="customer.addrLine2" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
 				</tr>
 				<tr>
                     <td><b>City</b></td>
@@ -50,6 +50,7 @@
                     <td><b>Zipcode</b></td>
 				</tr>
 				<tr>
+
                     <td><input type="text" value="<s:property value="customer.city"/>" name="customer.city" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
                     <td>
                     <select name="customer.state">
@@ -110,12 +111,13 @@
                     
                     </td>
                     <td><input type="text" value="<s:property value="customer.zip"/>" name="customer.zip" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+
 				</tr>
 				<tr>
                     <td><b>Balance</b></td>
 				</tr>
 				<tr>
-                    <td><input type="text" value="<s:property value="customer.cash"/>" name="customer.cash" style="border: 0px solid #000000; background-color: #f6f6f6;" disabled/></td>
+                    <td><input type="text" value="<s:property value="#session.customer.cash"/>" name="customer.cash" style="border: 0px solid #000000; background-color: #f6f6f6;" disabled/></td>
 				</tr>
 				
 			</table>

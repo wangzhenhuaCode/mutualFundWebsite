@@ -54,6 +54,10 @@ public class CustomerAction extends ActionSupport {
 
 	}
 
+	public String gotoChangeProfile(){
+		return "changeProfile";
+	}
+	
 	public String gotoChangePassword(){
 		return "resetPassword";
 	}
