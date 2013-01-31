@@ -119,29 +119,59 @@ public class EmployeeAction extends ActionSupport {
 		if(customer.getUsername()==null || customer.getUsername().trim().equals("")){
 			this.addFieldError("newAccount", "User Name cannot be empty");
 		}
+		if(customer.getUsername().length()>25) {
+			this.addFieldError("newAccount", "User Name should be less than 25 words");
+		}
 		if(customerDAO.findByProperty("username", customer.getUsername()).size()!=0){
 			this.addFieldError("newAccount", "The User Already Existed");
 		}
 		if(customer.getFirstname()==null || customer.getFirstname().trim().equals("")){
 			this.addFieldError("newAccount", "First Name cannot be empty");
 		}
-		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
-			this.addFieldError("newAccount", "Address Line1 cannot be empty");
-		}
-		if(customer.getCity()==null || customer.getCity().trim().equals("")){
-			this.addFieldError("newAccount", "City cannot be empty");
-		}
-		if(customer.getState()==null){
-			this.addFieldError("newAccount", "State cannot be empty");
+		if(customer.getFirstname().length()>20) {
+			this.addFieldError("newAccount", "First Name should be less than 25 words");
 		}
 		if(customer.getLastname()==null || customer.getLastname().trim().equals("")){
 			this.addFieldError("newAccount", "Last Name cannot be empty");
 		}
+		if(customer.getLastname().length()>20) {
+			this.addFieldError("newAccount", "Last Name should be less than 25 words");
+		}
+		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
+			this.addFieldError("newAccount", "Address Line1 cannot be empty");
+		}
+		if(customer.getAddrLine1().length()>200) {
+			this.addFieldError("newAccount", "Address Line1 is too long");
+		}
+		if(customer.getAddrLine2().length()>200) {
+			this.addFieldError("newAccount", "Address Line2 is too long");
+		}
+		if(customer.getCity()==null || customer.getCity().trim().equals("")){
+			this.addFieldError("newAccount", "City cannot be empty");
+		}
+		if(customer.getCity().length()>20) {
+			this.addFieldError("newAccount", "City Name is too long");
+		}
+		if(customer.getState()==null){
+			this.addFieldError("newAccount", "State cannot be empty");
+		}
+		if(customer.getState().length()>10) {
+			this.addFieldError("newAccount", "State Name is too long");
+		}
 		if(customer.getZip()==null || customer.getZip().equals("")){
 			this.addFieldError("newAccount", "Zip Code cannot be empty");
 		}
+		if(customer.getZip().length()>10) {
+			this.addFieldError("newAccount", "Zip Code is too long");
+		}
 		if(customer.getPassword()==null || customer.getPassword().trim().equals("")){
 			this.addFieldError("newAccount", "Password cannot be empty");
+		}
+		if(customer.getPassword().length()>20) {
+			this.addFieldError("newAccount", "Password is too long");
+		}
+		if(this.confirmCustomerPassword==null || this.confirmCustomerPassword.trim().equals("")){
+			this.addFieldError("newAccount", "ConfirmPassword cannot be empty");
 		}
 		String temp=customer.getPassword();
 		if(!temp.equals(this.confirmCustomerPassword)) {
@@ -197,31 +227,46 @@ public class EmployeeAction extends ActionSupport {
 	}
 	
 	public void validateViewCustomerAccount() {
-		if(customer.getUsername()==null || customer.getUsername().trim().equals("")){
-			this.addFieldError("newAccount", "User Name cannot be empty");
-		}
+		
 		if(customer.getFirstname()==null || customer.getFirstname().trim().equals("")){
 			this.addFieldError("newAccount", "First Name cannot be empty");
 		}
-		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
-			this.addFieldError("newAccount", "Address Line1 cannot be empty");
-		}
-		if(customer.getCity()==null || customer.getCity().trim().equals("")){
-			this.addFieldError("newAccount", "City cannot be empty");
-		}
-		if(customer.getState()==null){
-			this.addFieldError("newAccount", "State cannot be empty");
+		if(customer.getFirstname().length()>20) {
+			this.addFieldError("newAccount", "First Name should be less than 20 words");
 		}
 		if(customer.getLastname()==null || customer.getLastname().trim().equals("")){
 			this.addFieldError("newAccount", "Last Name cannot be empty");
 		}
+		if(customer.getLastname().length()>20) {
+			this.addFieldError("newAccount", "Last Name should be less than 20 words");
+		}
+		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
+			this.addFieldError("newAccount", "Address Line1 cannot be empty");
+		}
+		if(customer.getAddrLine1().length()>200) {
+			this.addFieldError("newAccount", "The Address Line1 is too long");
+		}
+		if(customer.getAddrLine2().length()>200) {
+			this.addFieldError("newAccount", "The Address Line2 is too long");
+		}
+		if(customer.getCity()==null || customer.getCity().trim().equals("")){
+			this.addFieldError("newAccount", "City cannot be empty");
+		}
+		if(customer.getCity().length()>20) {
+			this.addFieldError("newAccount", "The City Name is too long");
+		}
+		if(customer.getState()==null){
+			this.addFieldError("newAccount", "State cannot be empty");
+		}
+		if(customer.getState().length()>10) {
+			this.addFieldError("newAccount", "The State Name is too long");
+		}
 		if(customer.getZip()==null || customer.getZip().equals("")){
 			this.addFieldError("newAccount", "Zip Code cannot be empty");
 		}
-		if(customer.getPassword()==null || customer.getPassword().trim().equals("")){
-			this.addFieldError("newAccount", "Password cannot be empty");
+		if(customer.getZip().length()>10) {
+			this.addFieldError("newAccount", "The Zipcode is too long");
 		}
-		
 	}
 	
 	public String goToResetCustomerPassword() {
@@ -240,6 +285,10 @@ public class EmployeeAction extends ActionSupport {
 		if(newCustomerPassword==null ||confirmCustomerPassword==null){
 			this.addFieldError("changePassword", "Password Can Not Be Empty");
 			customer = customerDAO.findById(customer.getCustomerId());
+			return;
+		}
+		if(newCustomerPassword.length()>30 || confirmCustomerPassword.length()>30){
+			this.addFieldError("changePassword", "Password Can Not Be So Long");
 			return;
 		}
 		
@@ -295,17 +344,32 @@ public class EmployeeAction extends ActionSupport {
 		if(employee.getUsername()==null || employee.getUsername().trim().equals("")){
 			this.addFieldError("newAccount", "User Name cannot be empty");
 		}
+		if(employee.getUsername().length()>25) {
+			this.addFieldError("newAccount", "The User Name is too long");
+		}
 		if(employeeDAO.findByProperty("username", employee.getUsername()).size()!=0){
 			this.addFieldError("newAccount", "The User Already Existed");
 		}
 		if(employee.getFirstname()==null || employee.getFirstname().trim().equals("")){
 			this.addFieldError("newAccount", "First Name cannot be empty");
 		}
+		if(employee.getFirstname().length()>20) {
+			this.addFieldError("newAccount", "The First Name is too long");
+		}
 		if(employee.getLastname()==null || employee.getLastname().trim().equals("")){
 			this.addFieldError("newAccount", "Last Name cannot be empty");
 		}
+		if(employee.getLastname().length()>20) {
+			this.addFieldError("newAccount", "The Last Name is too long");
+		}
 		if(employee.getPassword()==null || employee.getPassword().trim().equals("")){
 			this.addFieldError("newAccount", "Password cannot be empty");
+		}
+		if(this.confirmPassword==null || this.confirmPassword.trim().equals("")){
+			this.addFieldError("newAccount", "ConfirmPassword cannot be empty");
+		}
+		if(employee.getPassword().length()>30) {
+			this.addFieldError("newAccount", "The Password is too long");
 		}
 		String temp=employee.getPassword();
 		if(!temp.equals(this.confirmPassword)) {
