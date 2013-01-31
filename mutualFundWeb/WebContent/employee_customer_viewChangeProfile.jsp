@@ -26,6 +26,7 @@
        		<s:hidden name="customer.password" value="%{customer.password}"></s:hidden>
        		<s:hidden name="customer.cash" value="%{customer.cash}"></s:hidden>
        		
+       		
             <h2>View / Edit Profile</h2>
             <br />
 			<table>
