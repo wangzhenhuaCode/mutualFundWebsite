@@ -51,10 +51,10 @@
 				</tr>
 				<tr>
 
-                    <td><input type="text" value="<s:property value="customer.city"/>" name="customer.city" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+                    <td><input type="text" value="<s:property value="#session.customer.city"/>" name="customer.city" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
                     <td>
                     <select name="customer.state">
-                    <option value="<s:property value="customer.state"/>"><s:property value="customer.state"/></option>
+                    <option value="<s:property value="#session.customer.state"/>"><s:property value="#session.customer.state"/></option>
 						<option value="AL">AL</option>
 						<option value="AK">AK</option>
 						<option value="AZ">AZ</option>
@@ -110,7 +110,7 @@
 					</select>
                     
                     </td>
-                    <td><input type="text" value="<s:property value="customer.zip"/>" name="customer.zip" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
+                    <td><input type="text" value="<s:property value="#session.customer.zip"/>" name="customer.zip" style="border: 0px solid #000000; background-color: #f6f6f6;"/></td>
 
 				</tr>
 				<tr>
