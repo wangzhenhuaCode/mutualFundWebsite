@@ -44,7 +44,7 @@ public class EmployeeAction extends ActionSupport {
 	@InputConfig(resultName="employeeFailureLogin")
 	public String login(){
 		
-		//password=getMD5Str(password);
+		password=getMD5Str(password);
 		List<Employee> list=employeeDAO.findByProperty("username", username);
 		if(list.size()==0){
 			this.addFieldError("username", "Username error!");
@@ -54,6 +54,8 @@ public class EmployeeAction extends ActionSupport {
 			ActionContext ctx=ActionContext.getContext();
 			Map<String,Object> session=ctx.getSession();
 			session.put("employee", list.get(0));
+			if(session.containsKey("customer"))
+				session.remove("customer");
 			return "employeeSucessLogin";
 		}
 		else{
@@ -105,7 +107,10 @@ public class EmployeeAction extends ActionSupport {
     }  
 	@InputConfig(resultName="goToAddNewCustomerAccount")
 	public String createCustomerAccount(){
+		String password=customer.getPassword();
+		customer.setPassword(getMD5Str(password));
 		customer.setCash((long)0);
+		customer.setPendingCash(0L);
 		customerDAO.save(customer);
 		return "addNewCustomerSuccess";
 		
