@@ -138,18 +138,34 @@ public class EmployeeAction extends ActionSupport {
 	}
 	
 	public void validateViewCustomerAccount() {
-		if(customer.getUsername().trim().length()==0)
-			this.addFieldError("viewCustomerAccount", "User Name Cannot Be Empty");
-		if(customer.getFirstname().trim().length()==0)
-			this.addFieldError("viewCustomerAccount", "First Name Cannot Be Empty");
-		if(customer.getLastname().trim().length()==0)
-			this.addFieldError("viewCustomerAccount", "Last Name Cannot Be Empty");
-		if(customer.getAddrLine1().trim().length()==0)
-			this.addFieldError("viewCustomerAccount", "Address Line1 Cannot Be Empty");
-		if(customer.getCity().trim().length()==0)
-			this.addFieldError("viewCustomerAccount", "City Cannot Be Empty");
+		if(customer.getUsername()==null || customer.getUsername().trim().equals("")){
+			this.addFieldError("newAccount", "User Name cannot be empty");
+		}
+		if(customerDAO.findByProperty("username", customer.getUsername()).size()!=0){
+			this.addFieldError("newAccount", "The User Already Existed");
+		}
+		if(customer.getFirstname()==null || customer.getFirstname().trim().equals("")){
+			this.addFieldError("newAccount", "First Name cannot be empty");
+		}
+		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
+			this.addFieldError("newAccount", "Address Line1 cannot be empty");
+		}
+		if(customer.getCity()==null || customer.getCity().trim().equals("")){
+			this.addFieldError("newAccount", "City cannot be empty");
+		}
+		if(customer.getState()==null){
+			this.addFieldError("newAccount", "State cannot be empty");
+		}
+		if(customer.getLastname()==null || customer.getLastname().trim().equals("")){
+			this.addFieldError("newAccount", "Last Name cannot be empty");
+		}
+		if(customer.getZip()==null || customer.getZip().equals("")){
+			this.addFieldError("newAccount", "Zip Code cannot be empty");
+		}
+		if(customer.getPassword()==null || customer.getPassword().trim().equals("")){
+			this.addFieldError("newAccount", "Password cannot be empty");
+		}
 		
-		customer = customerDAO.findById(customer.getCustomerId());
 	}
 	
 	public String goToResetCustomerPassword() {
