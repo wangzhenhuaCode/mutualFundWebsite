@@ -49,14 +49,9 @@ public class CustomerAction extends ActionSupport {
 		Map<String, Object> session = ctx.getSession();
 		Customer c=null;
 		c = (Customer) session.get("customer");
-		if (newCustomerPassword.equals(confirmCustomerPassword)) {
-			c.setPassword(newCustomerPassword);
-			customerDAO.update(c);
-			return "customerSucessChangePassword";
-		} else {
-			errorInfo = "Password Error";
-			return "customerFailureChangePassword";
-		}
+		c.setPassword(newCustomerPassword);
+		customerDAO.update(c);
+		return "customerSucessChangePassword";
 
 	}
 

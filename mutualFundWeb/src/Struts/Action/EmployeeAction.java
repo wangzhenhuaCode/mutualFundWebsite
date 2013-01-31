@@ -161,14 +161,9 @@ public class EmployeeAction extends ActionSupport {
 		Map<String,Object> session=ctx.getSession();
 		Employee e=null;
 		e=(Employee)session.get("employee");
-		if(newPassword.equals(confirmPassword)){
-			e.setPassword(newPassword);
-			employeeDAO.update(e);
-			return "employeeSucessChangePassword";
-		}else{
-			errorInfo="Password Error";
-			return "employeeFailureChangePassword";
-		}
+		e.setPassword(newPassword);
+		employeeDAO.update(e);
+		return "employeeSucessChangePassword";
 	}
 	
 	public String goToChangepassword(){
