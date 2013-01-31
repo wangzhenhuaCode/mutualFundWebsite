@@ -92,7 +92,8 @@
         </p>
         <p>
             <h2>Fund Description.</h2>
-            <s:property value="fund.description" />
+            <br />
+            <blockquote><s:property value="fund.description" /></blockquote>
         </p>
         <p>
             <h2>Fund Position</h2>
