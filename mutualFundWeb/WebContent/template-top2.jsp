@@ -48,7 +48,7 @@
 
                 <ul>
                     <li><a href="#">Change Profile</a></li>
-                    <li><a href="#">Change Password</a></li>
+                    <li><a href="<%=basePath%>act/customer_gotoChangePassword.action">Change Password</a></li>
                     <li><a href="<%=basePath%>act/customer_logout.action">Log out</a></li>
                 </ul>
 

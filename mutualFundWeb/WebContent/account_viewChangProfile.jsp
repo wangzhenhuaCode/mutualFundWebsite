@@ -21,10 +21,8 @@
 
 <jsp:include page="template-top2.jsp" />
          <s:form method="post" action="act/employee_viewCustomerAccount.action" validate= "true" id="form">
-            <s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
-       		<s:hidden name="customer.username" value="%{customer.username}"></s:hidden>
-       		<s:hidden name="customer.password" value="%{customer.password}"></s:hidden>
-       		<s:hidden name="customer.cash" value="%{customer.cash}"></s:hidden>
+         
+         <s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
        		
             <h2>View / Edit Profile</h2>
             <br />
