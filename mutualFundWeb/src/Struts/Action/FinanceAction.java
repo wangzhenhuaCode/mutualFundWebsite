@@ -52,13 +52,18 @@ public class FinanceAction extends ActionSupport {
 			transactionList=transactionDAO.findByProperty("customer", customer);
 			return;
 		}
+		if(amount>Transaction.MAX_TRANSACTION_AMOUNT){
+			this.addFieldError("amount", "Amount should be less than 1 billion");
+			transactionList=transactionDAO.findByProperty("customer", customer);
+			return;
+		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
 		if(amount<0.01) {
 			this.addFieldError("amount", "Amount can not be negative or too small");
 			transactionList=transactionDAO.findByProperty("customer", customer);
-			
+			return;
 		}
 		if(amount*100>customer.getCash()+customer.getPendingCash()){
 			this.addFieldError("amount", "Amount exceeds current balance");
@@ -102,10 +107,17 @@ public class FinanceAction extends ActionSupport {
 		if(amount==null){
 			this.addFieldError("amount", "Amount can not be null");
 			customer=customerDAO.findById(customer.getCustomerId());
+			return;
 		}
-		else if(amount<0.01) {
+		if(amount<0.01) {
 			this.addFieldError("amount", "Amount can not be negative or too small");
 			customer=customerDAO.findById(customer.getCustomerId());
+			return;
+		}
+		if(amount>Transaction.MAX_TRANSACTION_AMOUNT){
+			this.addFieldError("amount", "Amount should be less than 1 billion");
+			customer=customerDAO.findById(customer.getCustomerId());
+			return;
 		}
 	}
 	

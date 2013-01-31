@@ -16,6 +16,9 @@ public class Transaction implements java.io.Serializable {
 	public static Integer PENDING_DEPOSIT=6;
 	public static Integer WITHDRAW=7;
 	public static Integer PENDING_WITHDRAW=8;
+	
+	public static Long MAX_TRANSACTION_AMOUNT= 100000000000L;
+	public static Long MAX_TRANSACTION_SHARE=1000000000000L;
 	// Fields
 
 	private Integer transactionId;

@@ -52,7 +52,7 @@
             <h3>Current Balance: <s:property value="#session.customer.currentCash" /></h3>
                
             <br />
-			
+			<h3>Available Balance: <s:property value="#session.customer.available" /></h3>
 			<div class="amount">
 			Amount:&nbsp;<input type="text" name="amount" style="width: 190px;" >
 			</div>

@@ -87,6 +87,11 @@ public class TradeAction extends ActionSupport {
 			research();
 			return;
 		}
+		if(amount>Transaction.MAX_TRANSACTION_AMOUNT){
+			this.addFieldError("amount", "Amount should be less than 1 billion");
+			research();
+			return;
+		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
@@ -130,9 +135,12 @@ public class TradeAction extends ActionSupport {
 			return;
 		}
 		if(shares<0.001){
-			this.addFieldError("shares", "Invalid shares");
+			this.addFieldError("shares", "Share should be less than 1 billion");
 			research();
 			return;
+		}
+		if(shares>Transaction.MAX_TRANSACTION_SHARE){
+			
 		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
