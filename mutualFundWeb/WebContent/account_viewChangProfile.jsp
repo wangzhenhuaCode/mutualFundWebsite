@@ -125,7 +125,7 @@
 			</table>
             Click field to change the value.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span class="ButtonInput"><span><input type="submit" value="Update" /></span></span>&nbsp;&nbsp;&nbsp;
-            <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
+            <a href="<%=basePath%>act/trade_showPosition.action" class="Button"><span>Cancel</span></a>
            	<s:fielderror/>
            </s:form>
             

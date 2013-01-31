@@ -39,7 +39,7 @@
 		</table>
        <div align = "right" style="margin-right:280px;">
             <span class="ButtonInput"><span align="center"><input type="submit" value="Reset"/></span></span>
-           <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
+           <a href="<%=basePath%>act/trade_showPosition.action" class="Button"><span>Cancel</span></a>
 		</div>
 		<s:fielderror/>
 		</s:form>
