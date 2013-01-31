@@ -17,7 +17,7 @@
 <jsp:include page="employee_template-top2.jsp" />
 
             <form method="post" action="<%=basePath%>act/employee_viewTransactionHistory.action">
-            <h2><s:property value="customer.firstname"/> <s:property value="customer.lastName"/>'s Transaction History</h2>
+            <h2><s:property value="customer.firstname"/> <s:property value="customer.lastname"/>'s Transaction History</h2>
             
             <p>
             <br />
