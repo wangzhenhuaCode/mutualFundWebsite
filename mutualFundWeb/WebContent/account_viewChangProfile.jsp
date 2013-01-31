@@ -20,10 +20,12 @@
         </div>
 
 <jsp:include page="template-top2.jsp" />
-         <s:form method="post" action="act/customer_gotoChangeProfile.action" validate= "true" id="form">
-         
+         <s:form method="post" action="act/customer_changeProfile.action" validate= "true" id="form">
+       		<s:hidden name="customer.username" value="%{#session.customer.username}"></s:hidden>
+       		<s:hidden name="customer.password" value="%{#session.customer.password}"></s:hidden>
+       		<s:hidden name="customer.cash" value="%{#session.customer.cash}"></s:hidden>
          <s:hidden name="customer.customerId" value="%{#session.customer.customerId}"></s:hidden>
-       		
+       		<s:hidden name="customer.version" value="%{#session.customer.version}"></s:hidden>
             <h2>View / Edit Profile</h2>
             <br />
 			<table>
