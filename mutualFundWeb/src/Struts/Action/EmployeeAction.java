@@ -141,9 +141,6 @@ public class EmployeeAction extends ActionSupport {
 		if(customer.getUsername()==null || customer.getUsername().trim().equals("")){
 			this.addFieldError("newAccount", "User Name cannot be empty");
 		}
-		if(customerDAO.findByProperty("username", customer.getUsername()).size()!=0){
-			this.addFieldError("newAccount", "The User Already Existed");
-		}
 		if(customer.getFirstname()==null || customer.getFirstname().trim().equals("")){
 			this.addFieldError("newAccount", "First Name cannot be empty");
 		}
