@@ -71,6 +71,7 @@
         </p>
         <p>
             <h2>Fund Description.</h2>
+            <br />
             <blockquote><s:property value="fund.description" /></blockquote>
         </p>
         <p>
