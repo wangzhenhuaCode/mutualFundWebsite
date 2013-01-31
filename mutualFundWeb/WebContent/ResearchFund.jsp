@@ -12,11 +12,12 @@
     <script src="js/ui/js/jquery-ui-1.9.2.custom.js"></script>
     <script type="text/javascript">
     
-        $(function() {<s:if test="position.available>0" > 
+        $(function() {
+        	<s:if test="position.availableShare>0" > 
           $( "#sellSlider" ).slider({
                                           range: "max",
                                           min: 0,
-                                          max:  <s:property value="position.available" />,
+                                          max:  <s:property value="position.availableShare" />,
                                           value: 0,
                                           slide: function( event, ui ) {
                                           $( "#sellField" ).val( ui.value );
@@ -24,11 +25,11 @@
                                           });
           $( "#sellField" ).val( $( "#sellSlider" ).slider( "value" ) );
      </s:if>     
-     <s:if test="#session.customer.available>0" >     
+     <s:if test="#session.customer.availableCash>0" >     
           $( "#buySlider" ).slider({
                                     range: "max",
                                     min: 0,
-                                    max: <s:property value="#session.customer.available" />,
+                                    max: <s:property value="#session.customer.availableCash" />,
                                     value: 0,
                                     slide: function( event, ui ) {
                                     $( "#buyField" ).val( ui.value );
@@ -140,7 +141,7 @@
             </p>-->
          <p><h2>Transaction</h2>
          <font color="red"><s:property value="errorInfo" /></font>
-         <s:if test="position.available>0" > 
+         <s:if test="position.availableShare>0" > 
          <form method="post" action="act/trade_sell.action" >
           <s:hidden name="fund.fundId" value="%{fund.fundId}"></s:hidden>
             <div id="sellDiv">
@@ -156,7 +157,7 @@
             </div>
            </form>
            </s:if>
-            <s:if test="#session.customer.available>0" > 
+            <s:if test="#session.customer.availableCash>0" > 
            <form method="post" action="act/trade_buy.action">
            <s:hidden name="fund.fundId" value="%{fund.fundId}"></s:hidden>
             <div id="buyDiv" style="margin-top:20px;">

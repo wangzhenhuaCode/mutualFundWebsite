@@ -126,6 +126,7 @@ public class TradeAction extends ActionSupport {
 			research();
 			return "gotoResearch";
 		}
+		session.put("customer", customer);
 		return "success";
 	}
 	public void validateSell(){
