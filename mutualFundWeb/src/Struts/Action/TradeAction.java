@@ -199,8 +199,17 @@ public class TradeAction extends ActionSupport {
 			this.addFieldError("name", "Empty fund name");
 			fundlist=fundDAO.findAll();
 		}
+		if(fund.getName().length()>40){
+			this.addFieldError("name", "Name should be within 40 characters");
+			fundlist=fundDAO.findAll();
+		}
 		if(fund.getSymbol()==null||fund.getSymbol().equals("")){
 			this.addFieldError("symbol", "Empty fund symbol");
+			if(fundlist==null)
+				fundlist=fundDAO.findAll();
+		}
+		if(fund.getSymbol().length()>40){
+			this.addFieldError("symbol", "Symbol should be within 40 characters");
 			if(fundlist==null)
 				fundlist=fundDAO.findAll();
 		}

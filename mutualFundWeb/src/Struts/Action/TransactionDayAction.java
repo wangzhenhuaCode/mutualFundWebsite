@@ -60,19 +60,26 @@ public class TransactionDayAction extends ActionSupport{
 			return "failureTrans";}
 		List<FundPriceHistory> pricelist=new ArrayList<FundPriceHistory>();
 		for(int i=0;i<fundlist.size();i++){
+			FundPriceHistory instance;
+			Long p;
 			try{
-				FundPriceHistory instance=new FundPriceHistory();
-				Long p=(long)(Double.valueOf(newPrices[i])*100);
+				instance=new FundPriceHistory();
+				p=(long)(Double.valueOf(newPrices[i])*100);
+				if(p>Transaction.MAX_TRANSACTION_AMOUNT){
+					errorInfo="price should be less than 1 billion";
+					return "failureTrans";
+				}
+			}catch(Exception e){
+				errorInfo="Please fill price for all funds with valid price";
+				return "failureTrans";
+			}
 				instance.setPrice(p);
 				FundPriceHistoryId id=new FundPriceHistoryId();
 				id.setFund(fundlist.get(i));
 				id.setPriceDate(date);
 				instance.setId(id);
 				pricelist.add(instance);
-			}catch(Exception e){
-				errorInfo="Please fill price for all funds";
-				return "failureTrans";
-			}
+			
 			
 		}
 		if(!transactionDAO.transactionDay(buylist, selllist, depositlist, withdrawlist, pricelist,date)){
