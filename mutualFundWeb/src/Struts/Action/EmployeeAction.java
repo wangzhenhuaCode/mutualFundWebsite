@@ -59,7 +59,6 @@ public class EmployeeAction extends ActionSupport {
 	}
 	@InputConfig(resultName="goToAddNewCustomerAccount")
 	public String createCustomerAccount(){
-		errorInfo="";
 		customer.setCash((long)0);
 		customerDAO.save(customer);
 		return "addNewCustomerSuccess";
@@ -222,6 +221,18 @@ public class EmployeeAction extends ActionSupport {
 			this.customer = list.get(0);
 			return "viewCustomerSuccess";
 		}
+	}
+	public String goToCreateEmployeeAccount() {
+		return "goToCreateEmployeeAccount";
+	}
+	
+	@InputConfig(resultName="goToResetCustomerPassword")
+	public String createEmployeeAccount(){
+		employeeDAO.save(employee);
+		return "createEmployeeAccountSuccess";
+	}
+	public void validateCreateEmployeeAccount(){
+		
 	}
 	
 	public String homePage(){
