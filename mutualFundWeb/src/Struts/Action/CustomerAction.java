@@ -12,6 +12,8 @@ public class CustomerAction extends ActionSupport {
 	private ICustomerDAO customerDAO;
 	private Customer customer;
 	private String newPassword;
+	private String newCustomerPassword;
+	private String confirmCustomerPassword;
 	private String errorInfo;
 	private String username;
 	private String password;
@@ -40,8 +42,8 @@ public class CustomerAction extends ActionSupport {
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
 		Customer c = (Customer) session.get("customer");
-		if (c.getPassword().equals(customer.getPassword())) {
-			c.setPassword(newPassword);
+		if (newCustomerPassword.equals(confirmCustomerPassword)) {
+			c.setPassword(newCustomerPassword);
 			customerDAO.update(c);
 			return "customerSucessChangePassword";
 		} else {
@@ -51,6 +53,10 @@ public class CustomerAction extends ActionSupport {
 
 	}
 
+	public String gotoChangePassword(){
+		return "resetPassword";
+	}
+	
 	public String logout() {
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
@@ -72,6 +78,14 @@ public class CustomerAction extends ActionSupport {
 
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
+	}
+	
+	public void setNewCustomerPassword(String newCustomerPassword) {
+		this.newCustomerPassword = newCustomerPassword;
+	}
+	
+	public void setConfirmCustomerPassword(String confirmCustomerPassword) {
+		this.confirmCustomerPassword = confirmCustomerPassword;
 	}
 
 	public void setUsername(String username) {
