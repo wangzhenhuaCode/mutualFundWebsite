@@ -14,6 +14,8 @@ public interface IBaseHibernateDAO<T> {
 
 	public void delete(T object);
 	
+	public void flush();
+	
 	public T load(Class c, Serializable id);
 	
 	public Integer count(String property, String value);

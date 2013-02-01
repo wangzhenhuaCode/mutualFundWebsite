@@ -116,6 +116,7 @@ public class CustomerAction extends ActionSupport {
 		customer.setPassword(oldcustomer.getPassword());
 		customer.setPendingCash(oldcustomer.getPendingCash());
 		customerDAO.merge(customer);
+		session.put("customer", customer);
 		return "changeProfileSuccess";
 	}
 	

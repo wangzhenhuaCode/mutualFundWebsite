@@ -28,6 +28,13 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 			throw re;
 		}
 	}
+	public void flush() {
+		try {
+			getHibernateTemplate().flush();
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
 
 	public void update(T object) {
 		try {
