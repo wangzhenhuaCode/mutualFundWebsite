@@ -82,10 +82,12 @@
 
 <jsp:include page="template-top2.jsp" />
 
-        <h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="fund.todayPrice" /> &nbsp;&nbsp;&nbsp;<img src="images/up.png" height="20"/>&nbsp;<span style="color:green;"><s:property value="fund.percentage" />%</span></h2>
+		<s:if test="fund.percentage>0"><h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="fund.todayPrice" /> &nbsp;&nbsp;&nbsp;<img src="images/up.png" height="20"/>&nbsp;<span style="color:green;"><s:property value="fund.percentage" />%</span></h2></s:if>
+        <s:if test="fund.percentage<0"><h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="fund.todayPrice" /> &nbsp;&nbsp;&nbsp;<img src="images/down.png" height="20"/>&nbsp;<span style="color:red;"><s:property value="fund.percentage" />%</span></h2></s:if>
+        <s:if test="fund.percentage==0"><h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="fund.todayPrice" /> &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black;"><s:property value="fund.percentage" />%</span></h2></s:if>
+		<s:if test="fund.percentage==null"><h2 style="margin-bottom:10px;"><s:property value="fund.name" /> (<s:property value="fund.symbol" />)&nbsp;&nbsp;&nbsp;&nbsp;<s:property value="fund.todayPrice" /> &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:black;"><s:property value="fund.percentage" />0.00%</span></h2></s:if>
 
-        <p>
-            
+        <p>    
             <script src="js/highstock.js"></script>
             <script src="js/exporting.js"></script>
             <div id="container" style="height: 500px; min-width: 500px"></div>            
