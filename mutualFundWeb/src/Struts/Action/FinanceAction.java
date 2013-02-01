@@ -31,7 +31,7 @@ public class FinanceAction extends ActionSupport {
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_WITHDRAW);
 		transaction.setAmount((long)(Math.round(amount*(-100))));
-		transaction.setExecuteDate(new Date());
+		transaction.setExecuteDate(null);
 		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		long pending=customer.getPendingCash();
 		pending+=(long)(Math.round(amount*(-100)));
@@ -91,11 +91,8 @@ public class FinanceAction extends ActionSupport {
 		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
 		transaction.setAmount((long)(Math.round(amount*100)));
-		transaction.setExecuteDate(new Date());
+		transaction.setExecuteDate(null);
 
-		long pending=customer.getPendingCash();
-		pending+=(long)(Math.round(amount*(100)));
-		customer.setPendingCash(pending);
 
 		transaction.setCustomer(customer);
 		if(!transactionDAO.operateTransaction(transaction, customer)){

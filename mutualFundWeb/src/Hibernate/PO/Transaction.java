@@ -141,7 +141,10 @@ public class Transaction implements java.io.Serializable {
 	}
 	public String getCurrentDate(){
 		SimpleDateFormat sdf=new SimpleDateFormat("MMM dd, yyyy");
+		if(executeDate!=null)
 		return sdf.format(executeDate);
+		else
+			return "Pending";
 	}
 
 	public Integer getVersion() {

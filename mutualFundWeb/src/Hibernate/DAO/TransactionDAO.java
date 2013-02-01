@@ -39,7 +39,7 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 		try {
 			String queryString = "from " + entityName
 
-					+" order by executeDate desc";
+					+" where executeDate!=null  order by executeDate desc";
 
 			List<Transaction> list=getHibernateTemplate().find(queryString);
 			if(list.size()>0){

@@ -47,7 +47,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_BUY);
 		transaction.setAmount((long)(Math.round(amount*(-100))));
 		transaction.setShares((long)0);
-		transaction.setExecuteDate(new Date());
+		transaction.setExecuteDate(null);
 		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.findById(pid);
@@ -119,7 +119,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_SELL);
 		transaction.setShares((long)(shares*1000));
 		transaction.setAmount((long)0);
-		transaction.setExecuteDate(new Date());
+		transaction.setExecuteDate(null);
 		transaction.setPosition(p);
 		if(!transactionDAO.operateTransaction(transaction, p)){
 			this.addFieldError("operation", "System busy, please try again");

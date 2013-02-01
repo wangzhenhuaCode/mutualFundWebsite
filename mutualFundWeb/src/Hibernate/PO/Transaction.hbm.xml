@@ -20,7 +20,7 @@
             <column name="customer_id"/>
         </many-to-one>
         <property name="executeDate" type="java.util.Date">
-            <column name="execute_date" length="10" not-null="true" />
+            <column name="execute_date" length="10"  />
         </property>
         <property name="shares" type="java.lang.Long">
             <column name="shares" />
