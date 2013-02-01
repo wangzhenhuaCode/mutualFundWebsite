@@ -22,7 +22,7 @@
   });
   </script>
  <h2>Welcome, <s:property value="#session.employee.firstname" /></h2>
-            
+          Current Day: <s:property value="#application.today" />  
             <br />
 			<font color="red"><s:property value="errorInfo" /></font>
 			

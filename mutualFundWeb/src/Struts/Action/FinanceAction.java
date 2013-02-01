@@ -25,13 +25,14 @@ public class FinanceAction extends ActionSupport {
 	public String requestCheck(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
+		Map<String, Object> application = ctx.getSession();
 		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		Transaction transaction=new Transaction();
 	
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_WITHDRAW);
 		transaction.setAmount((long)(Math.round(amount*(-100))));
-		transaction.setExecuteDate(null);
+		transaction.setExecuteDate((Date) application.get("today"));
 		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		long pending=customer.getPendingCash();
 		pending+=(long)(Math.round(amount*(-100)));
@@ -91,7 +92,10 @@ public class FinanceAction extends ActionSupport {
 		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
 		transaction.setAmount((long)(Math.round(amount*100)));
-		transaction.setExecuteDate(null);
+		ActionContext ctx=ActionContext.getContext();
+		Map<String, Object> application = ctx.getSession();
+		transaction.setExecuteDate((Date) application.get("today"));
+		
 
 
 		transaction.setCustomer(customer);

@@ -3,12 +3,16 @@ package Struts.Action;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import Hibernate.DAO.ICustomerDAO;
 import Hibernate.DAO.IEmployeeDAO;
 import Hibernate.DAO.IFundDAO;
+import Hibernate.DAO.IFundPriceHistoryDAO;
 import Hibernate.DAO.ITransactionDAO;
 import Hibernate.PO.Customer;
 import Hibernate.PO.Employee;
@@ -22,6 +26,7 @@ import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 public class EmployeeAction extends ActionSupport {
 	private IEmployeeDAO employeeDAO;
 	private ICustomerDAO customerDAO;
+	private IFundPriceHistoryDAO fundPriceHistoryDAO;
 	private Customer customer;
 	private Employee employee;
 	
@@ -53,9 +58,13 @@ public class EmployeeAction extends ActionSupport {
 		if(list.get(0).getPassword().equals(password)){
 			ActionContext ctx=ActionContext.getContext();
 			Map<String,Object> session=ctx.getSession();
+			Map<String, Object> application = ctx.getSession();
 			session.put("employee", list.get(0));
 			if(session.containsKey("customer"))
 				session.remove("customer");
+			if(!application.containsKey("today")){
+				 updateToday();
+			}
 			return "employeeSucessLogin";
 		}
 		else{
@@ -489,5 +498,36 @@ public class EmployeeAction extends ActionSupport {
 	}
 	public Employee getEmployee() {
 		return employee;
+	}
+	private void updateToday(){
+		ActionContext ctx = ActionContext.getContext();
+		Map<String, Object> application = ctx.getSession();
+		Date td=transactionDAO.findLastTransitionDay();
+		Date fd=fundPriceHistoryDAO.findLastTransitionDay();
+		if(td==null&&fd==null){
+			try {
+				application.put("today", (new SimpleDateFormat("yyyy-MM-dd")).parse("1900-01-01"));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(fd==null){
+			application.put("today", td);
+		}else if(td==null){
+			application.put("today", fd);
+		}else{
+			if(td.after(fd)){
+				application.put("today", td);
+			}else{
+				application.put("today", fd);
+			}
+		}
+	}
+	public void setFundPriceHistoryDAO(IFundPriceHistoryDAO fundPriceHistoryDAO) {
+		this.fundPriceHistoryDAO = fundPriceHistoryDAO;
+	}
+	public void setTransactionDAO(ITransactionDAO transactionDAO) {
+		this.transactionDAO = transactionDAO;
 	}
 }

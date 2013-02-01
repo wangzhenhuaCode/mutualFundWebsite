@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import Hibernate.DAO.IFundDAO;
+import Hibernate.DAO.IFundPriceHistoryDAO;
 import Hibernate.DAO.IPositionDAO;
 import Hibernate.DAO.ITransactionDAO;
 import Hibernate.PO.Fund;
@@ -24,6 +25,7 @@ public class TransactionDayAction extends ActionSupport{
 	private IFundDAO fundDAO;
 	private IPositionDAO positionDAO;
 	private ITransactionDAO transactionDAO;
+	private IFundPriceHistoryDAO fundPriceHistoryDAO;
 	private List<Fund> fundlist;
 	private String[] newPrices;
 	private String datestring;
@@ -95,8 +97,25 @@ public class TransactionDayAction extends ActionSupport{
 			return "failureTrans";
 		}
 		Date td=transactionDAO.findLastTransitionDay();
-		if(td!=null){
+		Date fd=fundPriceHistoryDAO.findLastTransitionDay();
+		if(td==null&&fd==null){
+			try {
+				application.put("today", (new SimpleDateFormat("yyyy-MM-dd")).parse("1900-01-01"));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(fd==null){
 			application.put("today", td);
+		}else if(td==null){
+			application.put("today", fd);
+		}else{
+			if(td.after(fd)){
+				application.put("today", td);
+			}else{
+				application.put("today", fd);
+			}
 		}
 		application.put("transitionLock", false);
 		return "successTrans";
@@ -123,5 +142,8 @@ public class TransactionDayAction extends ActionSupport{
 	}
 	public String getErrorInfo() {
 		return errorInfo;
+	}
+	public void setFundPriceHistoryDAO(IFundPriceHistoryDAO fundPriceHistoryDAO) {
+		this.fundPriceHistoryDAO = fundPriceHistoryDAO;
 	}
 }

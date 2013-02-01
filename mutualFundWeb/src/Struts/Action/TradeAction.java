@@ -39,6 +39,7 @@ public class TradeAction extends ActionSupport {
 		try{
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
+		Map<String, Object> application = ctx.getSession();
 		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 
 		Transaction transaction=new Transaction();
@@ -47,7 +48,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_BUY);
 		transaction.setAmount((long)(Math.round(amount*(-100))));
 		transaction.setShares((long)0);
-		transaction.setExecuteDate(null);
+		transaction.setExecuteDate((Date) application.get("today"));
 		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.findById(pid);
@@ -105,6 +106,7 @@ public class TradeAction extends ActionSupport {
 		
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
+		Map<String, Object> application = ctx.getSession();
 		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
@@ -119,7 +121,7 @@ public class TradeAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_SELL);
 		transaction.setShares((long)(shares*1000));
 		transaction.setAmount((long)0);
-		transaction.setExecuteDate(null);
+		transaction.setExecuteDate((Date) application.get("today"));
 		transaction.setPosition(p);
 		if(!transactionDAO.operateTransaction(transaction, p)){
 			this.addFieldError("operation", "System busy, please try again");
@@ -151,7 +153,6 @@ public class TradeAction extends ActionSupport {
 		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
-		long shares=p.getShares();
 		if((p.getShares()-p.getPendingShare())<shares*1000){
 			this.addFieldError("shares", "Insufficient shares");
 			research();

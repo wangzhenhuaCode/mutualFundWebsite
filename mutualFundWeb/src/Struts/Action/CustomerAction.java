@@ -3,9 +3,13 @@ package Struts.Action;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import Hibernate.DAO.ICustomerDAO;
+import Hibernate.DAO.IFundPriceHistoryDAO;
+import Hibernate.DAO.ITransactionDAO;
 import Hibernate.PO.Customer;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -21,6 +25,8 @@ public class CustomerAction extends ActionSupport {
 	private String errorInfo;
 	private String username;
 	private String password;
+	private ITransactionDAO transactionDAO;
+	private IFundPriceHistoryDAO fundPriceHistoryDAO;
 	@InputConfig(resultName="loginPage")
 	public String login() {
 
@@ -34,7 +40,11 @@ public class CustomerAction extends ActionSupport {
 		if (list.get(0).getPassword().equals(password)) {
 			ActionContext ctx = ActionContext.getContext();
 			Map<String, Object> session = ctx.getSession();
+			Map<String, Object> application = ctx.getSession();
 			session.put("customer", list.get(0));
+			if(!application.containsKey("today")){
+				 updateToday();
+			}
 			if(session.containsKey("emploee"))
 				session.remove("employee");
 			return "customerSucessLogin";
@@ -105,7 +115,7 @@ public class CustomerAction extends ActionSupport {
 		customer.setUsername(oldcustomer.getUsername());
 		customer.setPassword(oldcustomer.getPassword());
 		customer.setPendingCash(oldcustomer.getPendingCash());
-		customerDAO.update(customer);
+		customerDAO.merge(customer);
 		return "changeProfileSuccess";
 	}
 	
@@ -222,6 +232,39 @@ public class CustomerAction extends ActionSupport {
         }  
  
        return md5StrBuff.toString();  
-    }  
+    } 
+	private void updateToday(){
+		ActionContext ctx = ActionContext.getContext();
+		Map<String, Object> application = ctx.getSession();
+		Date td=transactionDAO.findLastTransitionDay();
+		Date fd=fundPriceHistoryDAO.findLastTransitionDay();
+		if(td==null&&fd==null){
+			try {
+				application.put("today", (new SimpleDateFormat("yyyy-MM-dd")).parse("1900-01-01"));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(fd==null){
+			application.put("today", td);
+		}else if(td==null){
+			application.put("today", fd);
+		}else{
+			if(td.after(fd)){
+				application.put("today", td);
+			}else{
+				application.put("today", fd);
+			}
+		}
+	}
+
+	public void setTransactionDAO(ITransactionDAO transactionDAO) {
+		this.transactionDAO = transactionDAO;
+	}
+
+	public void setFundPriceHistoryDAO(IFundPriceHistoryDAO fundPriceHistoryDAO) {
+		this.fundPriceHistoryDAO = fundPriceHistoryDAO;
+	}
 
 }

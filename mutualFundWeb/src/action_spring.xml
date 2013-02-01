@@ -8,11 +8,15 @@
 	<bean id="CustomerAction"
 		class="Struts.Action.CustomerAction" scope="prototype">
 		<property name="customerDAO" ref="CustomerDAO" />
+		<property name="transactionDAO" ref="TransactionDAO" />
+		<property name="fundPriceHistoryDAO" ref="FundPriceHistoryDAO" />
 	</bean>
 	<bean id="EmployeeAction"
 		class="Struts.Action.EmployeeAction" scope="prototype">
 		<property name="employeeDAO" ref="EmployeeDAO" />
 		<property name="customerDAO" ref="CustomerDAO" />
+		<property name="transactionDAO" ref="TransactionDAO" />
+		<property name="fundPriceHistoryDAO" ref="FundPriceHistoryDAO" />
 	</bean>
 	<bean id="FinanceAction"
 		class="Struts.Action.FinanceAction" scope="prototype">
@@ -25,6 +29,7 @@
 		<property name="fundDAO" ref="FundDAO" />
 		<property name="positionDAO" ref="PositionDAO" />
 		<property name="transactionDAO" ref="TransactionDAO" />
+		<property name="fundPriceHistoryDAO" ref="FundPriceHistoryDAO" />
 		
 	</bean>
 	<bean id="TradeAction"
