@@ -16,9 +16,9 @@
 
         <h2 >Check Request</h2>
             
-Current Day: <s:property value="#application['today']" />
+
         <p>
-            <br />
+            
             <h3>Request History</h3>
 
             <s:form method="post" action="act/finance_requestCheck.action" validation="true">

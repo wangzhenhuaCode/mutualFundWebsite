@@ -19,7 +19,7 @@
 		<s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
         <h2 >Reset Password for <s:property value="customer.firstname" />&nbsp;<s:property value="customer.lastname" /> </h2>
 		
-            <br />asdfsa
+            <br />
 		<table >
 			<col width="150">
 			<col width="250">

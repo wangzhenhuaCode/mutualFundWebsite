@@ -12,7 +12,7 @@
         </div>
 
 <jsp:include page="employee_template-top2.jsp" />
-Current Day: <s:property value="#application.today" />
+
             <h2>Fund Listed:</h2>
             <br />
             

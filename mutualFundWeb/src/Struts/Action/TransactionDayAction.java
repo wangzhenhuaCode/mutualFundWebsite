@@ -75,7 +75,7 @@ public class TransactionDayAction extends ActionSupport{
 					this.addFieldError("fund", "price should be less than 1 billion");
 					return "failureTrans";
 				}
-				if(p<0.01){
+				if(p<1){
 					this.addFieldError("fund", "price is too small");
 					return "failureTrans";
 				}
