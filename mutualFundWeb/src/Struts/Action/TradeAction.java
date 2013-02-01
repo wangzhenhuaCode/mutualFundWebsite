@@ -39,7 +39,7 @@ public class TradeAction extends ActionSupport {
 		try{
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Map<String, Object> application = ctx.getSession();
+		Map<String, Object> application = ctx.getApplication();
 		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 
 		Transaction transaction=new Transaction();
@@ -106,7 +106,7 @@ public class TradeAction extends ActionSupport {
 		
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Map<String, Object> application = ctx.getSession();
+		Map<String, Object> application = ctx.getApplication();
 		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);

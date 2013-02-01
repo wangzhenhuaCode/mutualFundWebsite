@@ -25,7 +25,7 @@ public class FinanceAction extends ActionSupport {
 	public String requestCheck(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Map<String, Object> application = ctx.getSession();
+		Map<String, Object> application = ctx.getApplication();
 		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		Transaction transaction=new Transaction();
 	
@@ -93,7 +93,7 @@ public class FinanceAction extends ActionSupport {
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
 		transaction.setAmount((long)(Math.round(amount*100)));
 		ActionContext ctx=ActionContext.getContext();
-		Map<String, Object> application = ctx.getSession();
+		Map<String, Object> application = ctx.getApplication();
 		transaction.setExecuteDate((Date) application.get("today"));
 		
 

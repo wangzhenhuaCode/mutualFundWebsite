@@ -16,7 +16,7 @@
 
         <h2 >Check Request</h2>
             
-Current Day: <s:property value="#application.today" />
+Current Day: <s:property value="#application['today']" />
         <p>
             <br />
             <h3>Request History</h3>

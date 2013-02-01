@@ -40,7 +40,7 @@ public class CustomerAction extends ActionSupport {
 		if (list.get(0).getPassword().equals(password)) {
 			ActionContext ctx = ActionContext.getContext();
 			Map<String, Object> session = ctx.getSession();
-			Map<String, Object> application = ctx.getSession();
+			Map<String, Object> application = ctx.getApplication();
 			session.put("customer", list.get(0));
 			if(!application.containsKey("today")){
 				 updateToday();
@@ -235,7 +235,7 @@ public class CustomerAction extends ActionSupport {
     } 
 	private void updateToday(){
 		ActionContext ctx = ActionContext.getContext();
-		Map<String, Object> application = ctx.getSession();
+		Map<String, Object> application = ctx.getApplication();
 		Date td=transactionDAO.findLastTransitionDay();
 		Date fd=fundPriceHistoryDAO.findLastTransitionDay();
 		if(td==null&&fd==null){
