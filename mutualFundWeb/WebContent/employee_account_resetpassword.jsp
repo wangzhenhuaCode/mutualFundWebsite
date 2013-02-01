@@ -15,7 +15,7 @@
 
 <jsp:include page="employee_template-top2.jsp" />
 
-		<s:form method="post" action="act/employee_resetCustomerPassword.action" validate = "true" id="form">
+		<s:form method="post" action="act/employee_resetPassword.action" validate = "true" id="form">
         <h2 >Reset Your Password</h2>
 		<s:hidden name="customer.customerId" value="%{customer.customerId}"></s:hidden>
             <br />
@@ -25,14 +25,14 @@
 			<div class="name">
 				<tr>
 					<td><strong>New Password:</strong></td>
-					<td><input type="password" name="newCustomerPassword"
+					<td><input type="password" name="newPassword"
 						style="width: 200px" /></td>
 				</tr>
 			</div>
 			<div class="inputName">
 				<tr>
 				<td><strong>Confirm Password:</strong></td>
-				<td><input type="password" name="newCustomerPassword" style="width: 200px" />
+				<td><input type="password" name="confirmPassword" style="width: 200px" />
 					</td>
 				</tr>
 			</div>

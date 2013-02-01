@@ -50,14 +50,14 @@ public class CustomerAction extends ActionSupport {
 		Map<String, Object> session = ctx.getSession();
 		Customer c=null;
 		c = (Customer) session.get("customer");
-		c.setPassword(newCustomerPassword);
+		c.setPassword(getMD5Str(newCustomerPassword));
 		customerDAO.update(c);
 		return "customerSucessChangePassword";
 	}
 	public void validateChangePassword() {
 		if(this.newCustomerPassword==null || this.newCustomerPassword.trim().equals(""))
 			this.addFieldError("resetPassword", "Password cannot be empty");
-		if(this.newCustomerPassword==null || this.confirmCustomerPassword.trim().equals(""))
+		if(this.confirmCustomerPassword==null || this.confirmCustomerPassword.trim().equals(""))
 			this.addFieldError("resetPassword", "Confirm Password cannot be empty");
 		if(!this.newCustomerPassword.equals(this.confirmCustomerPassword))
 			this.addFieldError("resetPassword", "Password is not the same");

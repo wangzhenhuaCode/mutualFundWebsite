@@ -31,7 +31,7 @@
         	<result name="logoutSuccess">/Login.jsp</result> 
         	<result name="resetPage">/employee_customer_resetpassword.jsp</result>
         	<result name="employeeSucessChangePassword" type="redirectAction">transaction_gotoTrans.action</result>
-        	<result name="goToChangepassword">/employee_resetpassword.jsp</result>
+        	<result name="goToResetPassword">/employee_resetpassword.jsp</result>
         	<result name="employeeFailureLogin">/Login.jsp</result>
         	<result name="goToHomePage">/employee_home.jsp</result>
         	<result name="goToCustomerPage">/employee_customer.jsp</result>
@@ -48,7 +48,7 @@
         	<result name="resetCustomerPasswordSuccess" type="redirectAction">/employee_viewCustomers.action</result>
         	<result name="viewCustomerSuccess" type="redirectAction">employee_goToViewCustomerAccount.action?customer.customerId=${customer.customerId}</result>
 			<result name="goToCreateEmployeeAccount">/employee_account_new.jsp</result>
-			<result name="createEmployeeAccountSuccess">/employee_home.jsp</result>
+			<result name="createEmployeeAccountSuccess" type="redirectAction">/transaction_gotoTrans.action</result>
 			
         </action>
         
