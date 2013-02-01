@@ -22,7 +22,7 @@
         	<result name="changeProfileSuccess">/account_viewChangProfile.jsp</result>
         	<result name="changeProfile">/account_viewChangProfile.jsp</result>
         	<result name="resetPassword">/account_resetpassword.jsp</result>
-        	<result name="customerSucessChangePassword">/account_resetpassword.jsp</result>
+        	<result name="customerSucessChangePassword">/Home.jsp</result>
         	<result name="login"  type="redirectAction">user_index.action</result>
         	<result name="index">/login.jsp</result>
         	

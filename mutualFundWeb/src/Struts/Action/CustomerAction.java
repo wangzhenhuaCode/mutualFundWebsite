@@ -10,6 +10,7 @@ import Hibernate.PO.Customer;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 
 public class CustomerAction extends ActionSupport {
 	private ICustomerDAO customerDAO;
@@ -42,9 +43,9 @@ public class CustomerAction extends ActionSupport {
 			return "customerFailureLogin";
 		}
 	}
-
+	
+	@InputConfig(resultName="resetPassword")
 	public String changePassword() {
-		errorInfo = "";
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
 		Customer c=null;
@@ -52,28 +53,69 @@ public class CustomerAction extends ActionSupport {
 		c.setPassword(newCustomerPassword);
 		customerDAO.update(c);
 		return "customerSucessChangePassword";
-
+	}
+	public void validateChangePassword() {
+		if(this.newCustomerPassword==null || this.newCustomerPassword.trim().equals(""))
+			this.addFieldError("resetPassword", "Password cannot be empty");
+		if(this.newCustomerPassword==null || this.confirmCustomerPassword.trim().equals(""))
+			this.addFieldError("resetPassword", "Confirm Password cannot be empty");
+		if(!this.newCustomerPassword.equals(this.confirmCustomerPassword))
+			this.addFieldError("resetPassword", "Password is not the same");
 	}
 
 	public String gotoChangeProfile(){
-		return "changeProfile";
-	}
-	
-	public String changeProfile(){
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
-		Customer oldcustomer=(Customer) session.get("customer");
-		customer.setVersion(oldcustomer.getVersion());
-		customer.setCustomerId(oldcustomer.getCustomerId());
-		customer.setCash(oldcustomer.getCash());
-		customer.setUsername(oldcustomer.getUsername());
-		customer.setPassword(oldcustomer.getPassword());
-		customer.setPendingCash(oldcustomer.getPendingCash());
+		customer = (Customer) session.get("customer");
+		return "changeProfile";
+	}
+	@InputConfig(resultName="changeProfile")
+	public String changeProfile(){
 		customerDAO.update(customer);
-		session.put("customer", customer);
 		return "changeProfileSuccess";
 	}
 	
+	public void validateChangeProfile() {
+		if(customer.getFirstname()==null || customer.getFirstname().trim().equals("")){
+			this.addFieldError("newAccount", "First Name cannot be empty");
+		}
+		if(customer.getFirstname().length()>20) {
+			this.addFieldError("newAccount", "First Name should be less than 20 words");
+		}
+		if(customer.getLastname()==null || customer.getLastname().trim().equals("")){
+			this.addFieldError("newAccount", "Last Name cannot be empty");
+		}
+		if(customer.getLastname().length()>20) {
+			this.addFieldError("newAccount", "Last Name should be less than 20 words");
+		}
+		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
+			this.addFieldError("newAccount", "Address Line1 cannot be empty");
+		}
+		if(customer.getAddrLine1().length()>200) {
+			this.addFieldError("newAccount", "The Address Line1 is too long");
+		}
+		if(customer.getAddrLine2().length()>200) {
+			this.addFieldError("newAccount", "The Address Line2 is too long");
+		}
+		if(customer.getCity()==null || customer.getCity().trim().equals("")){
+			this.addFieldError("newAccount", "City cannot be empty");
+		}
+		if(customer.getCity().length()>20) {
+			this.addFieldError("newAccount", "The City Name is too long");
+		}
+		if(customer.getState()==null){
+			this.addFieldError("newAccount", "State cannot be empty");
+		}
+		if(customer.getState().length()>10) {
+			this.addFieldError("newAccount", "The State Name is too long");
+		}
+		if(customer.getZip()==null || customer.getZip().equals("")){
+			this.addFieldError("newAccount", "Zip Code cannot be empty");
+		}
+		if(customer.getZip().length()>10) {
+			this.addFieldError("newAccount", "The Zipcode is too long");
+		}
+	}
 	public String gotoChangePassword(){
 		return "resetPassword";
 	}

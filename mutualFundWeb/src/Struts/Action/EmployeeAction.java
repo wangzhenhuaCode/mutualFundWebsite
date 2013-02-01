@@ -272,7 +272,7 @@ public class EmployeeAction extends ActionSupport {
 	@InputConfig(resultName="goToResetCustomerPassword")
 	public String resetCustomerPassword(){
 		customer = customerDAO.findById(customer.getCustomerId());
-		customer.setPassword(newCustomerPassword);
+		customer.setPassword(getMD5Str(newCustomerPassword));
 		customerDAO.update(customer);
 		return "resetCustomerPasswordSuccess";
 	}
@@ -332,6 +332,8 @@ public class EmployeeAction extends ActionSupport {
 	
 	@InputConfig(resultName="goToCreateEmployeeAccount")
 	public String createEmployeeAccount(){
+		String password = customer.getPassword();
+		customer.setPassword(getMD5Str(password));
 		employeeDAO.save(employee);
 		return "createEmployeeAccountSuccess";
 	}
