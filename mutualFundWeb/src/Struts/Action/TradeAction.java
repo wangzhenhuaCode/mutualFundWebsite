@@ -217,6 +217,11 @@ public class TradeAction extends ActionSupport {
 			if(fundlist==null)
 				fundlist=fundDAO.findAll();
 		}
+		if(fundDAO.findByProperty("symbol",fund.getSymbol()).size()!=0) {
+			this.addFieldError("symbol", "Symbol should be different");
+			if(fundlist==null)
+				fundlist=fundDAO.findAll();
+		}
 	}
 	public String showPosition(){
 		ActionContext ctx=ActionContext.getContext();
