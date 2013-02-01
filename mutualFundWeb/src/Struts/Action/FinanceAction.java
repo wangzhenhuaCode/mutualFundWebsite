@@ -107,6 +107,7 @@ public class FinanceAction extends ActionSupport {
 		return "depositSuccess";
 	}
 	public void validateDeposit(){
+		//if(Double.parseDouble(s))
 		if(amount==null){
 			this.addFieldError("amount", "Amount can not be null");
 			customer=customerDAO.findById(customer.getCustomerId());
