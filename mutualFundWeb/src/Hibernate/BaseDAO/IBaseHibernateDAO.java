@@ -36,4 +36,5 @@ public interface IBaseHibernateDAO<T> {
 //	public Integer updateBySQL(final String sql);
 	
 	public T findById(Serializable id);
+	
 }

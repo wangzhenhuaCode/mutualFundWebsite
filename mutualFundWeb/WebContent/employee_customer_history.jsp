@@ -54,7 +54,7 @@
             </p>
             
             <div align="right" style="margin-right:50px;">
-            <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Cancel</span></a>
+            <a href="<%=basePath%>act/employee_viewCustomers.action" class="Button"><span>Back</span></a>
             </div>
 		</form>
 <jsp:include page="template-bottom.jsp" />

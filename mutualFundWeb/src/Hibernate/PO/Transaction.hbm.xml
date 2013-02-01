@@ -11,10 +11,8 @@
             <generator class="identity" />
         </id>
         <version column="version" name="version" type="java.lang.Integer" />
-        <many-to-one name="fund" class="Hibernate.PO.Fund" fetch="select">
-            <column name="fund_id" />
-        </many-to-one>
-        <many-to-one name="customer" class="Hibernate.PO.Customer" fetch="select"  lazy="false">
+        
+        <many-to-one name="customer" class="Hibernate.PO.Customer" fetch="select" >
             <column name="customer_id" not-null="true" />
         </many-to-one>
         <many-to-one name="position" class="Hibernate.PO.Position" update="false" insert="false" fetch="select" not-null="false" >
@@ -33,5 +31,8 @@
         <property name="amount" type="java.lang.Long">
             <column name="amount" />
         </property>
+        <many-to-one name="fund" class="Hibernate.PO.Fund" fetch="select">
+            <column name="fund_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

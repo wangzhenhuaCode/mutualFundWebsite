@@ -122,6 +122,7 @@ public class BaseHibernateDAO<T> extends HibernateDaoSupport implements
 	}
 
 
+
 	@SuppressWarnings("unchecked")
 	public List<T> findByQuery(String hqlquery) {
 		return getHibernateTemplate().find(hqlquery);

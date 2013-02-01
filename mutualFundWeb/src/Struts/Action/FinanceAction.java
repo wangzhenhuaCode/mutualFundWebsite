@@ -75,8 +75,9 @@ public class FinanceAction extends ActionSupport {
 	public String financePage(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
-		transactionList=transactionDAO.findByProperty("customer", customer);
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
+		session.put("customer", customer);
+			transactionList=transactionDAO.findByProperty("customer", customer);
 		return "gotoFinance";
 	}
 	
@@ -87,23 +88,17 @@ public class FinanceAction extends ActionSupport {
 	@InputConfig(resultName="gotoDeposit")
 	public String deposit(){
 		Transaction transaction=new Transaction();
-		
+		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
 		transaction.setAmount((long)(amount*100));
 		transaction.setExecuteDate(new Date());
-		customer=customerDAO.load(Customer.class, customer.getCustomerId());
-		long pending=customer.getPendingCash();
-		pending+=(long)(amount*(100));
-		customer.setPendingCash(pending);
+		
 		transaction.setCustomer(customer);
 		if(!transactionDAO.operateTransaction(transaction, customer)){
 			this.addFieldError("operation", "System busy, please try again");
 			customer=customerDAO.findById(customer.getCustomerId());
 			return "gotoDeposit";
 		}
-		ActionContext ctx=ActionContext.getContext();
-		Map<String,Object> session=ctx.getSession();
-		session.put("customer", customer);
 		return "depositSuccess";
 	}
 	public void validateDeposit(){

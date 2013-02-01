@@ -29,17 +29,17 @@
 
 
 			   		<tr style="padding-bot:10px;">
-						<td><Strong>Date</strong></td>
-						<td><Strong>Amount</strong></td>
-						<td><Strong>Status</strong></td>
+						<th>Date</th>
+						<th>Amount</th>
+						<th>Status</th>
 						
 					</tr>
 					<s:iterator value="transactionList" id="transaction">
 					<s:if test="#transaction.transactionType>4">
 					<tr>
-						<td><s:property value="#transaction.currentDate" /></td>
+						<td align="center"><s:property value="#transaction.currentDate" /></td>
 						<td align="right"><s:property value="#transaction.currentAmount" /></td>
-						<td><s:if test="#transaction.transactionType==5">Deposited</s:if>
+						<td align="center"><s:if test="#transaction.transactionType==5">Deposited</s:if>
                     <s:if test="#transaction.transactionType==6">Pending Deposit</s:if>
                     <s:if test="#transaction.transactionType==7">Withdrew</s:if>
                     <s:if test="#transaction.transactionType==8">Pending Withdraw</s:if></td>
@@ -49,10 +49,11 @@
 
 
 			   </table>
+			   
+			<br />
             <h3>Current Balance: <s:property value="#session.customer.currentCash" /></h3>
-               
-            <br />
 			<h3>Available Balance: <s:property value="#session.customer.available" /></h3>
+			<br />
 			<div class="amount">
 			Amount:&nbsp;<input type="text" name="amount" style="width: 190px;" >
 			</div>

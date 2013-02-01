@@ -69,6 +69,10 @@ public class TransactionDayAction extends ActionSupport{
 					errorInfo="price should be less than 1 billion";
 					return "failureTrans";
 				}
+				if(p<0.01){
+					errorInfo="price is too small";
+					return "failureTrans";
+				}
 			}catch(Exception e){
 				errorInfo="Please fill price for all funds with valid price";
 				return "failureTrans";

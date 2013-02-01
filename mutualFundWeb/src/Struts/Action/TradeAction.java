@@ -58,7 +58,7 @@ public class TradeAction extends ActionSupport {
 		}
 		transaction.setFund(fund);
 		transaction.setPosition(p);
-		customer=customerDAO.load(Customer.class, customer.getCustomerId());
+		
 		long pending=customer.getPendingCash();
 		pending+=(long)(amount*(-100));
 		customer.setPendingCash(pending);
@@ -94,7 +94,7 @@ public class TradeAction extends ActionSupport {
 		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		if(amount*100>(customer.getCash()+customer.getPendingCash())){
 			research();
 			this.addFieldError("buy", "Insufficient amount");
@@ -105,7 +105,7 @@ public class TradeAction extends ActionSupport {
 		
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
@@ -147,7 +147,7 @@ public class TradeAction extends ActionSupport {
 		}
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
 		fund=fundDAO.load(Fund.class, fund.getFundId());
 		PositionId pid=new PositionId(customer,fund);
 		Position p=positionDAO.load(Position.class,pid);
@@ -173,10 +173,11 @@ public class TradeAction extends ActionSupport {
 		return "employeeGotoTrade";
 	}
 	public void research(){
-		fund=fundDAO.findById(fund.getFundId());
+		fund=fundDAO.load(Fund.class,fund.getFundId());
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
-		Customer customer=(Customer)session.get("customer");
+		Customer customer=customerDAO.load(Customer.class, ((Customer)session.get("customer")).getCustomerId());
+		session.put("customer", customer);
 
 		transactionList=transactionDAO.findByTwoProperty("customer", customer, "fund", fund);
 		if(transactionList.size()>0){
@@ -228,7 +229,9 @@ public class TradeAction extends ActionSupport {
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> session=ctx.getSession();
 		Customer customer=(Customer)session.get("customer");
-		transactionList=transactionDAO.findByProperty("customer", customer);
+		Transaction t=new Transaction();
+		t.setCustomer(customer);
+		transactionList=transactionDAO.find(t);
 		return "viewHistory";
 	}
 	public String employeeViewHistory(){
