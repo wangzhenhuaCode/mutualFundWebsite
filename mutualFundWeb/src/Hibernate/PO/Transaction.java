@@ -151,4 +151,5 @@ public class Transaction implements java.io.Serializable {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+	
 }

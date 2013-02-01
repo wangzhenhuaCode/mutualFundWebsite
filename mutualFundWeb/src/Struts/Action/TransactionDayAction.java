@@ -18,6 +18,7 @@ import Hibernate.PO.Transaction;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.interceptor.annotations.InputConfig;
 
 public class TransactionDayAction extends ActionSupport{
 	private IFundDAO fundDAO;
@@ -32,12 +33,14 @@ public class TransactionDayAction extends ActionSupport{
 		errorInfo="";
 		return "gototrans";
 	}
+	@InputConfig(resultName="failureTrans")
 	public String transact(){
 		ActionContext ctx=ActionContext.getContext();
 		Map<String,Object> application=ctx.getApplication();
 		if(application.containsKey("application")){
 			if(application.get("application").equals("true")){
-				errorInfo="System busy!";
+				this.addFieldError("system", "System busy!");
+				fundlist=fundDAO.findAll();
 				return "failureTrans";
 			}
 		}
@@ -48,7 +51,7 @@ public class TransactionDayAction extends ActionSupport{
 		try {
 			date = (new SimpleDateFormat("yyyy-MM-dd")).parse(datestring);
 		} catch (ParseException e1) {
-			errorInfo="Wrong time format!";
+			this.addFieldError("time", "Wrong time fomat");
 			return "failureTrans";
 		}
 		List<Transaction> buylist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_BUY);
@@ -56,8 +59,9 @@ public class TransactionDayAction extends ActionSupport{
 		List<Transaction> depositlist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_DEPOSIT);
 		List<Transaction> withdrawlist=transactionDAO.findPendingTransaction(date, Transaction.PENDING_WITHDRAW);
 		if(fundlist.size()!=newPrices.length){
-			errorInfo="Please fill price for all funds";
-			return "failureTrans";}
+			this.addFieldError("fund", "Please fill price for all funds");
+			return "failureTrans";
+			}
 		List<FundPriceHistory> pricelist=new ArrayList<FundPriceHistory>();
 		for(int i=0;i<fundlist.size();i++){
 			FundPriceHistory instance;
@@ -66,15 +70,15 @@ public class TransactionDayAction extends ActionSupport{
 				instance=new FundPriceHistory();
 				p=(long)(Math.round(Double.valueOf(newPrices[i])*100));
 				if(p>Transaction.MAX_TRANSACTION_AMOUNT){
-					errorInfo="price should be less than 1 billion";
+					this.addFieldError("fund", "price should be less than 1 billion");
 					return "failureTrans";
 				}
 				if(p<0.01){
-					errorInfo="price is too small";
+					this.addFieldError("fund", "price is too small");
 					return "failureTrans";
 				}
 			}catch(Exception e){
-				errorInfo="Please fill price for all funds with valid price";
+				this.addFieldError("fund", "Please fill price for all funds with valid price");
 				return "failureTrans";
 			}
 				instance.setPrice(p);
@@ -87,8 +91,12 @@ public class TransactionDayAction extends ActionSupport{
 			
 		}
 		if(!transactionDAO.transactionDay(buylist, selllist, depositlist, withdrawlist, pricelist,date)){
-			errorInfo="Repeated transition day";
+			this.addFieldError("fund", "Repeated transition day");
 			return "failureTrans";
+		}
+		Date td=transactionDAO.findLastTransitionDay();
+		if(td!=null){
+			application.put("today", td);
 		}
 		application.put("transitionLock", false);
 		return "successTrans";

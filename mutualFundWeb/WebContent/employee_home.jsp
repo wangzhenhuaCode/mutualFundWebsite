@@ -31,7 +31,7 @@
             <h3>New Transaction Day:</h3>
             <input type="text" id="datepicker" style="width: 120px" name="datestring"/>
             <br />
-               
+              <s:fielderror/> 
             <h3>Fund Prices:</h3>
            <table class="bottomBorder">
 				<col width="150">

@@ -14,4 +14,5 @@ public interface ITransactionDAO extends IBaseHibernateDAO<Transaction> {
 	public boolean transactionDay(final List<Transaction> buylist,final  List<Transaction> selllist,final List<Transaction> depositlist,final List<Transaction> withdrawlist,final List<FundPriceHistory> pricelist,final Date date);
 	public boolean operateTransaction(final Transaction trasanction, final Customer customer);
 	public boolean operateTransaction(final Transaction trasanction, final Position position);
+	public Date findLastTransitionDay();
 }

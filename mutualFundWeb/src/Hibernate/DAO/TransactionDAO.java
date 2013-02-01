@@ -35,6 +35,22 @@ public class TransactionDAO extends BaseHibernateDAO<Transaction> implements ITr
 		}
 		
 	}
+	public Date findLastTransitionDay(){
+		try {
+			String queryString = "from " + entityName
+
+					+" order by executeDate desc";
+
+			List<Transaction> list=getHibernateTemplate().find(queryString);
+			if(list.size()>0){
+				return list.get(0).getExecuteDate();
+			}else
+				return null;
+		} catch (RuntimeException re) {
+			throw re;
+		}
+		
+	}
 	public boolean transactionDay(final List<Transaction> buylist,final  List<Transaction> selllist,final List<Transaction> depositlist,final List<Transaction> withdrawlist,final List<FundPriceHistory> pricelist,final Date date){
 		boolean b=(Boolean) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
