@@ -43,6 +43,7 @@ public class CustomerAction extends ActionSupport {
 			return "loginPage";
 		}
 	}
+
 	public void validateLogin(){
 		if(username==null||username.equals("")){
 			this.addFieldError("username", "Username null");
@@ -55,35 +56,45 @@ public class CustomerAction extends ActionSupport {
 		}
 		
 	}
-	@InputConfig(resultName="customerFailureChangePassword")
+
+	
+	@InputConfig(resultName="resetPassword")
 	public String changePassword() {
-		
+
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
 		Customer c=null;
 
+
 		c =customerDAO.load(Customer.class, ((Customer) session.get("customer")).getCustomerId());
 		newCustomerPassword=getMD5Str(newCustomerPassword);
 		c.setPassword(newCustomerPassword);
-		customerDAO.merge(c);
+		customerDAO.update(c);
 		session.put("customer", c);
+
 		return "customerSucessChangePassword";
 
 
 	}
-	public void validateChangePassword(){
-		if(newCustomerPassword==null||newCustomerPassword.equals("")){
-			this.addFieldError("password", "Password can not be null");
-		}
-		if (!newCustomerPassword.equals(confirmCustomerPassword)){
-			this.addFieldError("password", "Two passwords are not equal");
-		}
+
+	
+	public void validateChangePassword() {
+		if(this.newCustomerPassword==null || this.newCustomerPassword.trim().equals(""))
+			this.addFieldError("resetPassword", "Password cannot be empty");
+		if(this.confirmCustomerPassword==null || this.confirmCustomerPassword.trim().equals(""))
+			this.addFieldError("resetPassword", "Confirm Password cannot be empty");
+		if(!this.newCustomerPassword.equals(this.confirmCustomerPassword))
+			this.addFieldError("resetPassword", "Password is not the same");
 	}
 
 	public String gotoChangeProfile(){
+		ActionContext ctx = ActionContext.getContext();
+		Map<String, Object> session = ctx.getSession();
+
+		customer = (Customer) session.get("customer");
 		return "changeProfile";
 	}
-	
+	@InputConfig(resultName="changeProfile")
 	public String changeProfile(){
 		ActionContext ctx = ActionContext.getContext();
 		Map<String, Object> session = ctx.getSession();
@@ -95,10 +106,50 @@ public class CustomerAction extends ActionSupport {
 		customer.setPassword(oldcustomer.getPassword());
 		customer.setPendingCash(oldcustomer.getPendingCash());
 		customerDAO.update(customer);
-		session.put("customer", customer);
 		return "changeProfileSuccess";
 	}
 	
+	public void validateChangeProfile() {
+		if(customer.getFirstname()==null || customer.getFirstname().trim().equals("")){
+			this.addFieldError("newAccount", "First Name cannot be empty");
+		}
+		if(customer.getFirstname().length()>20) {
+			this.addFieldError("newAccount", "First Name should be less than 20 words");
+		}
+		if(customer.getLastname()==null || customer.getLastname().trim().equals("")){
+			this.addFieldError("newAccount", "Last Name cannot be empty");
+		}
+		if(customer.getLastname().length()>20) {
+			this.addFieldError("newAccount", "Last Name should be less than 20 words");
+		}
+		if(customer.getAddrLine1()==null || customer.getAddrLine1().trim().equals("")){
+			this.addFieldError("newAccount", "Address Line1 cannot be empty");
+		}
+		if(customer.getAddrLine1().length()>200) {
+			this.addFieldError("newAccount", "The Address Line1 is too long");
+		}
+		if(customer.getAddrLine2().length()>200) {
+			this.addFieldError("newAccount", "The Address Line2 is too long");
+		}
+		if(customer.getCity()==null || customer.getCity().trim().equals("")){
+			this.addFieldError("newAccount", "City cannot be empty");
+		}
+		if(customer.getCity().length()>20) {
+			this.addFieldError("newAccount", "The City Name is too long");
+		}
+		if(customer.getState()==null){
+			this.addFieldError("newAccount", "State cannot be empty");
+		}
+		if(customer.getState().length()>10) {
+			this.addFieldError("newAccount", "The State Name is too long");
+		}
+		if(customer.getZip()==null || customer.getZip().equals("")){
+			this.addFieldError("newAccount", "Zip Code cannot be empty");
+		}
+		if(customer.getZip().length()>10) {
+			this.addFieldError("newAccount", "The Zipcode is too long");
+		}
+	}
 	public String gotoChangePassword(){
 		return "resetPassword";
 	}

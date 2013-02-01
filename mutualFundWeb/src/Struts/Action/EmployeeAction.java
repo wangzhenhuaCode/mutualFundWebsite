@@ -185,6 +185,7 @@ public class EmployeeAction extends ActionSupport {
 		session.remove("employee");
 		return "logoutSuccess";
 	}
+
 	@InputConfig(resultName="employeeFailureChangePassword")
 	public String changePassword(){
 		errorInfo="";
@@ -198,6 +199,22 @@ public class EmployeeAction extends ActionSupport {
 		return "employeeSucessChangePassword";
 		
 	}
+
+	public String goToResetPassword(){
+		return "goToResetPassword";
+	}
+	
+	@InputConfig(resultName="goToResetPassword")
+	public String resetPassword(){
+		ActionContext ctx = ActionContext.getContext();
+		Map<String, Object> session = ctx.getSession();
+		Employee e = (Employee) session.get("employee");
+		e.setPassword(this.getMD5Str(newPassword));
+		employeeDAO.update(e);
+
+		return "employeeSucessChangePassword";
+		
+	}
 	public void validateChangePassword(){
 		if(newPassword==null||newPassword.equals("")){
 			this.addFieldError("password", "Password can not be null");
@@ -207,11 +224,23 @@ public class EmployeeAction extends ActionSupport {
 		}
 
 	}
+
 	
 	public String goToChangepassword(){
 		return "goToChangepassword";
-
 	}
+	public void validateResetPassword(){
+		if(this.newPassword==null || this.newPassword.trim().equals(""))
+			this.addFieldError("resetPassword", "Password cannot be empty");
+		if(this.confirmPassword==null || this.confirmPassword.trim().equals(""))
+			this.addFieldError("resetPassword", "Confirm Password cannot be empty");
+		if(!this.newPassword.equals(this.confirmPassword))
+			this.addFieldError("resetPassword", "Password is not the same");
+	}
+	
+
+
+	
 	public String viewCustomers() {
 		customerList = customerDAO.findAll();
 		maxPage=customerDAO.count(null,null)/20+1;
@@ -284,12 +313,17 @@ public class EmployeeAction extends ActionSupport {
 	@InputConfig(resultName="goToResetCustomerPassword")
 	public String resetCustomerPassword(){
 		customer = customerDAO.findById(customer.getCustomerId());
-		customer.setPassword(newCustomerPassword);
+		customer.setPassword(getMD5Str(confirmCustomerPassword));
 		customerDAO.update(customer);
 		return "resetCustomerPasswordSuccess";
 	}
 	public void validateResetCustomerPassword() {
 		if(newCustomerPassword==null ||confirmCustomerPassword==null){
+			this.addFieldError("changePassword", "Password Can Not Be Empty");
+			customer = customerDAO.findById(customer.getCustomerId());
+			return;
+		}
+		if(newCustomerPassword.trim().equals("") ||confirmCustomerPassword.trim().equals("")){
 			this.addFieldError("changePassword", "Password Can Not Be Empty");
 			customer = customerDAO.findById(customer.getCustomerId());
 			return;
@@ -344,6 +378,8 @@ public class EmployeeAction extends ActionSupport {
 	
 	@InputConfig(resultName="goToCreateEmployeeAccount")
 	public String createEmployeeAccount(){
+		String password = employee.getPassword();
+		employee.setPassword(getMD5Str(password));
 		employeeDAO.save(employee);
 		return "createEmployeeAccountSuccess";
 	}

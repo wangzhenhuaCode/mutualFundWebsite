@@ -15,7 +15,7 @@
 
 <jsp:include page="employee_template-top2.jsp" />
 
-		<s:form method="post" action="act/employee_changePassword.action" validate = "true" id="form">
+		<s:form method="post" action="act/employee_resetPassword.action" validate = "true" id="form">
         <h2 >Reset New Password</h2>
 		
             <br />
