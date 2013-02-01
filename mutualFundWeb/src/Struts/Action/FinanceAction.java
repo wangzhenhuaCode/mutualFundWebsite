@@ -30,11 +30,11 @@ public class FinanceAction extends ActionSupport {
 	
 		transaction.setCustomer(customer);
 		transaction.setTransactionType(Transaction.PENDING_WITHDRAW);
-		transaction.setAmount((long)(amount*(-100)));
+		transaction.setAmount((long)(Math.round(amount*(-100))));
 		transaction.setExecuteDate(new Date());
 		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		long pending=customer.getPendingCash();
-		pending+=(long)(amount*(-100));
+		pending+=(long)(Math.round(amount*(-100)));
 		customer.setPendingCash(pending);
 		
 		if(!transactionDAO.operateTransaction(transaction, customer)){
@@ -90,9 +90,13 @@ public class FinanceAction extends ActionSupport {
 		Transaction transaction=new Transaction();
 		customer=customerDAO.load(Customer.class, customer.getCustomerId());
 		transaction.setTransactionType(Transaction.PENDING_DEPOSIT);
-		transaction.setAmount((long)(amount*100));
+		transaction.setAmount((long)(Math.round(amount*100)));
 		transaction.setExecuteDate(new Date());
-		
+
+		long pending=customer.getPendingCash();
+		pending+=(long)(Math.round(amount*(100)));
+		customer.setPendingCash(pending);
+
 		transaction.setCustomer(customer);
 		if(!transactionDAO.operateTransaction(transaction, customer)){
 			this.addFieldError("operation", "System busy, please try again");

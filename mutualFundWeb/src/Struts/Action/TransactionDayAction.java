@@ -64,7 +64,7 @@ public class TransactionDayAction extends ActionSupport{
 			Long p;
 			try{
 				instance=new FundPriceHistory();
-				p=(long)(Double.valueOf(newPrices[i])*100);
+				p=(long)(Math.round(Double.valueOf(newPrices[i])*100));
 				if(p>Transaction.MAX_TRANSACTION_AMOUNT){
 					errorInfo="price should be less than 1 billion";
 					return "failureTrans";
