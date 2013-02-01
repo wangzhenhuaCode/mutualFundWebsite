@@ -40,7 +40,7 @@
                     <s:if test="#transaction.transactionType==7">Withdrew</s:if>
                     <s:if test="#transaction.transactionType==8">Pending Withdraw</s:if>
                     </td>
-                    <td><s:if test="#transaction.fund!=null"><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#transaction.fund.fundId" />"><s:property value="#transaction.fund.symbol" /></a></s:if><s:else>-</s:else></td>
+                    <td><s:if test="#transaction.fund!=null"><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#transaction.fund.fundId" />"><s:property value="#transaction.fund.symbol" /></a></s:if><s:else>--</s:else></td>
                     <td align="right"><s:property value="#transaction.currentShares" /></td>
                     <td align="right"><s:if test="#transaction.fund!=null"><s:property value="#transaction.boughtPrice" /></s:if></td>
                     <td align="right"><s:property value="#transaction.currentAmount" /></td>

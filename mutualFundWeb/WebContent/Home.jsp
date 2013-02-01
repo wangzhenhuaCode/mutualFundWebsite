@@ -36,8 +36,8 @@
                 <s:iterator value="positionList" id="position">
                 <tr>
                     <td><a href="<%=basePath%>act/trade_gotoResearch.action?fund.fundId=<s:property value="#position.id.fund.fundId" />"><s:property value="#position.id.fund.symbol" /></a></td>
-                    <td align="right"><s:if test="#position.id.fund.todayPrice!=null"><s:property value="#position.id.fund.todayPrice" /></s:if><s:else>-</s:else></td>
-                    <td align="right"><s:if test="#position.id.fund.percentage!=null"><s:property value="#position.id.fund.percentage" />%</s:if><s:else>-</s:else></td>
+                    <td align="right"><s:if test="#position.id.fund.todayPrice!=null"><s:property value="#position.id.fund.todayPrice" /></s:if><s:else>--</s:else></td>
+                    <td align="right"><s:if test="#position.id.fund.percentage!=null"><s:property value="#position.id.fund.percentage" />%</s:if><s:else>--</s:else></td>
                     <td align="right"><s:property value="#position.currentShares" /></td>
                     
                 </tr>
